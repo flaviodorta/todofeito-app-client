@@ -15,14 +15,16 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 62.5%;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple Color Emoji", Helvetica, Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
     scroll-behavior: smooth;
+    
+    
   }
 
   body {
     min-height: 100vh;
     width: 100vw;
     font-size: 1.6rem;
-    color: ${({ theme }) => theme.colors.font};
-    background-color: ${({ theme }) => theme.colors.primary.one}
+    color: ${props => props.theme.colors.font};
+    background-color: ${props => props.theme.colors.primary.one}
   }
 
   ${normalize}

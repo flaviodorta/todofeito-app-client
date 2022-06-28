@@ -1,5 +1,5 @@
-import { InitialState } from '../../types/types';
+import { InitialStateType } from '../../types/types';
 
-export const initialState: InitialState = {
+export const initialState: InitialStateType = {
   todos: [],
 };

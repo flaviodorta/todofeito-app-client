@@ -1,6 +1,6 @@
-import { FlattenSimpleInterpolation } from 'styled-components';
+import { DefaultTheme, FlattenSimpleInterpolation } from 'styled-components';
 
-export type Todo = {
+export type TodoType = {
   id: string;
   title: string;
   content: string;
@@ -12,13 +12,15 @@ export type Todo = {
   isShared: boolean;
 };
 
-export type InitialState = {
-  todos: Todo[];
+export type InitialStateType = {
+  todos: TodoType[];
 };
 
-export type MediaQuerie = {
-  sm: (...args: string[]) => void;
-  md: (...args: string[]) => FlattenSimpleInterpolation;
-  lg: (...args: string[]) => FlattenSimpleInterpolation;
-  xl: (...args: string[]) => FlattenSimpleInterpolation;
+export type AppThemeContextType = {
+  toggleMode: () => void;
+  mode: string;
+};
+
+export type AppThemeProviderProps = {
+  children: JSX.Element;
 };
