@@ -1,4 +1,4 @@
-import { createGlobalStyle, css } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 import { normalize } from '../normalize/normalize';
 
 export const GlobalStyle = createGlobalStyle`
@@ -22,7 +22,7 @@ export const GlobalStyle = createGlobalStyle`
     width: 100vw;
     font-size: 1.6rem;
     color: ${({ theme }) => theme.colors.font};
-    background-color: ${({ theme }) => theme.colors.primaryOne}
+    background-color: ${({ theme }) => theme.colors.primary.one}
   }
 
   ${normalize}

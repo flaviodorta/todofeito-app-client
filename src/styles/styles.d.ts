@@ -4,13 +4,17 @@ declare module 'styled-components' {
   export interface DefaultTheme {
     mode: string;
     colors: {
-      primaryOne: string;
-      primaryTwo: string;
-      primaryThree: string;
-      primaryFour?: string;
-      secondaryOne: string;
-      secondaryTwo: string;
-      secondaryThree: string;
+      primary: {
+        one: string;
+        two: string;
+        three: string;
+        four?: string;
+      };
+      secondary: {
+        one: string;
+        two: string;
+        three: string;
+      };
       red: string;
       orange: string;
       yellow: string;
