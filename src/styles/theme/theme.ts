@@ -15,6 +15,7 @@ const base = {
       three: '#F9F9F9',
     },
 
+    white: '#FFFFFF',
     red: '#ff4c30',
     orange: '#e67e22',
     yellow: '#f5e51b',

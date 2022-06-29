@@ -20,11 +20,15 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    min-height: 100vh;
+    height: 100vh;
     width: 100vw;
     font-size: 1.6rem;
-    color: ${props => props.theme.colors.font};
-    background-color: ${props => props.theme.colors.primary.one}
+    color: ${(props) => props.theme.colors.font};
+    background-color: ${(props) => props.theme.colors.secondary.three}
+  }
+
+  ul {
+    list-style: none;
   }
 
   ${normalize}

@@ -1,9 +1,10 @@
 import { Provider as ReduxProvider } from 'react-redux';
 import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
-import { Navbar } from './components/app/Navbar/Navbar';
 import { GlobalStyle } from './styles/global-style/global-style';
 import { store } from './store/store';
-import { AppThemeProvider } from './context/ThemeAppContext';
+import { AppThemeProvider } from './context/theme/ThemeAppContext';
+
+import { Inbox } from './pages/Inbox';
 
 export default function App() {
   return (
@@ -11,15 +12,12 @@ export default function App() {
       <AppThemeProvider>
         <HashRouter>
           <main>
-            <h1>Todofeito App</h1>
-            <Navbar />
-
             <Routes>
-              <Route path='/inbox' element={<h1>Inbox</h1>} />
+              <Route path='/inbox' element={<Inbox />} />
               <Route path='/today' element={<h1>Today</h1>} />
               <Route path='/upcoming' element={<h1>upcoming</h1>} />
+              <Route path='*' element={<Navigate to='/inbox' replace={true} />} />
             </Routes>
-
             <GlobalStyle />
           </main>
         </HashRouter>
