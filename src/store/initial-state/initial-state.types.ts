@@ -1,5 +1,3 @@
-import { DefaultTheme, FlattenSimpleInterpolation } from 'styled-components';
-
 export type TodoType = {
   id: string;
   title: string;
@@ -14,13 +12,4 @@ export type TodoType = {
 
 export type InitialStateType = {
   todos: TodoType[];
-};
-
-export type AppThemeContextType = {
-  toggleMode: () => void;
-  mode: string;
-};
-
-export type AppThemeProviderProps = {
-  children: JSX.Element;
 };
