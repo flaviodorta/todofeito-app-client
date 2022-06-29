@@ -7,7 +7,7 @@ export const breakpoints = {
   xl: '1440px',
 };
 
-const base = {
+export const baseTheme = {
   colors: {
     secondary: {
       one: '#FFFFFF',
@@ -22,13 +22,17 @@ const base = {
     blue: '#284387',
     purple: '#a537fd',
   },
+
+  sizes: {
+    icon: '2rem',
+  },
 };
 
 export const light: DefaultTheme = {
   mode: 'light',
 
   colors: {
-    ...base.colors,
+    ...baseTheme.colors,
 
     primary: {
       one: '#00e640',
@@ -38,13 +42,17 @@ export const light: DefaultTheme = {
 
     font: '#030303',
   },
+
+  sizes: {
+    ...baseTheme.sizes,
+  },
 };
 
 export const dark: DefaultTheme = {
   mode: 'dark',
 
   colors: {
-    ...base.colors,
+    ...baseTheme.colors,
 
     primary: {
       one: '#121212',
@@ -53,5 +61,9 @@ export const dark: DefaultTheme = {
       four: '#404040',
     },
     font: '#FFFFFF',
+  },
+
+  sizes: {
+    ...baseTheme.sizes,
   },
 };

@@ -11,9 +11,9 @@ export type ContentProps = {
 };
 
 export const Content = styled.div<ContentProps>`
-  width: 82%;
-  height: auto;
-  margin-left: ${(props) => (props.isSidebarOpen ? '18%' : '0')};
+  width: 100%;
+  min-height: 100vh;
+  margin-left: ${(props) => (props.isSidebarOpen ? '30rem' : '0')};
 
   display: flex;
   justify-content: center;
@@ -27,6 +27,6 @@ export const Content = styled.div<ContentProps>`
 `;
 
 export const Wrapper = styled.div`
-  width: 100%;
+  width: 100vw;
   height: 100%;
 `;

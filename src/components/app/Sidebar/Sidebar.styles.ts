@@ -6,9 +6,9 @@ export type AsideProps = {
 
 export const Aside = styled.aside<AsideProps>`
   position: fixed;
-  width: 18vw;
+  width: 30rem;
   min-height: 100%;
-  background-color: red;
+  background-color: rgba(255, 0, 0, 0.2);
 
   margin-left: ${(props) => (props.isSidebarOpen ? '0' : '-18vw')};
 

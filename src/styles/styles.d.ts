@@ -24,5 +24,9 @@ declare module 'styled-components' {
       purple: string;
       font: string;
     };
+
+    sizes: {
+      icon: string;
+    };
   }
 }

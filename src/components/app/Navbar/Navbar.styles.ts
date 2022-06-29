@@ -20,8 +20,12 @@ export const Ul = styled.ul`
   align-items: center;
 
   li:not(:last-child) {
-    margin-right: 1rem;
+    margin-right: 1.8rem;
   }
+`;
+
+export const Li = styled.li`
+  display: flex;
 `;
 
 export const NavLink = styled(Link)`
