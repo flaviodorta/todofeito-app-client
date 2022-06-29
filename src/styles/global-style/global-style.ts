@@ -2,6 +2,11 @@ import { createGlobalStyle } from 'styled-components';
 import { normalize } from '../normalize/normalize';
 
 export const GlobalStyle = createGlobalStyle`
+  @font-face {
+    font-family: 'Aileron';
+    src: url('../../assets/fonts/Aileron-Black.otf');
+  }
+
   *,
   *::before,
   *::after {
@@ -9,14 +14,23 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     font-family: inherit;
+    color: inherit;
+    outline: none;
   }
+
+  *:focus {
+    outline: none;
+  }
+
+  input::placeholder {
+    color: inherit;
+  }
+
 
   html {
     font-size: 62.5%;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple Color Emoji", Helvetica, Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
     scroll-behavior: smooth;
-    
-    
   }
 
   body {

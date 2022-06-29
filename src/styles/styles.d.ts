@@ -7,8 +7,8 @@ declare module 'styled-components' {
     colors: {
       primary: {
         one: string;
-        two: string;
-        three: string;
+        two?: string;
+        three?: string;
         four?: string;
       };
       secondary: {
@@ -16,6 +16,13 @@ declare module 'styled-components' {
         two: string;
         three: string;
       };
+
+      grey: {
+        one: string;
+        two: string;
+        three: string;
+      };
+
       white;
       red: string;
       orange: string;

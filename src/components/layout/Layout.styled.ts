@@ -23,7 +23,7 @@ export const Content = styled.div<ContentProps>`
 
   transition-delay: 0.065s;
 
-  background-color: yellow;
+  /* background-color: yellow; */
 `;
 
 export const Wrapper = styled.div`

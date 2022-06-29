@@ -15,6 +15,12 @@ export const baseTheme = {
       three: '#F9F9F9',
     },
 
+    grey: {
+      one: '#696969',
+      two: '#B0B0B0',
+      three: '#D0D0D0',
+    },
+
     white: '#FFFFFF',
     red: '#ff4c30',
     orange: '#e67e22',
@@ -35,9 +41,7 @@ export const light: DefaultTheme = {
     ...baseTheme.colors,
 
     primary: {
-      one: '#00e640',
-      two: '#2ecc71',
-      three: '#93faa5',
+      one: '#3D5593',
     },
 
     font: '#030303',
