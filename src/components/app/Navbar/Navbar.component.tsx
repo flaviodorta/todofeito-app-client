@@ -9,13 +9,16 @@ import {
   ShortcutInputButton,
 } from './Navbar.styles';
 import { baseTheme } from '../../../styles/theme/theme';
+import { useState } from 'react';
 
 import { HomeOutlineIcon as HomeIcon } from '../../icons/HomeOutlineIcon';
 import { ArrowGrowthIcon as CompletedTodosIcon } from '../../icons/ArrowGrowthIcon';
 import { PlusSolidIcon as AddTaskIcon } from '../../icons/PlusSolidIcon';
 import { BarsSolidIcon as SidebarIcon } from '../../icons/BarsSolidIcon';
 import { MaginifyingGlassSolidIcon as SearchIcon } from '../../icons/MagnifyingGlassSolidIcon';
-import { useState } from 'react';
+import { BellRegularIcon as NotificationsIcon } from '../../icons/BellRegularIcon';
+import { CircleUserSolidIcon as UserIcon } from '../../icons/CircleUserSolidIcon';
+import { Label } from '../../shared/Label/Label';
 
 export type NavbarProps = {
   toggleSidebar: () => void;
@@ -37,14 +40,15 @@ export function Navbar(props: NavbarProps) {
       <Ul>
         <Li>
           <NavIconButton onClick={props.toggleSidebar}>
-            <SidebarIcon height={'26px'} width={'26px'} fill={white} />
+            <SidebarIcon fill={white} />
           </NavIconButton>
+          <Label content={'Siderbar icon'} />
         </Li>
 
         <Li>
           <NavLink to='/home'>
             <NavIconButton>
-              <HomeIcon height={'28px'} width={'28px'} stroke={white} />
+              <HomeIcon height={'24px'} width={'24px'} stroke={white} />
             </NavIconButton>
           </NavLink>
         </Li>
@@ -52,12 +56,10 @@ export function Navbar(props: NavbarProps) {
         <HoveredDiv
           isInputOpen={isInputOpen}
           isInputHover={isInputHover}
-          onClick={openInput}
           onMouseEnter={enterCursorInput}
-          onMouseLeave={() => {
-            closeInput();
-            leaveCursorInput();
-          }}
+          onMouseLeave={leaveCursorInput}
+          onFocus={openInput}
+          onBlur={closeInput}
         >
           <Li>
             <SearchIcon id='search-icon' />
@@ -75,13 +77,28 @@ export function Navbar(props: NavbarProps) {
 
       <Ul>
         <Li>
-          <AddTaskIcon fill={white} />
+          <NavIconButton>
+            <AddTaskIcon fill={white} />
+          </NavIconButton>
         </Li>
+
         <Li>
-          <CompletedTodosIcon fill={white} />
+          <NavIconButton>
+            <CompletedTodosIcon fill={white} />
+          </NavIconButton>
         </Li>
-        <Li>notifications</Li>
-        <Li>user</Li>
+
+        <Li>
+          <NavIconButton>
+            <NotificationsIcon fill={white} />
+          </NavIconButton>
+        </Li>
+
+        <Li>
+          <NavIconButton>
+            <UserIcon fill={white} />
+          </NavIconButton>
+        </Li>
       </Ul>
     </Nav>
   );

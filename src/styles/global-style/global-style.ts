@@ -16,6 +16,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: inherit;
     color: inherit;
     outline: none;
+    position: relative;
   }
 
   *:focus {
