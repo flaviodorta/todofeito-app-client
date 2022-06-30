@@ -1,6 +1,7 @@
 import styled, { css, DefaultTheme, ThemedStyledProps } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { HoveredDivProps, InputProps, NavIconButtonProps } from './Navbar.types';
+import { breakpoints } from '../../../styles/theme/theme';
 
 const inputOpenCSS = <P, T extends DefaultTheme>(props: ThemedStyledProps<P, T>) => css`
   background-color: ${props.theme.colors.white};
@@ -16,20 +17,24 @@ const searchIconOpenInputCSS = <P, T extends DefaultTheme>(props: ThemedStyledPr
 `;
 
 export const Nav = styled.nav`
-  height: 4.8rem;
-  width: 100vw;
-  background-color: ${(props) => props.theme.colors.primary.one};
-  display: flex;
-  padding: 1.2rem 6rem;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   color: ${(props) => props.theme.colors.white};
+  background-color: ${(props) => props.theme.colors.primary.one};
+
+  font-weight: 100;
+  height: 4.8rem;
+  width: 100vw;
 
   font-size: 1.35rem;
-  font-weight: 100;
+
+  padding: 1.2rem 2rem;
+
+  @media screen and (min-width: ${breakpoints.md}) {
+    padding: 1.2rem 6rem;
+  }
 `;
 
 export const Ul = styled.ul`
@@ -97,9 +102,10 @@ export const Input = styled.input<InputProps>`
   border: none;
   outline: none;
   color: inherit;
+  width: 200px;
   background-color: rgba(255, 255, 255, 0.21);
 
-  transition: color 0.125s ease, background-color 0.175s ease;
+  transition: color 0.135s ease, background-color 0.135s ease, width 0.195s ease;
 
   ${(props) =>
     (props.isInputHover || props.isInputOpen) &&
@@ -108,17 +114,29 @@ export const Input = styled.input<InputProps>`
         color: ${props.theme.colors.grey.one};
       }
     `}
+
+  ${(props) =>
+    props.isInputHover &&
+    css`
+      ${inputOpenCSS(props)};
+
+      transition: color 0.135s ease, background-color 0.135s ease, width 0.135s ease;
+    `}
+
+  ${(props) =>
+    props.isInputOpen &&
+    css`
+      ${inputOpenCSS(props)}
+      width: 35rem;
+
+      transition: color 0.135s ease, background-color 0.135s ease, width 0.135s ease;
+    `}
 `;
 
 export const HoveredDiv = styled.div<HoveredDivProps>`
   ${(props) =>
     props.isInputOpen &&
     css`
-      input {
-        ${inputOpenCSS(props)}
-        width: 30rem;
-      }
-
       & #search-icon {
         ${searchIconOpenInputCSS(props)}
       }
@@ -127,10 +145,6 @@ export const HoveredDiv = styled.div<HoveredDivProps>`
   ${(props) =>
     props.isInputHover &&
     css`
-      input {
-        ${inputOpenCSS(props)};
-      }
-
       & #search-icon {
         ${searchIconOpenInputCSS(props)};
       }
@@ -144,8 +158,10 @@ export const ShortcutInputButton = styled.button`
   height: 1.7rem;
   border: 1px solid ${(props) => props.theme.colors.grey.two};
   border-radius: 2px;
-  margin-left: -2.3rem;
   cursor: pointer;
+
+  position: absolute;
+  right: 1rem;
 
   transition: all 0.125s ease;
 

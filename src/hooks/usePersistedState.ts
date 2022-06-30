@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 type Response<T> = [T, Dispatch<SetStateAction<T>>];
 
 export function usePersistedState<T>(key: string, initialState: T): Response<T> {
-  const [state, setState] = useState(() => {
+  const [state, setState] = useState<T>(() => {
     const storageValue = localStorage.getItem(key);
 
     return storageValue ? JSON.parse(storageValue) : initialState;

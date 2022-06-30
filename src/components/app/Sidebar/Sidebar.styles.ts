@@ -10,7 +10,7 @@ export const Aside = styled.aside<AsideProps>`
   min-height: 100%;
   background-color: rgba(255, 0, 0, 0.2);
 
-  margin-left: ${(props) => (props.isSidebarOpen ? '0' : '-18vw')};
+  margin-left: ${(props) => (props.isSidebarOpen ? '0' : '-30.1rem')};
 
   padding: 8rem 8rem;
 

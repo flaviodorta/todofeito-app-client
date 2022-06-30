@@ -1,9 +1,8 @@
-import { useCallback, useLayoutEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useCallback, useLayoutEffect, useState } from 'react';
 
-export function useDimensions<T extends HTMLElement>(): [
-  setRef: (node: T | null) => void,
-  dimensions: DOMRect | {}
-] {
+type Response<T> = [Dispatch<SetStateAction<T | null>>, DOMRect | {}];
+
+export function useDimensions<T extends HTMLElement>(): Response<T> {
   const [dimensions, setDimensions] = useState<DOMRect | {}>({});
   const [ref, setRef] = useState<T | null>(null);
 

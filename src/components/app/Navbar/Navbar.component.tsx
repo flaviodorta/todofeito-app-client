@@ -10,6 +10,7 @@ import {
 } from './Navbar.styles';
 import { baseTheme } from '../../../styles/theme/theme';
 import { useLayoutEffect, useState } from 'react';
+import { NavbarProps } from './Navbar.types';
 
 import { HomeOutlineIcon as HomeIcon } from '../../icons/HomeOutlineIcon';
 import { ArrowGrowthIcon as CompletedTodosIcon } from '../../icons/ArrowGrowthIcon';
@@ -20,10 +21,6 @@ import { BellRegularIcon as NotificationsIcon } from '../../icons/BellRegularIco
 import { CircleUserSolidIcon as UserIcon } from '../../icons/CircleUserSolidIcon';
 import { Label } from '../../shared/Label/Label';
 import { useDimensions } from '../../../hooks/useDimensions';
-
-export type NavbarProps = {
-  toggleSidebar: () => void;
-};
 
 export function Navbar(props: NavbarProps) {
   const { white } = baseTheme.colors;
@@ -39,7 +36,7 @@ export function Navbar(props: NavbarProps) {
   const [setRef, dimensions] = useDimensions<HTMLButtonElement>();
 
   useLayoutEffect(() => {
-    console.log('render: navbar');
+    console.log(window.innerWidth);
   });
 
   return (
