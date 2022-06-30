@@ -35,5 +35,7 @@ declare module 'styled-components' {
     sizes: {
       icon: string;
     };
+
+    boxShadow: string;
   }
 }

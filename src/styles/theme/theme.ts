@@ -32,6 +32,8 @@ export const baseTheme = {
   sizes: {
     icon: '2rem',
   },
+
+  boxShadow: 'rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;',
 };
 
 export const light: DefaultTheme = {
@@ -50,6 +52,8 @@ export const light: DefaultTheme = {
   sizes: {
     ...baseTheme.sizes,
   },
+
+  boxShadow: baseTheme.boxShadow,
 };
 
 export const dark: DefaultTheme = {
@@ -70,4 +74,6 @@ export const dark: DefaultTheme = {
   sizes: {
     ...baseTheme.sizes,
   },
+
+  boxShadow: baseTheme.boxShadow,
 };

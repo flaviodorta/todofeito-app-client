@@ -10,7 +10,10 @@ import {
 } from './Navbar.styles';
 import { baseTheme } from '../../../styles/theme/theme';
 import { useLayoutEffect, useState } from 'react';
+import { useDimensions } from '../../../hooks/useDimensions';
 import { NavbarProps } from './Navbar.types';
+
+import { Label } from '../../shared/Label/Label.component';
 
 import { HomeOutlineIcon as HomeIcon } from '../../icons/HomeOutlineIcon';
 import { ArrowGrowthIcon as CompletedTodosIcon } from '../../icons/ArrowGrowthIcon';
@@ -19,8 +22,6 @@ import { BarsSolidIcon as SidebarIcon } from '../../icons/BarsSolidIcon';
 import { MaginifyingGlassSolidIcon as SearchIcon } from '../../icons/MagnifyingGlassSolidIcon';
 import { BellRegularIcon as NotificationsIcon } from '../../icons/BellRegularIcon';
 import { CircleUserSolidIcon as UserIcon } from '../../icons/CircleUserSolidIcon';
-import { Label } from '../../shared/Label/Label';
-import { useDimensions } from '../../../hooks/useDimensions';
 
 export function Navbar(props: NavbarProps) {
   const { white } = baseTheme.colors;

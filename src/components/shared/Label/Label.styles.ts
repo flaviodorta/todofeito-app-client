@@ -8,6 +8,7 @@ export const Div = styled.div`
   padding: 0.65rem 0.85rem;
   position: absolute;
   z-index: 3;
+  box-shadow: ${(props) => props.theme.boxShadow};
 
   bottom: -4.4rem;
   left: -50%;
