@@ -4,3 +4,5 @@ export interface HoveredDivProps {
 }
 
 export interface InputProps extends HoveredDivProps {}
+
+export interface NavIconButtonProps {}

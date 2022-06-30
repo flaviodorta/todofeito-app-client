@@ -9,7 +9,7 @@ import {
   ShortcutInputButton,
 } from './Navbar.styles';
 import { baseTheme } from '../../../styles/theme/theme';
-import { useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 
 import { HomeOutlineIcon as HomeIcon } from '../../icons/HomeOutlineIcon';
 import { ArrowGrowthIcon as CompletedTodosIcon } from '../../icons/ArrowGrowthIcon';
@@ -19,6 +19,7 @@ import { MaginifyingGlassSolidIcon as SearchIcon } from '../../icons/MagnifyingG
 import { BellRegularIcon as NotificationsIcon } from '../../icons/BellRegularIcon';
 import { CircleUserSolidIcon as UserIcon } from '../../icons/CircleUserSolidIcon';
 import { Label } from '../../shared/Label/Label';
+import { useDimensions } from '../../../hooks/useDimensions';
 
 export type NavbarProps = {
   toggleSidebar: () => void;
@@ -35,11 +36,17 @@ export function Navbar(props: NavbarProps) {
   const enterCursorInput = () => setIsInputHover(true);
   const leaveCursorInput = () => setIsInputHover(false);
 
+  const [setRef, dimensions] = useDimensions<HTMLButtonElement>();
+
+  useLayoutEffect(() => {
+    console.log('render: navbar');
+  });
+
   return (
     <Nav>
       <Ul>
         <Li>
-          <NavIconButton onClick={props.toggleSidebar}>
+          <NavIconButton ref={setRef} onClick={props.toggleSidebar}>
             <SidebarIcon fill={white} />
           </NavIconButton>
           <Label content={'Siderbar icon'} />

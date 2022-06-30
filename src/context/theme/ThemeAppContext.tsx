@@ -23,7 +23,9 @@ export function AppThemeProvider(props: AppThemeProviderProps): JSX.Element {
 
   return (
     <ThemeProvider theme={mode === 'light' ? light : dark}>
-      <AppThemeContext.Provider value={{ mode, toggleMode }}>{props.children}</AppThemeContext.Provider>
+      <AppThemeContext.Provider value={{ mode, toggleMode }}>
+        {props.children}
+      </AppThemeContext.Provider>
     </ThemeProvider>
   );
 }

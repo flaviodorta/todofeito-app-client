@@ -1,6 +1,6 @@
 import styled, { css, DefaultTheme, ThemedStyledProps } from 'styled-components';
 import { Link } from 'react-router-dom';
-import { HoveredDivProps, InputProps } from './Navbar.types';
+import { HoveredDivProps, InputProps, NavIconButtonProps } from './Navbar.types';
 
 const inputOpenCSS = <P, T extends DefaultTheme>(props: ThemedStyledProps<P, T>) => css`
   background-color: ${props.theme.colors.white};
@@ -64,7 +64,7 @@ export const Li = styled.li`
   }
 `;
 
-export const NavIconButton = styled.button`
+export const NavIconButton = styled.button<NavIconButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -100,16 +100,6 @@ export const Input = styled.input<InputProps>`
   background-color: rgba(255, 255, 255, 0.21);
 
   transition: color 0.125s ease, background-color 0.175s ease;
-
-  &:hover {
-    &${Nav} {
-      background-color: red;
-    }
-
-    #search-icon {
-      fill: red;
-    }
-  }
 
   ${(props) =>
     (props.isInputHover || props.isInputOpen) &&
