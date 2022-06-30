@@ -5,11 +5,11 @@ import {
   Li,
   NavIconButton,
   Input,
-  HoveredDiv,
+  DivWithHover,
   ShortcutInputButton,
 } from './Navbar.styles';
 import { baseTheme } from '../../../styles/theme/theme';
-import { useLayoutEffect, useState } from 'react';
+import { useState, useRef } from 'react';
 import { useDimensions } from '../../../hooks/useDimensions';
 import { NavbarProps } from './Navbar.types';
 
@@ -22,23 +22,19 @@ import { BarsSolidIcon as SidebarIcon } from '../../icons/BarsSolidIcon';
 import { MaginifyingGlassSolidIcon as SearchIcon } from '../../icons/MagnifyingGlassSolidIcon';
 import { BellRegularIcon as NotificationsIcon } from '../../icons/BellRegularIcon';
 import { CircleUserSolidIcon as UserIcon } from '../../icons/CircleUserSolidIcon';
+import { useHover } from '../../../hooks/useHover';
+import { useFocus } from '../../../hooks/useFocus';
 
 export function Navbar(props: NavbarProps) {
   const { white } = baseTheme.colors;
-  const [isInputOpen, setIsInputOpen] = useState<boolean>(false);
-  const [isInputHover, setIsInputHover] = useState<boolean>(false);
 
-  const openInput = () => setIsInputOpen(true);
-  const closeInput = () => setIsInputOpen(false);
+  const divWithHoverRef = useRef<HTMLDivElement | null>(null);
 
-  const enterCursorInput = () => setIsInputHover(true);
-  const leaveCursorInput = () => setIsInputHover(false);
+  const [isDivWithHoverFocus, setOnFocus, setOnBlur] =
+    useFocus(divWithHoverRef);
+  const isInputHover = useHover(divWithHoverRef);
 
   const [setRef, dimensions] = useDimensions<HTMLButtonElement>();
-
-  useLayoutEffect(() => {
-    console.log(window.innerWidth);
-  });
 
   return (
     <Nav>
@@ -58,26 +54,27 @@ export function Navbar(props: NavbarProps) {
           </NavLink>
         </Li>
 
-        <HoveredDiv
-          isInputOpen={isInputOpen}
+        <DivWithHover
+          ref={divWithHoverRef}
           isInputHover={isInputHover}
-          onMouseEnter={enterCursorInput}
-          onMouseLeave={leaveCursorInput}
-          onFocus={openInput}
-          onBlur={closeInput}
+          isDivWithHoverFocus={isDivWithHoverFocus}
+          onFocus={setOnFocus}
+          onBlur={setOnBlur}
         >
           <Li>
             <SearchIcon id='search-icon' />
             <Input
-              isInputOpen={isInputOpen}
+              isDivWithHoverFocus={isDivWithHoverFocus}
               isInputHover={isInputHover}
               type='text'
               placeholder='Search'
             />
-            {(isInputOpen && <ShortcutInputButton>/</ShortcutInputButton>) ||
+            {(isDivWithHoverFocus && (
+              <ShortcutInputButton>/</ShortcutInputButton>
+            )) ||
               (isInputHover && <ShortcutInputButton>/</ShortcutInputButton>)}
           </Li>
-        </HoveredDiv>
+        </DivWithHover>
       </Ul>
 
       <Ul>

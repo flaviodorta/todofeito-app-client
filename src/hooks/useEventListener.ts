@@ -39,12 +39,6 @@ export function useEventListener<
 ) {
   const savedHandler = useRef(handler);
 
-  console.log('Saved Handler:');
-  console.log(savedHandler);
-
-  console.log('Current:');
-  console.log(savedHandler.current);
-
   useIsomorphicLayoutEffect(() => {
     savedHandler.current = handler;
   }, [handler]);

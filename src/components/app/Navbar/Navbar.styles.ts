@@ -1,16 +1,28 @@
-import styled, { css, DefaultTheme, ThemedStyledProps } from 'styled-components';
+import styled, {
+  css,
+  DefaultTheme,
+  ThemedStyledProps,
+} from 'styled-components';
 import { Link } from 'react-router-dom';
-import { HoveredDivProps, InputProps, NavIconButtonProps } from './Navbar.types';
+import {
+  DivWithHoverProps,
+  InputProps,
+  NavIconButtonProps,
+} from './Navbar.types';
 import { breakpoints } from '../../../styles/theme/theme';
 
-const inputOpenCSS = <P, T extends DefaultTheme>(props: ThemedStyledProps<P, T>) => css`
+const inputOpenCSS = <P, T extends DefaultTheme>(
+  props: ThemedStyledProps<P, T>
+) => css`
   background-color: ${props.theme.colors.white};
   color: ${props.theme.colors.font};
 
   transition: color 0.125s ease, background-color 0.175s ease;
 `;
 
-const searchIconOpenInputCSS = <P, T extends DefaultTheme>(props: ThemedStyledProps<P, T>) => css`
+const searchIconOpenInputCSS = <P, T extends DefaultTheme>(
+  props: ThemedStyledProps<P, T>
+) => css`
   fill: ${(props) => props.theme.colors.primary.one};
 
   transition: fill 0.125s ease;
@@ -108,7 +120,7 @@ export const Input = styled.input<InputProps>`
   transition: color 0.135s ease, background-color 0.135s ease, width 0.195s ease;
 
   ${(props) =>
-    (props.isInputHover || props.isInputOpen) &&
+    (props.isInputHover || props.isDivWithHoverFocus) &&
     css`
       &::placeholder {
         color: ${props.theme.colors.grey.one};
@@ -120,22 +132,24 @@ export const Input = styled.input<InputProps>`
     css`
       ${inputOpenCSS(props)};
 
-      transition: color 0.135s ease, background-color 0.135s ease, width 0.135s ease;
+      transition: color 0.135s ease, background-color 0.135s ease,
+        width 0.135s ease;
     `}
 
   ${(props) =>
-    props.isInputOpen &&
+    props.isDivWithHoverFocus &&
     css`
       ${inputOpenCSS(props)}
       width: 35rem;
 
-      transition: color 0.135s ease, background-color 0.135s ease, width 0.135s ease;
+      transition: color 0.135s ease, background-color 0.135s ease,
+        width 0.135s ease;
     `}
 `;
 
-export const HoveredDiv = styled.div<HoveredDivProps>`
+export const DivWithHover = styled.div<DivWithHoverProps>`
   ${(props) =>
-    props.isInputOpen &&
+    props.isDivWithHoverFocus &&
     css`
       & #search-icon {
         ${searchIconOpenInputCSS(props)}

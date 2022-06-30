@@ -6,7 +6,6 @@ import {
   useState,
 } from 'react';
 import { useEventListener } from './useEventListener';
-import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 
 type Response<T> = [Dispatch<SetStateAction<T | null>>, DOMRect];
 
