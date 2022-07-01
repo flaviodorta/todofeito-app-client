@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useRef } from 'react';
+import { RefObject, useEffect, useLayoutEffect, useRef } from 'react';
 import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 
 export function useEventListener<K extends keyof WindowEventMap>(
@@ -39,7 +39,7 @@ export function useEventListener<
 ) {
   const savedHandler = useRef(handler);
 
-  useIsomorphicLayoutEffect(() => {
+  useLayoutEffect(() => {
     savedHandler.current = handler;
   }, [handler]);
 

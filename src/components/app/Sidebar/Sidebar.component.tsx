@@ -1,12 +1,11 @@
 import { Aside } from './Sidebar.styles';
-
-export type SidebarProps = {
-  isSidebarOpen: boolean;
-};
+import { SidebarProps } from './Sidebar.types';
 
 export function Sidebar(props: SidebarProps): JSX.Element {
+  const { isSidebarOpen } = props;
+
   return (
-    <Aside isSidebarOpen={props.isSidebarOpen}>
+    <Aside isSidebarOpen={isSidebarOpen}>
       <ul>
         <li>Inbox</li>
         <li>Today</li>

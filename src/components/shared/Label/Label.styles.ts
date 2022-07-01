@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { DivProps } from './Label.types';
 
-export const Div = styled.div`
+export const Div = styled.div<DivProps>`
   background-color: ${(props) => props.theme.colors.grey.one};
   border: none;
   border-radius: 4px;
@@ -9,7 +9,10 @@ export const Div = styled.div`
   position: absolute;
   z-index: 3;
   box-shadow: ${(props) => props.theme.boxShadow};
+  white-space: nowrap;
+  visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
 
-  bottom: -4.4rem;
-  left: -50%;
+  bottom: -3.2rem;
+  left: ${(props) =>
+    `${(props.parentWidth ?? 0) / 2 - (props.elementWidth ?? 0) / 2}px`};
 `;

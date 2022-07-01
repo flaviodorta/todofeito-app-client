@@ -3,13 +3,14 @@ import styled, {
   DefaultTheme,
   ThemedStyledProps,
 } from 'styled-components';
+import { breakpoints } from '../../../styles/theme/theme';
+
 import { Link } from 'react-router-dom';
 import {
   DivWithHoverProps,
   InputProps,
   NavIconButtonProps,
 } from './Navbar.types';
-import { breakpoints } from '../../../styles/theme/theme';
 
 const inputOpenCSS = <P, T extends DefaultTheme>(
   props: ThemedStyledProps<P, T>

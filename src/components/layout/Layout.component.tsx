@@ -1,11 +1,9 @@
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
+import { LayoutProps } from './Layout.types';
+
 import { Navbar } from '../app/Navbar/Navbar.component';
 import { Sidebar } from '../app/Sidebar/Sidebar.component';
-import { Content, Div } from './Layout.styled';
-
-export type LayoutProps = {
-  activePage: string;
-};
+import { Content } from './Layout.styled';
 
 export function Layout(props: LayoutProps): JSX.Element {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
@@ -14,7 +12,7 @@ export function Layout(props: LayoutProps): JSX.Element {
 
   return (
     <>
-      <Navbar toggleSidebar={toggleSidebar} />
+      <Navbar toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
       <Sidebar isSidebarOpen={isSidebarOpen} />
       <Content isSidebarOpen={isSidebarOpen}></Content>
     </>

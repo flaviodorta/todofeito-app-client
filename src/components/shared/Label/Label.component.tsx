@@ -1,6 +1,20 @@
 import { LabelProps } from './Label.types';
 import { Div } from './Label.styles';
+import { useElementSize } from '../../../hooks/useElementSize';
 
 export function Label(props: LabelProps): JSX.Element {
-  return <Div>{props.content}</Div>;
+  const [labelRef, labelSize] = useElementSize();
+
+  const { isVisible, content, parentWidth } = props;
+
+  return (
+    <Div
+      ref={labelRef}
+      isVisible={isVisible}
+      parentWidth={parentWidth}
+      elementWidth={labelSize.width}
+    >
+      {content}
+    </Div>
+  );
 }

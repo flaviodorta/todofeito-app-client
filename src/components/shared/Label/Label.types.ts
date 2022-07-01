@@ -1,8 +1,11 @@
-export type LabelProps = {
-  content: string;
-};
+export interface LabelProps {
+  isVisible?: boolean;
+  content: string | [string, string];
+  parentWidth?: number;
+}
 
 export interface DivProps {
-  left: number;
-  width: number;
+  isVisible?: boolean;
+  parentWidth?: number;
+  elementWidth?: number;
 }
