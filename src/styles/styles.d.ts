@@ -11,7 +11,8 @@ declare module 'styled-components' {
         three?: string;
         four?: string;
       };
-      secondary: {
+
+      white: {
         one: string;
         two: string;
         three: string;
@@ -23,7 +24,6 @@ declare module 'styled-components' {
         three: string;
       };
 
-      white;
       red: string;
       orange: string;
       yellow: string;

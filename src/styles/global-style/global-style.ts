@@ -39,7 +39,7 @@ export const GlobalStyle = createGlobalStyle`
     width: 100vw;
     font-size: 1.6rem;
     color: ${(props) => props.theme.colors.font};
-    background-color: ${(props) => props.theme.colors.secondary.three};
+    background-color: ${(props) => props.theme.colors.white.one};
 
     overflow: hidden;
   }

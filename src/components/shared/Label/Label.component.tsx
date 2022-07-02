@@ -1,5 +1,5 @@
 import { LabelProps } from './Label.types';
-import { Div } from './Label.styles';
+import { Div } from './Label.styled';
 import { useElementSize } from '../../../hooks/useElementSize';
 
 export function Label(props: LabelProps): JSX.Element {

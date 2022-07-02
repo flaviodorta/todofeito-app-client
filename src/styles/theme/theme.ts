@@ -9,31 +9,31 @@ export const breakpoints = {
 
 export const baseTheme = {
   colors: {
-    secondary: {
-      one: '#FFFFFF',
-      two: '#ECECEC',
-      three: '#F9F9F9',
+    white: {
+      one: 'rgb(255, 255, 255)',
+      two: 'rgb(250, 250, 250)',
+      three: 'rgb(238, 238, 238)',
     },
 
     grey: {
-      one: '#696969',
-      two: '#B0B0B0',
-      three: '#D0D0D0',
+      one: 'rgb(208, 208, 208)',
+      two: 'rgb(176, 176, 176)',
+      three: 'rgb(105, 105, 105)',
     },
 
-    white: '#FFFFFF',
-    red: '#ff4c30',
-    orange: '#e67e22',
-    yellow: '#f5e51b',
-    blue: '#284387',
-    purple: '#a537fd',
+    red: 'rgb(255, 76, 48)',
+    orange: 'rgb(230, 126, 34)',
+    yellow: 'rgb(245, 229, 27)',
+    blue: 'rgb(40, 67, 135)',
+    purple: 'rgb(165, 55, 253)',
   },
 
   sizes: {
     icon: '2rem',
   },
 
-  boxShadow: 'rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;',
+  boxShadow:
+    'rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;',
 };
 
 export const light: DefaultTheme = {

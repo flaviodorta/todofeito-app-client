@@ -1,12 +1,12 @@
 import { Fragment } from 'react';
-import { Layout } from '../components/layout/Layout.component';
+import { BasePage } from './base-page/BasePage.component';
 
 export function Inbox(): JSX.Element {
   const activePage = 'inbox';
 
   return (
     <Fragment>
-      <Layout activePage={activePage} />
+      <BasePage activePage={activePage} />
     </Fragment>
   );
 }
