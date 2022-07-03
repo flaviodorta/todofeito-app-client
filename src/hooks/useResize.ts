@@ -30,8 +30,8 @@ export function useResize<T extends HTMLElement>(
   const [heightRemFinal, setHeightRemFinal] = useState<string>(initialValue || '');
 
   const direction = resizeableSide?.direction;
-  const max = resizeableSide?.max;
-  const min = resizeableSide?.min;
+  let max = resizeableSide?.max;
+  let min = resizeableSide?.min;
 
   useLayoutEffect(() => {
     if (element && (top || right || bottom || left)) {

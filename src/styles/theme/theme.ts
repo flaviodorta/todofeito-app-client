@@ -26,6 +26,7 @@ export const baseTheme = {
     yellow: 'rgb(245, 229, 27)',
     blue: 'rgb(40, 67, 135)',
     purple: 'rgb(165, 55, 253)',
+    green: 'rgb(38, 194, 129)',
   },
 
   sizes: {

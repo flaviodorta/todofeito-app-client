@@ -13,7 +13,7 @@ export const Aside = styled.aside<AsideProps>`
   margin-left: ${(props) =>
     props.isSidebarOpen ? '0' : `-${props.resizeabledWidth}`};
 
-  padding: 8rem 0 8rem 5.5rem;
+  padding: 3rem 0 7rem 5.5rem;
 
   transition: margin-left 0.125s ease;
 
@@ -44,9 +44,10 @@ export const Li = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.2rem 1.6rem;
+  padding: 0.8rem 1.2rem;
   border-radius: 4px 0 0 4px;
   cursor: pointer;
+  margin-bottom: 0;
 
   &:hover {
     background-color: ${(props) => props.theme.colors.white.three};
@@ -56,10 +57,19 @@ export const Li = styled.li`
 export const Div = styled.div`
   display: flex;
   align-items: center;
+
+  font-size: 1.4rem;
+  letter-spacing: 0.5px;
+  user-select: none;
+
+  svg {
+    margin-right: 1.3rem;
+  }
 `;
 
 export const TodoCount = styled.span`
   color: ${(props) => props.theme.colors.grey.three};
   font-size: 1.4rem;
   justify-self: flex-end;
+  user-select: none;
 `;
