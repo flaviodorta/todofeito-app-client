@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { NavbarProps } from './Navbar.types';
 import { useHover } from '../../../hooks/useHover';
-import { useFocus } from '../../../hooks/useFocus';
+import { useToggle } from '../../../hooks/useToggle';
 import { baseTheme } from '../../../styles/theme/theme';
 import { NavbarData as Data } from './Navbar.data';
 
@@ -41,7 +41,7 @@ export function Navbar(props: NavbarProps) {
 
   const hoveredDivRef = useRef<HTMLDivElement | null>(null);
 
-  const [isHoveredDivFocus, setOnFocus, setOnBlur] = useFocus(hoveredDivRef);
+  const [isHoveredDivFocus, toggleHoveredDivFocus] = useToggle(false);
 
   const isInputHover = useHover(hoveredDivRef);
 
@@ -93,8 +93,8 @@ export function Navbar(props: NavbarProps) {
           ref={hoveredDivRef}
           isInputHover={isInputHover}
           isHoveredDivFocus={isHoveredDivFocus}
-          onFocus={setOnFocus}
-          onBlur={setOnBlur}
+          onFocus={toggleHoveredDivFocus}
+          onBlur={toggleHoveredDivFocus}
         >
           <Li>
             <SearchIcon id='search-icon' />
