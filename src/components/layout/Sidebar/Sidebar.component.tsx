@@ -1,10 +1,11 @@
+import { SidebarProps } from './Sidebar.types';
+import { baseTheme, breakpoints } from '../../../styles/theme/theme';
 import { useLayoutEffect, useRef } from 'react';
 import { usePersistedState } from '../../../hooks/usePersistedState';
 import { useResize } from '../../../hooks/useResize';
 import { useHover } from '../../../hooks/useHover';
 import { useWindowSize } from '../../../hooks/useWindowSize';
-import { SidebarProps } from './Sidebar.types';
-import { baseTheme, breakpoints } from '../../../styles/theme/theme';
+import { useEventListener } from '../../../hooks/useEventListener';
 
 import {
   Aside,
@@ -23,12 +24,37 @@ import { CalendarIcon as UpcomingIcon } from '../../shared/icons/CalendarIcon';
 import { LabelIcon as FiltersAndLabelsIcon } from '../../shared/icons/LabelIcon';
 import { ChevronDownIcon as RotatedChevronIcon } from '../../shared/icons/ChevronDownIcon';
 import { PlusSolidIcon as AddProjectIcon } from '../../shared/icons/PlusSolidIcon';
-import { useEventListener } from '../../../hooks/useEventListener';
 
 export function Sidebar(props: SidebarProps): JSX.Element {
-  const { isSidebarOpen } = props;
+  const { isSidebarOpen, toggleSidebar } = props;
 
   const { colors } = baseTheme;
+
+  // current and old window width values, and md breakpoint string parsed to int
+  const windowSizeWidth = useWindowSize().width;
+  const oldWindowWidthRef = useRef<number | undefined>(undefined);
+  const breakpointMd = parseInt(breakpoints.md, 10);
+
+  // save old window width value
+  useLayoutEffect(() => {
+    return () => {
+      oldWindowWidthRef.current = windowSizeWidth;
+    };
+  });
+
+  // close sidebar when change window width change from width major than md breakpoint
+  // to a value minor than md breakpoint
+  useEventListener('resize', () => {
+    if (windowSizeWidth && oldWindowWidthRef.current) {
+      if (
+        isSidebarOpen &&
+        windowSizeWidth < breakpointMd &&
+        oldWindowWidthRef.current > breakpointMd
+      ) {
+        setTimeout(toggleSidebar, 100);
+      }
+    }
+  });
 
   // width values to sidebar resizing
   const initialWidth = '35.1rem';
