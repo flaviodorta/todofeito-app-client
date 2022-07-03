@@ -18,8 +18,8 @@ export const baseTheme = {
     grey: {
       one: 'rgb(208, 208, 208)',
       two: 'rgb(176, 176, 176)',
-      three: 'rgb(105, 105, 105)',
-      four: 'rgba(90, 90, 90)',
+      three: 'rgb(125, 125, 125)',
+      four: 'rgb(80, 80, 80)',
     },
 
     red: 'rgb(255, 76, 48)',

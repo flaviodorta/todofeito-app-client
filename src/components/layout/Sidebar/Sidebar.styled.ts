@@ -103,6 +103,6 @@ export const HoveredButton = styled.div<HoveredButtonProps>`
   opacity: ${(props) => (props.isProjectHover ? 1 : 0)};
   fill: ${(props) =>
     props.isProjectButtonHover
-      ? props.theme.colors.grey.three
-      : props.theme.colors.grey.two};
+      ? props.theme.colors.grey.four
+      : props.theme.colors.grey.three};
 `;
