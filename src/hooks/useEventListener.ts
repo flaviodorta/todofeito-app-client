@@ -31,10 +31,8 @@ export function useEventListener<
   T extends HTMLElement | void = void
 >(
   eventName: KH | KW,
-  handler: (
-    event: WindowEventMap[KW] | HTMLElementEventMap[KH] | Event
-  ) => void,
-  element?: RefObject<T>,
+  handler: (event: WindowEventMap[KW] | HTMLElementEventMap[KH] | Event) => void,
+  element?: React.RefObject<T>,
   options?: boolean | AddEventListenerOptions
 ) {
   const savedHandler = useRef(handler);
@@ -48,8 +46,7 @@ export function useEventListener<
 
     if (!(targetElement && targetElement.addEventListener)) return;
 
-    const eventListener: typeof handler = (event) =>
-      savedHandler.current(event);
+    const eventListener: typeof handler = (event) => savedHandler.current(event);
 
     targetElement.addEventListener(eventName, eventListener, options);
 

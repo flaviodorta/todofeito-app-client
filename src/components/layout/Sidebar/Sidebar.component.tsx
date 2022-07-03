@@ -1,14 +1,37 @@
+import { useLayoutEffect } from 'react';
+import { usePersistedState } from '../../../hooks/usePersistedState';
 import { useResize } from '../../../hooks/useResize';
-import { Aside, Ul, Li, Div, TodoCount, Resizer } from './Sidebar.styled';
 import { SidebarProps } from './Sidebar.types';
+
+import { Aside, Ul, Li, Div, TodoCount, Resizer } from './Sidebar.styled';
 
 export function Sidebar(props: SidebarProps): JSX.Element {
   const { isSidebarOpen } = props;
-  const { element, right } = useResize({ side: 'right', max: 600, min: 200 });
+
+  const initialWidth = '35.1rem';
+
+  const [persistedWidth, setPersistedWidth] = usePersistedState(
+    'sidebar-width',
+    initialWidth
+  );
+
+  const [setRef, resizeabledWidth] = useResize(
+    { direction: 'right', max: 500, min: 270 },
+    persistedWidth
+  );
+
+  useLayoutEffect(() => {
+    setPersistedWidth(resizeabledWidth);
+  }, [resizeabledWidth]);
 
   return (
-    <Aside ref={element} isSidebarOpen={isSidebarOpen}>
-      <Resizer ref={right} />
+    <Aside
+      ref={setRef.element}
+      isSidebarOpen={isSidebarOpen}
+      initialWidth={initialWidth}
+      resizeabledWidth={persistedWidth}
+    >
+      <Resizer ref={setRef.right} />
       <Ul>
         <Li>
           <Div>inbox</Div>

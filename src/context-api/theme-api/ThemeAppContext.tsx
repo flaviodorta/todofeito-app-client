@@ -2,10 +2,7 @@ import { useContext, createContext } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { usePersistedState } from '../../hooks/usePersistedState';
 import { dark, light } from '../../styles/theme/theme';
-import {
-  AppThemeContextType,
-  AppThemeProviderProps,
-} from './ThemeAppContext.types';
+import { AppThemeContextType, AppThemeProviderProps } from './ThemeAppContext.types';
 
 const initialValue = {
   mode: 'light',

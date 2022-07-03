@@ -1,18 +1,22 @@
-import { useLayoutEffect, useEffect, useRef, useState } from 'react';
+import React, { useLayoutEffect, useEffect, useRef, useState } from 'react';
 
-interface UseResizeProps {
-  side: 'top' | 'right' | 'bottom' | 'left';
+type Side = {
+  direction: 'top' | 'right' | 'bottom' | 'left';
   max: number;
   min: number;
-}
-
-type UseResizeResponse<T> = {
-  [key: string]: React.Dispatch<React.SetStateAction<T | null>>;
 };
 
+type InitialValue = string;
+
+type Return<T> = [
+  { [key: string]: React.Dispatch<React.SetStateAction<T | null>> },
+  string
+];
+
 export function useResize<T extends HTMLElement>(
-  props?: UseResizeProps
-): UseResizeResponse<T> {
+  resizeableSide?: Side,
+  initialValue?: InitialValue
+): Return<T> {
   const [element, setElement] = useState<T | null>(null);
   const [top, setTop] = useState<T | null>(null);
   const [right, setRight] = useState<T | null>(null);
@@ -22,9 +26,12 @@ export function useResize<T extends HTMLElement>(
   let widthRem = '';
   let heightRem = '';
 
-  const side = props?.side;
-  const max = props?.max;
-  const min = props?.min;
+  const [widthRemFinal, setWidthRemFinal] = useState<string>(initialValue || '');
+  const [heightRemFinal, setHeightRemFinal] = useState<string>(initialValue || '');
+
+  const direction = resizeableSide?.direction;
+  const max = resizeableSide?.max;
+  const min = resizeableSide?.min;
 
   useLayoutEffect(() => {
     if (element && (top || right || bottom || left)) {
@@ -43,9 +50,9 @@ export function useResize<T extends HTMLElement>(
         heightRem = `${height / 10}rem`;
 
         // check to set width when has or not limit
-        if (!props) {
+        if (!resizeableSide) {
           resizeableElement.style.height = heightRem;
-        } else if (props && side) {
+        } else if (resizeableSide && direction) {
           if (max && min) {
             if (height > min && height < max) {
               resizeableElement.style.height = heightRem;
@@ -64,6 +71,7 @@ export function useResize<T extends HTMLElement>(
 
       const onMouseUpTopResize = () => {
         document.removeEventListener('mousemove', onMouseMoveTopResize);
+        setHeightRemFinal(heightRem);
       };
 
       const onMouseDownTopResize = (event: MouseEvent) => {
@@ -84,9 +92,9 @@ export function useResize<T extends HTMLElement>(
         widthRem = `${width / 10}rem`;
 
         // check to set width when has or not limit
-        if (!props) {
+        if (!resizeableSide) {
           resizeableElement.style.width = widthRem;
-        } else if (props && side) {
+        } else if (resizeableSide && direction) {
           if (max && min) {
             if (width > min && width < max) {
               resizeableElement.style.width = widthRem;
@@ -105,6 +113,7 @@ export function useResize<T extends HTMLElement>(
 
       const onMouseUpRightResize = () => {
         document.removeEventListener('mousemove', onMouseMoveRightResize);
+        setWidthRemFinal(widthRem);
       };
 
       const onMouseDownRightResize = (event: MouseEvent) => {
@@ -122,12 +131,12 @@ export function useResize<T extends HTMLElement>(
         const dy = event.clientY - y;
         y = event.clientY;
         height = height + dy;
-        heightRem = `${height / 10}rem`;
+        // heightRem = `${height / 10}rem`;
 
         // check to set width when has or not limit
-        if (!props) {
+        if (!resizeableSide) {
           resizeableElement.style.height = heightRem;
-        } else if (props && side) {
+        } else if (resizeableSide && direction) {
           if (max && min) {
             if (height > min && height < max) {
               resizeableElement.style.height = heightRem;
@@ -146,6 +155,7 @@ export function useResize<T extends HTMLElement>(
 
       const onMouseUpBottomResize = () => {
         document.removeEventListener('mousemove', onMouseMoveBottomResize);
+        setHeightRemFinal(heightRem);
       };
 
       const onMouseDownBottomResize = (event: MouseEvent) => {
@@ -166,9 +176,9 @@ export function useResize<T extends HTMLElement>(
         widthRem = `${width / 10}rem`;
 
         // check to set width when has or not limit
-        if (!props) {
+        if (!resizeableSide) {
           resizeableElement.style.width = widthRem;
-        } else if (props && side) {
+        } else if (resizeableSide && direction) {
           if (max && min) {
             if (width > min && width < max) {
               resizeableElement.style.width = widthRem;
@@ -187,6 +197,7 @@ export function useResize<T extends HTMLElement>(
 
       const onMouseUpLeftResize = () => {
         document.removeEventListener('mousemove', onMouseMoveLeftResize);
+        setWidthRemFinal(widthRem);
       };
 
       const onMouseDownLeftResize = (event: MouseEvent) => {
@@ -221,7 +232,7 @@ export function useResize<T extends HTMLElement>(
     }
   }, [element, top, right, bottom, left]);
 
-  const refs = {
+  const setRefs = {
     element: setElement,
     top: setTop,
     right: setRight,
@@ -229,5 +240,7 @@ export function useResize<T extends HTMLElement>(
     left: setLeft,
   };
 
-  return refs;
+  const sizeRemFinal = widthRemFinal ? widthRemFinal : heightRemFinal;
+
+  return [setRefs, sizeRemFinal];
 }

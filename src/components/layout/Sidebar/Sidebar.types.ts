@@ -4,5 +4,6 @@ export type SidebarProps = {
 
 export type AsideProps = {
   isSidebarOpen: boolean;
-  storagedWidth?: string | null;
+  initialWidth: string;
+  resizeabledWidth: string;
 };

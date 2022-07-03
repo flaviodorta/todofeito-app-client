@@ -13,3 +13,4 @@
 
 - add keybind no F12 pra F2
 - mudar botes do mouse pra mudar de workspace
+- mudar useFocus para useToggle

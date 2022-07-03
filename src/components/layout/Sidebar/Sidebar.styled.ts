@@ -3,18 +3,15 @@ import { AsideProps } from './Sidebar.types';
 
 export const Aside = styled.aside<AsideProps>`
   position: fixed;
-  width: ${(props) => (props.storagedWidth ? props.storagedWidth : '35.1rem')};
+  width: ${(props) =>
+    props.resizeabledWidth ? props.resizeabledWidth : props.initialWidth};
   min-height: 100%;
   background-color: ${(props) => props.theme.colors.white.two};
 
   z-index: 3;
 
   margin-left: ${(props) =>
-    props.isSidebarOpen
-      ? '0'
-      : props.storagedWidth !== ''
-      ? `-${props.storagedWidth}`
-      : '-35.7rem'};
+    props.isSidebarOpen ? '0' : `-${props.resizeabledWidth}`};
 
   padding: 8rem 0 8rem 5.5rem;
 
@@ -34,7 +31,7 @@ export const Resizer = styled.div`
   top: 0;
   right: 0;
   width: 5px;
-  margin-right: -5px;
+  z-index: 3;
 
   &:hover {
     background-color: ${(props) => props.theme.colors.grey.one};
