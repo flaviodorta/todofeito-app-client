@@ -7,25 +7,22 @@ export type NavbarProps = {
 
 // Components of navbar types props
 
-export interface DivWithHoverProps {
-  readonly ref?:
-    | React.RefObject<HTMLDivElement>
-    | ((instance: HTMLDivElement | null) => void)
-    | null
-    | undefined;
-
-  readonly isDivWithHoverFocus: boolean;
+export interface HoveredDivProps {
+  readonly isHoveredDivFocus: boolean;
   readonly isInputHover: boolean;
 }
 
 export interface InputProps {
-  readonly isDivWithHoverFocus: boolean;
+  readonly isHoveredDivFocus: boolean;
   readonly isInputHover: boolean;
 }
 
-export interface NavIconButtonProps {}
+export type HoveredButtonProps = {
+  width?: string;
+  height?: string;
+};
 
-// navbarData types
+// NavbarData component types
 
 export interface IconData {
   ref: React.Dispatch<React.SetStateAction<HTMLElement | null>>;

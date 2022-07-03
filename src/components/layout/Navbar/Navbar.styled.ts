@@ -1,15 +1,7 @@
-import styled, {
-  css,
-  DefaultTheme,
-  ThemedStyledProps,
-} from 'styled-components';
+import styled, { css, DefaultTheme, ThemedStyledProps } from 'styled-components';
 import { breakpoints } from '../../../styles/theme/theme';
 
-import {
-  DivWithHoverProps,
-  InputProps,
-  NavIconButtonProps,
-} from './Navbar.types';
+import { HoveredButtonProps, HoveredDivProps, InputProps } from './Navbar.types';
 
 const inputOpenCSS = <P, T extends DefaultTheme>(
   props: ThemedStyledProps<P, T>
@@ -27,6 +19,8 @@ const searchIconOpenInputCSS = <P, T extends DefaultTheme>(
 
   transition: fill 0.125s ease;
 `;
+
+// navbar semantic layout styles
 
 export const Nav = styled.nav`
   display: flex;
@@ -81,7 +75,9 @@ export const Li = styled.li`
   }
 `;
 
-export const NavIconButton = styled.button<NavIconButtonProps>`
+// hovered button to navbar options
+
+export const HoveredButton = styled.button<HoveredButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -92,8 +88,11 @@ export const NavIconButton = styled.button<NavIconButtonProps>`
   cursor: pointer;
   transition: all 0.225 ease;
   padding: 0.4rem 0.8rem;
-  height: 4.8rem;
-  width: auto;
+
+  /* height: 4.8rem; */
+  /* width: auto; */
+  height: ${(props) => props.height || 'auto'};
+  width: ${(props) => props.width || 'auto'};
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.19);
@@ -101,50 +100,11 @@ export const NavIconButton = styled.button<NavIconButtonProps>`
   }
 `;
 
-export const Input = styled.input<InputProps>`
-  margin-left: -1.3rem;
-  text-indent: 3.3rem;
-  padding: 0.6rem 0.4rem;
-  border-radius: 3px;
-  border: none;
-  outline: none;
-  color: inherit;
-  width: 200px;
-  background-color: rgba(255, 255, 255, 0.21);
+// input styles
 
-  transition: color 0.135s ease, background-color 0.135s ease, width 0.195s ease;
-
+export const HoveredDiv = styled.div<HoveredDivProps>`
   ${(props) =>
-    (props.isInputHover || props.isDivWithHoverFocus) &&
-    css`
-      &::placeholder {
-        color: ${props.theme.colors.grey.three};
-      }
-    `}
-
-  ${(props) =>
-    props.isInputHover &&
-    css`
-      ${inputOpenCSS(props)};
-
-      transition: color 0.135s ease, background-color 0.135s ease,
-        width 0.135s ease;
-    `}
-
-  ${(props) =>
-    props.isDivWithHoverFocus &&
-    css`
-      ${inputOpenCSS(props)}
-      width: 35rem;
-
-      transition: color 0.135s ease, background-color 0.135s ease,
-        width 0.135s ease;
-    `}
-`;
-
-export const DivWithHover = styled.div<DivWithHoverProps>`
-  ${(props) =>
-    props.isDivWithHoverFocus &&
+    props.isHoveredDivFocus &&
     css`
       & #search-icon {
         ${searchIconOpenInputCSS(props)}
@@ -176,4 +136,43 @@ export const ShortcutInputButton = styled.button`
 
   font-size: 1rem;
   color: ${(props) => props.theme.colors.grey.three};
+`;
+
+export const Input = styled.input<InputProps>`
+  margin-left: -1.3rem;
+  text-indent: 3.3rem;
+  padding: 0.6rem 0.4rem;
+  border-radius: 3px;
+  border: none;
+  outline: none;
+  color: inherit;
+  width: 200px;
+  background-color: rgba(255, 255, 255, 0.21);
+
+  transition: color 0.135s ease, background-color 0.135s ease, width 0.195s ease;
+
+  ${(props) =>
+    (props.isInputHover || props.isHoveredDivFocus) &&
+    css`
+      &::placeholder {
+        color: ${props.theme.colors.grey.three};
+      }
+    `}
+
+  ${(props) =>
+    props.isInputHover &&
+    css`
+      ${inputOpenCSS(props)};
+
+      transition: color 0.135s ease, background-color 0.135s ease, width 0.135s ease;
+    `}
+
+  ${(props) =>
+    props.isHoveredDivFocus &&
+    css`
+      ${inputOpenCSS(props)}
+      width: 35rem;
+
+      transition: color 0.135s ease, background-color 0.135s ease, width 0.135s ease;
+    `}
 `;

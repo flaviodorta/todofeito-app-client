@@ -9,9 +9,9 @@ import {
   Nav,
   Ul,
   Li,
-  NavIconButton,
+  HoveredButton,
   Input,
-  DivWithHover,
+  HoveredDiv,
   ShortcutInputButton,
 } from './Navbar.styled';
 import { Label } from '../../shared/Label/Label.component';
@@ -32,30 +32,29 @@ export function Navbar(props: NavbarProps) {
 
   const { iconsData, setIconName } = Data();
 
-  const { sidebar, home, addTodo, completedTodos, notifications, user } =
-    iconsData;
+  const { sidebar, home, addTodo, completedTodos, notifications, user } = iconsData;
 
   // foo to set label state to respective button name or set to none when
   // any icon is hovered
   const setIconNameTo = (iconName: string) => setIconName(iconName);
   const setIconNameToNone = () => setIconName('none');
 
-  const divWithHoverRef = useRef<HTMLDivElement | null>(null);
+  const hoveredDivRef = useRef<HTMLDivElement | null>(null);
 
-  const [isDivWithHoverFocus, setOnFocus, setOnBlur] =
-    useFocus(divWithHoverRef);
+  const [isHoveredDivFocus, setOnFocus, setOnBlur] = useFocus(hoveredDivRef);
 
-  const isInputHover = useHover(divWithHoverRef);
+  const isInputHover = useHover(hoveredDivRef);
 
   const LabelComponent = (
     isVisible: boolean,
     content: string | [string, string],
     parentWidth: number
-  ) => (
-    <Label isVisible={isVisible} content={content} parentWidth={parentWidth} />
-  );
+  ) => <Label isVisible={isVisible} content={content} parentWidth={parentWidth} />;
 
-  const homeIconWidthAndHeight = '24px';
+  // styles props to shared components
+  const icon24px = '2.4rem';
+
+  const hoveredButtonHeight = '4.8rem';
 
   return (
     <Nav>
@@ -65,9 +64,10 @@ export function Navbar(props: NavbarProps) {
           onMouseEnter={() => setIconNameTo('sidebar')}
           onMouseLeave={setIconNameToNone}
         >
-          <NavIconButton onClick={toggleSidebar}>
+          <HoveredButton onClick={toggleSidebar} height={hoveredButtonHeight}>
             <SidebarIcon fill={white.one} />
-          </NavIconButton>
+          </HoveredButton>
+
           {LabelComponent(
             sidebar.isLabelVisible,
             isSidebarOpen ? sidebar.labelContent[0] : sidebar.labelContent[1],
@@ -81,38 +81,33 @@ export function Navbar(props: NavbarProps) {
           onMouseLeave={setIconNameToNone}
         >
           <NavLink to='/home'>
-            <NavIconButton>
-              <HomeIcon
-                height={homeIconWidthAndHeight}
-                width={homeIconWidthAndHeight}
-                stroke={white.one}
-              />
-            </NavIconButton>
+            <HoveredButton height={hoveredButtonHeight}>
+              <HomeIcon height={icon24px} width={icon24px} stroke={white.one} />
+            </HoveredButton>
+
             {LabelComponent(home.isLabelVisible, home.labelContent, home.width)}
           </NavLink>
         </Li>
 
-        <DivWithHover
-          ref={divWithHoverRef}
+        <HoveredDiv
+          ref={hoveredDivRef}
           isInputHover={isInputHover}
-          isDivWithHoverFocus={isDivWithHoverFocus}
+          isHoveredDivFocus={isHoveredDivFocus}
           onFocus={setOnFocus}
           onBlur={setOnBlur}
         >
           <Li>
             <SearchIcon id='search-icon' />
             <Input
-              isDivWithHoverFocus={isDivWithHoverFocus}
+              isHoveredDivFocus={isHoveredDivFocus}
               isInputHover={isInputHover}
               type='text'
               placeholder='Search'
             />
-            {(isDivWithHoverFocus && (
-              <ShortcutInputButton>/</ShortcutInputButton>
-            )) ||
+            {(isHoveredDivFocus && <ShortcutInputButton>/</ShortcutInputButton>) ||
               (isInputHover && <ShortcutInputButton>/</ShortcutInputButton>)}
           </Li>
-        </DivWithHover>
+        </HoveredDiv>
       </Ul>
 
       <Ul>
@@ -121,9 +116,10 @@ export function Navbar(props: NavbarProps) {
           onMouseEnter={() => setIconNameTo('add-todo')}
           onMouseLeave={setIconNameToNone}
         >
-          <NavIconButton>
+          <HoveredButton height={hoveredButtonHeight}>
             <AddTodoIcon fill={white.one} />
-          </NavIconButton>
+          </HoveredButton>
+
           {LabelComponent(
             addTodo.isLabelVisible,
             addTodo.labelContent,
@@ -136,9 +132,10 @@ export function Navbar(props: NavbarProps) {
           onMouseEnter={() => setIconNameTo('completed-todos')}
           onMouseLeave={setIconNameToNone}
         >
-          <NavIconButton>
+          <HoveredButton height={hoveredButtonHeight}>
             <CompletedTodosIcon fill={white.one} />
-          </NavIconButton>
+          </HoveredButton>
+
           {LabelComponent(
             completedTodos.isLabelVisible,
             completedTodos.labelContent,
@@ -151,9 +148,10 @@ export function Navbar(props: NavbarProps) {
           onMouseEnter={() => setIconNameTo('notifications')}
           onMouseLeave={setIconNameToNone}
         >
-          <NavIconButton>
+          <HoveredButton height={hoveredButtonHeight}>
             <NotificationsIcon fill={white.one} />
-          </NavIconButton>
+          </HoveredButton>
+
           {LabelComponent(
             notifications.isLabelVisible,
             notifications.labelContent,
@@ -166,9 +164,10 @@ export function Navbar(props: NavbarProps) {
           onMouseEnter={() => setIconNameTo('user')}
           onMouseLeave={setIconNameToNone}
         >
-          <NavIconButton>
+          <HoveredButton height={hoveredButtonHeight}>
             <UserIcon fill={white.one} />
-          </NavIconButton>
+          </HoveredButton>
+
           {LabelComponent(user.isLabelVisible, user.labelContent, user.width)}
         </Li>
       </Ul>

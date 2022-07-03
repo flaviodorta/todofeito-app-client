@@ -7,10 +7,11 @@ export const Div = styled.div<DivProps>`
   border-radius: 4px;
   padding: 0.65rem 0.85rem;
   position: absolute;
-  z-index: 3;
+  z-index: 10;
   box-shadow: ${(props) => props.theme.boxShadow};
   white-space: nowrap;
   visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
+  user-select: none;
 
   bottom: -3.2rem;
   left: ${(props) =>
