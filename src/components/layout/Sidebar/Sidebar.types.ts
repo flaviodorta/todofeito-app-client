@@ -1,4 +1,5 @@
 export type SidebarProps = {
+  toggleSidebar: () => void;
   isSidebarOpen: boolean;
 };
 

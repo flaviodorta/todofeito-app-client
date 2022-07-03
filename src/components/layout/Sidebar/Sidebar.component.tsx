@@ -1,8 +1,10 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import { usePersistedState } from '../../../hooks/usePersistedState';
 import { useResize } from '../../../hooks/useResize';
+import { useHover } from '../../../hooks/useHover';
+import { useWindowSize } from '../../../hooks/useWindowSize';
 import { SidebarProps } from './Sidebar.types';
-import { baseTheme } from '../../../styles/theme/theme';
+import { baseTheme, breakpoints } from '../../../styles/theme/theme';
 
 import {
   Aside,
@@ -21,7 +23,7 @@ import { CalendarIcon as UpcomingIcon } from '../../shared/icons/CalendarIcon';
 import { LabelIcon as FiltersAndLabelsIcon } from '../../shared/icons/LabelIcon';
 import { ChevronDownIcon as RotatedChevronIcon } from '../../shared/icons/ChevronDownIcon';
 import { PlusSolidIcon as AddProjectIcon } from '../../shared/icons/PlusSolidIcon';
-import { useHover } from '../../../hooks/useHover';
+import { useEventListener } from '../../../hooks/useEventListener';
 
 export function Sidebar(props: SidebarProps): JSX.Element {
   const { isSidebarOpen } = props;

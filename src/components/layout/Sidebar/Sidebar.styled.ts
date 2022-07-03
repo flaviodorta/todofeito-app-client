@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { breakpoints } from '../../../styles/theme/theme';
 import { AsideProps, HoveredButtonProps } from './Sidebar.types';
 
 // semantic styled elements to layout sidebar
@@ -15,9 +16,12 @@ export const Aside = styled.aside<AsideProps>`
   margin-left: ${(props) =>
     props.isSidebarOpen ? '0' : `-${props.resizeabledWidth}`};
 
-  padding: 3rem 0 7rem 5.5rem;
+  padding: 2rem 0 7rem 5.5rem;
 
   transition: margin-left 0.125s ease;
+
+  @media screen and (max-width: ${breakpoints.md}) {
+  }
 `;
 
 export const Li = styled.li`
