@@ -13,9 +13,4 @@
 
 - add keybind no F12 pra F2
 - mudar botes do mouse pra mudar de workspace
-
-# to do project
-
-- dropdown menu no input e no project section do sidebar
-- colocar label nas sections do sidebar
-- criar modais do setion projects e das opções do navbar
+- mudar useFocus para useToggle

@@ -1,11 +1,11 @@
-// Type of Navbar props
+// Navbar component type props
 
 export type NavbarProps = {
   toggleSidebar: () => void;
   isSidebarOpen: boolean;
 };
 
-// Types of Navbar elements
+// Components of navbar types props
 
 export interface HoveredDivProps {
   readonly isHoveredDivFocus: boolean;
@@ -22,7 +22,7 @@ export type HoveredButtonProps = {
   height?: string;
 };
 
-// Types of NavbarData variables
+// NavbarData component types
 
 export interface IconData {
   ref: React.Dispatch<React.SetStateAction<HTMLElement | null>>;

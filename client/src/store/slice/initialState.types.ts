@@ -1,9 +1,3 @@
-export interface InitialState {
-  user: User | null;
-  todos: Todo[];
-  projects: Project[];
-}
-
 export interface User {
   id: string;
   email: string;
@@ -45,4 +39,10 @@ export interface Project {
   collaborators: User[];
   comments: Comment[];
   activity: Activity[];
+}
+
+export interface InitialState {
+  user: User | null;
+  todos: Todo[];
+  projects: Project[];
 }
