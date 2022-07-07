@@ -27,22 +27,15 @@ import { CircleUserSolidIcon as UserIcon } from '../../shared/icons/CircleUserSo
 
 export function Navbar(props: NavbarProps) {
   const { toggleSidebar, isSidebarOpen } = props;
-
   const { white } = baseTheme.colors;
-
   const { iconsData, setIconName } = Data();
-
   const { sidebar, home, addTodo, completedTodos, notifications, user } = iconsData;
 
-  // foo to set label state to respective button name or set to none when
-  // any icon is hovered
   const setIconNameTo = (iconName: string) => setIconName(iconName);
   const setIconNameToNone = () => setIconName('none');
 
   const hoveredDivRef = useRef<HTMLDivElement | null>(null);
-
   const [isHoveredDivFocus, toggleHoveredDivFocus] = useToggle(false);
-
   const isInputHover = useHover(hoveredDivRef);
 
   const LabelComponent = (
@@ -51,7 +44,6 @@ export function Navbar(props: NavbarProps) {
     parentWidth: number
   ) => <Label isVisible={isVisible} content={content} parentWidth={parentWidth} />;
 
-  // styles props to shared components
   const icon24px = '2.4rem';
 
   const hoveredButtonHeight = '4.8rem';
