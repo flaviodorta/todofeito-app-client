@@ -10,10 +10,12 @@ import { CircleSolidIcon as CircleIcon } from '../../../../../../shared/icons/Ci
 export function AllProjectsItem(props: AllProjectsItemProps): JSX.Element {
   const { isAllProjectsListOpen, children } = props;
 
+  const icon10px = '10px';
+
   return (
     <AllProjectsItemContainer isAllProjectsListOpen={isAllProjectsListOpen}>
       <AllProjectsItemContentContainer isAllProjectsListOpen={isAllProjectsListOpen}>
-        <CircleIcon height={'10px'} width={'10px'} />
+        <CircleIcon height={icon10px} width={icon10px} />
         {children}
       </AllProjectsItemContentContainer>
     </AllProjectsItemContainer>

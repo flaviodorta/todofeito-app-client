@@ -1,43 +1,44 @@
 import { SidebarProps } from './Sidebar.types';
-import { baseTheme, breakpoints } from '../../../../styles/theme/theme';
+import { baseTheme, breakpoints } from '../../../styles/theme/theme';
 import { useLayoutEffect, useRef } from 'react';
-import { usePersistedState } from '../../../../hooks/usePersistedState';
-import { useResize } from '../../../../hooks/useResize';
-import { useWindowSize } from '../../../../hooks/useWindowSize';
-import { useEventListener } from '../../../../hooks/useEventListener';
+import { usePersistedState } from '../../../hooks/usePersistedState';
+import { useResize } from '../../../hooks/useResize';
+import { useWindowSize } from '../../../hooks/useWindowSize';
+import { useEventListener } from '../../../hooks/useEventListener';
 
-import { Aside, Ul, Resizer } from './Sidebar.styled';
+import {
+  SidebarContainer,
+  SidebarOptionsList,
+  SidebarResizer,
+} from './Sidebar.styled';
 
-import { InboxSolidIcon as InboxIcon } from '../../../shared/icons/InboxSolidIcon';
-import { CalendarDayIcon as TodayIcon } from '../../../shared/icons/CalendarDayIcon';
-import { CalendarIcon as UpcomingIcon } from '../../../shared/icons/CalendarIcon';
-import { LabelIcon as FiltersAndLabelsIcon } from '../../../shared/icons/LabelIcon';
-import { ProjectOption } from '../Options/ProjectsOption/ProjectOption.component';
-import { Option } from '../Options/Option/Option.component';
+import { InboxSolidIcon as InboxIcon } from '../../shared/icons/InboxSolidIcon';
+import { CalendarDayIcon as TodayIcon } from '../../shared/icons/CalendarDayIcon';
+import { CalendarIcon as UpcomingIcon } from '../../shared/icons/CalendarIcon';
+import { LabelIcon as FiltersAndLabelsIcon } from '../../shared/icons/LabelIcon';
+import { SidebarProjectOption } from './Options/ProjectsOption/SidebarProjectOption.component';
+import { SidebarOption } from './Options/Option/SidebarOption.component';
 
 export function Sidebar(props: SidebarProps): JSX.Element {
   const { isSidebarOpen, toggleSidebar } = props;
   const { colors } = baseTheme;
 
-  const windowSizeWidth = useWindowSize().width;
+  const windowWidth = useWindowSize().width;
   const oldWindowWidthRef = useRef<number | undefined>(undefined);
   const breakpointMd = parseInt(breakpoints.md, 10);
 
   useLayoutEffect(() => {
     return () => {
-      oldWindowWidthRef.current = windowSizeWidth;
+      oldWindowWidthRef.current = windowWidth;
     };
   });
 
-  // type RemUnit = `${number}${'rem'}` | '0' | 0;
-
-  // const a: RemUnit = '3rem';
-
+  // automaticly sidebar close when screen resize to brakpoint < lg
   useEventListener('resize', () => {
-    if (windowSizeWidth && oldWindowWidthRef.current) {
+    if (windowWidth && oldWindowWidthRef.current) {
       if (
         isSidebarOpen &&
-        windowSizeWidth < breakpointMd &&
+        windowWidth < breakpointMd &&
         oldWindowWidthRef.current > breakpointMd
       ) {
         setTimeout(toggleSidebar, 100);
@@ -75,36 +76,36 @@ export function Sidebar(props: SidebarProps): JSX.Element {
   }, [resizeabledWidth, setPersistedWidth]);
 
   return (
-    <Aside
+    <SidebarContainer
       ref={setRef.element}
       isSidebarOpen={isSidebarOpen}
       initialWidth={initialWidth}
       resizeabledWidth={persistedWidth}
     >
-      <Resizer ref={setRef.right} />
-      <Ul>
-        <Option todoCount={23}>
+      <SidebarResizer ref={setRef.right} />
+      <SidebarOptionsList>
+        <SidebarOption todoCount={23}>
           <InboxIcon fill={colors.blue} />
           Inbox
-        </Option>
+        </SidebarOption>
 
-        <Option todoCount={21}>
+        <SidebarOption todoCount={21}>
           <TodayIcon fill={colors.green} />
           Today
-        </Option>
+        </SidebarOption>
 
-        <Option todoCount={12}>
+        <SidebarOption todoCount={12}>
           <UpcomingIcon fill={colors.purple} />
           Upcoming
-        </Option>
+        </SidebarOption>
 
-        <Option todoCount={53}>
+        <SidebarOption todoCount={53}>
           <FiltersAndLabelsIcon fill={colors.orange} />
           Filters & Labels
-        </Option>
+        </SidebarOption>
 
-        <ProjectOption />
-      </Ul>
-    </Aside>
+        <SidebarProjectOption />
+      </SidebarOptionsList>
+    </SidebarContainer>
   );
 }

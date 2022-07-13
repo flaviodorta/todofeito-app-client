@@ -3,7 +3,7 @@ export type SidebarProps = {
   isSidebarOpen: boolean;
 };
 
-export type AsideProps = {
+export type SidebarContainerProps = {
   isSidebarOpen: boolean;
   initialWidth: string;
   resizeabledWidth: string;

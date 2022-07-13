@@ -1,20 +1,20 @@
 import { useRef, useState } from 'react';
 import { useHover } from '../../../../../hooks/useHover';
 
-import { OptionContentContainer, OptionItem } from '../Option/Option.styled';
+import { OptionContentContainer, OptionItem } from '../Option/SidebarOption.styled';
 
 import {
   AddProjectButton,
   ProjectsOptionContainer,
   RotateChevronIcon,
-} from './ProjectOption.styled';
+} from './SidebarProjectOption.styled';
 
 import { PlusSolidIcon as AddProjectIcon } from '../../../../shared/icons/PlusSolidIcon';
 import { useToggle } from '../../../../../hooks/useToggle';
 import { AllProjectsItem } from './AllProjects/AllProjectItem/AllProjectItem.components';
 import { AllProjectsList } from './AllProjects/AllProjectList/AllProjectList.component';
 
-export function ProjectOption(): JSX.Element {
+export function SidebarProjectOption(): JSX.Element {
   const [isAllProjectsListOpen, setIsAllProjectsListOpen] = useToggle(false);
   const [projectOptionOpen, setProjectOptionOpen] = useState<string | null>(null);
 
