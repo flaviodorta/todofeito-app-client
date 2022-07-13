@@ -1,12 +1,12 @@
-import { Li, Div, TodoCount } from './Option.styled';
+import { OptionItem, OptionContentContainer, TodoCount } from './Option.styled';
 
 import { OptionProps } from './Option.types';
 
 export function Option(props: OptionProps): JSX.Element {
   return (
-    <Li>
-      <Div>{props.children}</Div>
+    <OptionItem>
+      <OptionContentContainer>{props.children}</OptionContentContainer>
       <TodoCount>{props.todoCount}</TodoCount>
-    </Li>
+    </OptionItem>
   );
 }

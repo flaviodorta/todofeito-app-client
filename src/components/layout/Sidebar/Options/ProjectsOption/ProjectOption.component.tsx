@@ -1,37 +1,78 @@
-import { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useHover } from '../../../../../hooks/useHover';
 
-import { Li, Div } from '../Option/Option.styled';
-import { HoveredButton, HoveredDiv } from './ProjectOption.styled';
+import { OptionContentContainer, OptionItem } from '../Option/Option.styled';
+import {
+  AllProjectsItemContentContainer,
+  AllProjectsItemContainer,
+} from './ProjectOption.styled';
 
-import { ChevronDownIcon as RotatedChevronIcon } from '../../../../shared/icons/ChevronDownIcon';
+import {
+  AllProjectsList,
+  AddProjectButton,
+  ProjectsOptionContainer,
+  RotateChevronIcon,
+} from './ProjectOption.styled';
+
 import { PlusSolidIcon as AddProjectIcon } from '../../../../shared/icons/PlusSolidIcon';
+import { CircleSolidIcon as CircleIcon } from '../../../../shared/icons/CircleSolid';
+import { useToggle } from '../../../../../hooks/useToggle';
 
 export function ProjectOption(): JSX.Element {
-  const projectSectionRef = useRef<HTMLDivElement | null>(null);
-  const projectSectionButtonRef = useRef<HTMLDivElement | null>(null);
+  const [isAllProjectsOpen, setIsAllProjectsOpen] = useToggle(false);
+  const [projectOptionOpen, setProjectOptionOpen] = useState<string | null>(null);
 
-  const isProjectHover = useHover(projectSectionRef);
-  const isProjectButtonHover = useHover(projectSectionButtonRef);
+  const projectOptionRef = useRef<HTMLDivElement | null>(null);
+  const AddProjectButtonRef = useRef<HTMLDivElement | null>(null);
+
+  const isProjectOptionHover = useHover(projectOptionRef);
+  const isProjectOptionButtonHover = useHover(AddProjectButtonRef);
 
   const icon16px = '1.6rem';
-
+  console.log(isAllProjectsOpen);
   return (
-    <HoveredDiv ref={projectSectionRef}>
-      <Li>
-        <Div>
-          <RotatedChevronIcon />
+    <ProjectsOptionContainer ref={projectOptionRef}>
+      <OptionItem onClick={() => setIsAllProjectsOpen()}>
+        <OptionContentContainer>
+          <RotateChevronIcon isOpen={isAllProjectsOpen} />
           Projects
-        </Div>
+        </OptionContentContainer>
 
-        <HoveredButton
-          ref={projectSectionButtonRef}
-          isProjectHover={isProjectHover}
-          isProjectButtonHover={isProjectButtonHover}
+        <AddProjectButton
+          ref={AddProjectButtonRef}
+          isProjectHover={isProjectOptionHover}
+          isProjectButtonHover={isProjectOptionButtonHover}
         >
           <AddProjectIcon width={icon16px} height={icon16px} />
-        </HoveredButton>
-      </Li>
-    </HoveredDiv>
+        </AddProjectButton>
+      </OptionItem>
+
+      <AllProjectsList isOpen={isAllProjectsOpen}>
+        <AllProjectsItem
+          isOpen={isAllProjectsOpen}
+          onClick={() => console.log('cu')}
+        >
+          Project 1
+        </AllProjectsItem>
+      </AllProjectsList>
+    </ProjectsOptionContainer>
+  );
+}
+
+function AllProjectsItem({
+  children,
+  isOpen,
+}: {
+  children: React.ReactNode;
+  onClick: () => void;
+  isOpen: boolean;
+}): JSX.Element {
+  return (
+    <AllProjectsItemContainer isOpen={isOpen}>
+      <AllProjectsItemContentContainer isOpen={isOpen}>
+        <CircleIcon height={'10px'} width={'10px'} />
+        {children}
+      </AllProjectsItemContentContainer>
+    </AllProjectsItemContainer>
   );
 }

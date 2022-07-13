@@ -8,8 +8,3 @@ export type AsideProps = {
   initialWidth: string;
   resizeabledWidth: string;
 };
-
-export type HoveredButtonProps = {
-  isProjectHover: boolean;
-  isProjectButtonHover: boolean;
-};

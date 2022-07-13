@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Li = styled.li`
+export const OptionItem = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -14,7 +14,7 @@ export const Li = styled.li`
   }
 `;
 
-export const Div = styled.div`
+export const OptionContentContainer = styled.div`
   display: flex;
   align-items: center;
 

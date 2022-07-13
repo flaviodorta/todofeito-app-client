@@ -3,7 +3,6 @@ import { baseTheme, breakpoints } from '../../../../styles/theme/theme';
 import { useLayoutEffect, useRef } from 'react';
 import { usePersistedState } from '../../../../hooks/usePersistedState';
 import { useResize } from '../../../../hooks/useResize';
-import { useHover } from '../../../../hooks/useHover';
 import { useWindowSize } from '../../../../hooks/useWindowSize';
 import { useEventListener } from '../../../../hooks/useEventListener';
 
@@ -69,11 +68,11 @@ export function Sidebar(props: SidebarProps): JSX.Element {
     if (parseInt(persistedWidth) < minWidthRem) {
       setPersistedWidth(minWidthRem + 'rem');
     }
-  });
+  }, [persistedWidth]);
 
   useLayoutEffect(() => {
     setPersistedWidth(resizeabledWidth);
-  }, [resizeabledWidth]);
+  }, [resizeabledWidth, setPersistedWidth]);
 
   return (
     <Aside
