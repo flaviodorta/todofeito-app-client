@@ -1,25 +1,21 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useHover } from '../../../../../hooks/useHover';
 
 import { OptionContentContainer, OptionItem } from '../Option/Option.styled';
-import {
-  AllProjectsItemContentContainer,
-  AllProjectsItemContainer,
-} from './ProjectOption.styled';
 
 import {
-  AllProjectsList,
   AddProjectButton,
   ProjectsOptionContainer,
   RotateChevronIcon,
 } from './ProjectOption.styled';
 
 import { PlusSolidIcon as AddProjectIcon } from '../../../../shared/icons/PlusSolidIcon';
-import { CircleSolidIcon as CircleIcon } from '../../../../shared/icons/CircleSolid';
 import { useToggle } from '../../../../../hooks/useToggle';
+import { AllProjectsItem } from './AllProjects/AllProjectItem/AllProjectItem.components';
+import { AllProjectsList } from './AllProjects/AllProjectList/AllProjectList.component';
 
 export function ProjectOption(): JSX.Element {
-  const [isAllProjectsOpen, setIsAllProjectsOpen] = useToggle(false);
+  const [isAllProjectsListOpen, setIsAllProjectsListOpen] = useToggle(false);
   const [projectOptionOpen, setProjectOptionOpen] = useState<string | null>(null);
 
   const projectOptionRef = useRef<HTMLDivElement | null>(null);
@@ -29,12 +25,11 @@ export function ProjectOption(): JSX.Element {
   const isProjectOptionButtonHover = useHover(AddProjectButtonRef);
 
   const icon16px = '1.6rem';
-  console.log(isAllProjectsOpen);
   return (
     <ProjectsOptionContainer ref={projectOptionRef}>
-      <OptionItem onClick={() => setIsAllProjectsOpen()}>
+      <OptionItem onClick={() => setIsAllProjectsListOpen()}>
         <OptionContentContainer>
-          <RotateChevronIcon isOpen={isAllProjectsOpen} />
+          <RotateChevronIcon isAllProjectsListOpen={isAllProjectsListOpen} />
           Projects
         </OptionContentContainer>
 
@@ -47,32 +42,19 @@ export function ProjectOption(): JSX.Element {
         </AddProjectButton>
       </OptionItem>
 
-      <AllProjectsList isOpen={isAllProjectsOpen}>
-        <AllProjectsItem
-          isOpen={isAllProjectsOpen}
-          onClick={() => console.log('cu')}
-        >
+      <AllProjectsList isAllProjectsListOpen>
+        <AllProjectsItem isAllProjectsListOpen={isAllProjectsListOpen}>
           Project 1
+        </AllProjectsItem>
+
+        <AllProjectsItem isAllProjectsListOpen={isAllProjectsListOpen}>
+          Project 2
+        </AllProjectsItem>
+
+        <AllProjectsItem isAllProjectsListOpen={isAllProjectsListOpen}>
+          Project 3
         </AllProjectsItem>
       </AllProjectsList>
     </ProjectsOptionContainer>
-  );
-}
-
-function AllProjectsItem({
-  children,
-  isOpen,
-}: {
-  children: React.ReactNode;
-  onClick: () => void;
-  isOpen: boolean;
-}): JSX.Element {
-  return (
-    <AllProjectsItemContainer isOpen={isOpen}>
-      <AllProjectsItemContentContainer isOpen={isOpen}>
-        <CircleIcon height={'10px'} width={'10px'} />
-        {children}
-      </AllProjectsItemContentContainer>
-    </AllProjectsItemContainer>
   );
 }

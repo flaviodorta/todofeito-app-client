@@ -3,14 +3,6 @@ export type AddProjectButtonProps = {
   isProjectButtonHover: boolean;
 };
 
-export interface AllProjectsProps {
-  isOpen: boolean;
-}
-
 export interface RotateChevronIconProps {
-  isOpen: boolean;
-}
-
-export interface ProjectProps {
-  isOpen: boolean;
+  isAllProjectsListOpen: boolean;
 }
