@@ -27,22 +27,14 @@ import { CircleUserSolidIcon as UserIcon } from '../../shared/icons/CircleUserSo
 
 export function Navbar(props: NavbarProps) {
   const { toggleSidebar, isSidebarOpen } = props;
-
   const { white } = baseTheme.colors;
-
   const { iconsData, setIconName } = Data();
 
   const { sidebar, home, addTodo, completedTodos, notifications, user } = iconsData;
-
-  // foo to set label state to respective button name or set to none when
-  // any icon is hovered
   const setIconNameTo = (iconName: string) => setIconName(iconName);
-  const setIconNameToNone = () => setIconName('none');
 
   const hoveredDivRef = useRef<HTMLDivElement | null>(null);
-
   const [isHoveredDivFocus, toggleHoveredDivFocus] = useToggle(false);
-
   const isInputHover = useHover(hoveredDivRef);
 
   const LabelComponent = (
@@ -51,9 +43,7 @@ export function Navbar(props: NavbarProps) {
     parentWidth: number
   ) => <Label isVisible={isVisible} content={content} parentWidth={parentWidth} />;
 
-  // styles props to shared components
   const icon24px = '2.4rem';
-
   const hoveredButtonHeight = '4.8rem';
 
   return (
@@ -62,7 +52,7 @@ export function Navbar(props: NavbarProps) {
         <Li
           ref={sidebar.ref}
           onMouseEnter={() => setIconNameTo('sidebar')}
-          onMouseLeave={setIconNameToNone}
+          onMouseLeave={() => setIconNameTo('none')}
         >
           <HoveredButton onClick={toggleSidebar} height={hoveredButtonHeight}>
             <SidebarIcon fill={white.one} />
@@ -78,7 +68,7 @@ export function Navbar(props: NavbarProps) {
         <Li
           ref={home.ref}
           onMouseEnter={() => setIconNameTo('home')}
-          onMouseLeave={setIconNameToNone}
+          onMouseLeave={() => setIconNameTo('none')}
         >
           <NavLink to='/home'>
             <HoveredButton height={hoveredButtonHeight}>
@@ -114,7 +104,7 @@ export function Navbar(props: NavbarProps) {
         <Li
           ref={addTodo.ref}
           onMouseEnter={() => setIconNameTo('add-todo')}
-          onMouseLeave={setIconNameToNone}
+          onMouseLeave={() => setIconNameTo('none')}
         >
           <HoveredButton height={hoveredButtonHeight}>
             <AddTodoIcon fill={white.one} />
@@ -130,7 +120,7 @@ export function Navbar(props: NavbarProps) {
         <Li
           ref={completedTodos.ref}
           onMouseEnter={() => setIconNameTo('completed-todos')}
-          onMouseLeave={setIconNameToNone}
+          onMouseLeave={() => setIconNameTo('none')}
         >
           <HoveredButton height={hoveredButtonHeight}>
             <CompletedTodosIcon fill={white.one} />
@@ -146,7 +136,7 @@ export function Navbar(props: NavbarProps) {
         <Li
           ref={notifications.ref}
           onMouseEnter={() => setIconNameTo('notifications')}
-          onMouseLeave={setIconNameToNone}
+          onMouseLeave={() => setIconNameTo('none')}
         >
           <HoveredButton height={hoveredButtonHeight}>
             <NotificationsIcon fill={white.one} />
@@ -162,7 +152,7 @@ export function Navbar(props: NavbarProps) {
         <Li
           ref={user.ref}
           onMouseEnter={() => setIconNameTo('user')}
-          onMouseLeave={setIconNameToNone}
+          onMouseLeave={() => setIconNameTo('none')}
         >
           <HoveredButton height={hoveredButtonHeight}>
             <UserIcon fill={white.one} />
