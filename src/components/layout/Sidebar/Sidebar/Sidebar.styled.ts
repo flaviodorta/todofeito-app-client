@@ -8,6 +8,7 @@ export const Aside = styled.aside<AsideProps>`
     props.resizeabledWidth ? props.resizeabledWidth : props.initialWidth};
   min-height: 100%;
   background-color: ${(props) => props.theme.colors.white.two};
+  user-select: none;
 
   z-index: 3;
 
@@ -34,7 +35,6 @@ export const Ul = styled.ul`
   }
 `;
 
-// div as column resizer at right of the sidebar
 export const Resizer = styled.div`
   position: absolute;
   cursor: col-resize;

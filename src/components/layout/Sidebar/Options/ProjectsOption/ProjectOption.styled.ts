@@ -48,7 +48,7 @@ export const AllProjectsList = styled.ul<AllProjectsProps>`
 export const AllProjectsItemContainer = styled.div<ProjectProps>`
   display: flex;
   align-items: center;
-  padding: 1.6rem 1.6rem;
+  /* padding: 1.6rem 1.6rem; */
   border-radius: 4px 0 0 4px;
   cursor: pointer;
   margin-top: 1rem;
@@ -57,6 +57,8 @@ export const AllProjectsItemContainer = styled.div<ProjectProps>`
   font-weight: normal;
   position: relative;
   overflow: hidden;
+  height: 3.2rem;
+  width: 100%;
 
   transition: all 0.125s ease;
 
@@ -73,13 +75,10 @@ export const AllProjectsItemContainer = styled.div<ProjectProps>`
 export const AllProjectsItemContentContainer = styled.div<{ isOpen: boolean }>`
   position: absolute;
   transition: all 0.125s ease;
-  /* width: 100%; */
-  /* height: 100%; */
-  margin: auto;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  margin-left: 1.6rem;
+  /* top: 50%; */
+  transform: translateY(-50%);
+  user-select: none;
 
-  /* transform: ${(props) => (props.isOpen ? 'translateY(50%)' : 0)}; */
-  top: ${(props) => (props.isOpen ? 0 : '-100%')};
+  top: ${(props) => (props.isOpen ? '50%' : '-50%')};
 `;
