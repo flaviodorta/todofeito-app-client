@@ -5,6 +5,7 @@ import {
   RotateChevronIconProps,
 } from './SidebarProjectOptions.types';
 import { ChevronDownIcon } from '../../../../shared/icons/ChevronDownIcon';
+import { OptionItem } from '../Option/SidebarOption.styled';
 
 export const RotateChevronIcon = styled(ChevronDownIcon)<RotateChevronIconProps>`
   transform: ${(props) =>
@@ -47,4 +48,12 @@ export const OpenProjectsListLayer = styled.div`
   opacity: 0;
   z-index: 99;
   left: 0;
+`;
+
+export const ProjectOptionItem = styled(OptionItem)`
+  background: none;
+
+  &:hover:not(:last-child) {
+    background: none;
+  }
 `;

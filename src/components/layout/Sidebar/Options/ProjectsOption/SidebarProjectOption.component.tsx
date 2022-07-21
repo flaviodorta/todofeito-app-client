@@ -1,11 +1,12 @@
 import { useRef, useState } from 'react';
 import { useHover } from '../../../../../hooks/useHover';
 
-import { OptionContentContainer, OptionItem } from '../Option/SidebarOption.styled';
+import { OptionContentContainer } from '../Option/SidebarOption.styled';
 
 import {
   AddProjectButton,
   OpenProjectsListLayer,
+  ProjectOptionItem,
   ProjectsOptionContainer,
   RotateChevronIcon,
 } from './SidebarProjectOption.styled';
@@ -14,6 +15,8 @@ import { PlusSolidIcon as AddProjectIcon } from '../../../../shared/icons/PlusSo
 import { useToggle } from '../../../../../hooks/useToggle';
 import { AllProjectsItem } from './AllProjects/AllProjectItem/AllProjectItem.components';
 import { AllProjectsList } from './AllProjects/AllProjectList/AllProjectList.component';
+import { useDispatch } from 'react-redux';
+import { todosActions } from '../../../../../store/store';
 
 export function SidebarProjectOption(): JSX.Element {
   const [isAllProjectsListOpen, setIsAllProjectsListOpen] = useToggle(false);
@@ -25,10 +28,16 @@ export function SidebarProjectOption(): JSX.Element {
   const isProjectOptionHover = useHover(projectOptionRef);
   const isProjectOptionButtonHover = useHover(AddProjectButtonRef);
 
+  const dispatch = useDispatch();
+
+  const toggleAddProjectModal = () => {
+    dispatch(todosActions.showModal('add-project-modal'));
+  };
+
   const icon16px = '1.6rem';
   return (
     <ProjectsOptionContainer ref={projectOptionRef}>
-      <OptionItem>
+      <ProjectOptionItem>
         <OpenProjectsListLayer onClick={() => setIsAllProjectsListOpen()} />
 
         <OptionContentContainer>
@@ -40,10 +49,11 @@ export function SidebarProjectOption(): JSX.Element {
           ref={AddProjectButtonRef}
           isProjectHover={isProjectOptionHover}
           isProjectButtonHover={isProjectOptionButtonHover}
+          onClick={toggleAddProjectModal}
         >
           <AddProjectIcon width={icon16px} height={icon16px} />
         </AddProjectButton>
-      </OptionItem>
+      </ProjectOptionItem>
 
       <AllProjectsList isAllProjectsListOpen>
         <AllProjectsItem isAllProjectsListOpen={isAllProjectsListOpen}>

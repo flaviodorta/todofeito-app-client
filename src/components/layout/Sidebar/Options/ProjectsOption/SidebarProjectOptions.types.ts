@@ -6,3 +6,7 @@ export type AddProjectButtonProps = {
 export interface RotateChevronIconProps {
   isAllProjectsListOpen: boolean;
 }
+
+export interface SidebarProjectOptionProps {
+  setIsModalOpen: () => void;
+}

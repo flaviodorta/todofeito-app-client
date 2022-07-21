@@ -1,14 +1,11 @@
 import styled from 'styled-components';
+import { ContentProps } from './BasePage.types';
 
 export const Div = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
 `;
-
-export type ContentProps = {
-  isSidebarOpen: boolean;
-};
 
 export const Content = styled.div<ContentProps>`
   width: 100%;
@@ -29,4 +26,13 @@ export const Content = styled.div<ContentProps>`
 export const Wrapper = styled.div`
   width: 100vw;
   height: 100%;
+`;
+
+export const ModalBackground = styled.div`
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  background-color: black;
+  opacity: 0.45;
+  z-index: 20;
 `;
