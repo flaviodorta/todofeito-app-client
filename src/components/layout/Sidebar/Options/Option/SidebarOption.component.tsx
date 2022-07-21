@@ -1,6 +1,6 @@
-import { OptionItem, OptionContentContainer, TodoCount } from './Option.styled';
+import { OptionItem, OptionContentContainer, TodoCount } from './SidebarOption.styled';
 
-import { OptionProps } from './Option.types';
+import { OptionProps } from './SidebarOption.types';
 
 export function SidebarOption(props: OptionProps): JSX.Element {
   return (

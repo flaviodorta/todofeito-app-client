@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {
   AddProjectButtonProps,
   RotateChevronIconProps,
-} from './ProjectOptions.types';
+} from './SidebarProjectOptions.types';
 import { ChevronDownIcon } from '../../../../shared/icons/ChevronDownIcon';
 
 export const RotateChevronIcon = styled(ChevronDownIcon)<RotateChevronIconProps>`
@@ -17,6 +17,9 @@ export const ProjectsOptionContainer = styled.div`
 `;
 
 export const AddProjectButton = styled.div<AddProjectButtonProps>`
+  position: absolute;
+  right: 10px;
+  z-index: 100;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,4 +38,13 @@ export const AddProjectButton = styled.div<AddProjectButtonProps>`
     props.isProjectButtonHover
       ? props.theme.colors.grey.four
       : props.theme.colors.grey.three};
+`;
+
+export const OpenProjectsListLayer = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 99;
+  left: 0;
 `;

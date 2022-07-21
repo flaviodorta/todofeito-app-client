@@ -5,6 +5,7 @@ import { OptionContentContainer, OptionItem } from '../Option/SidebarOption.styl
 
 import {
   AddProjectButton,
+  OpenProjectsListLayer,
   ProjectsOptionContainer,
   RotateChevronIcon,
 } from './SidebarProjectOption.styled';
@@ -27,7 +28,9 @@ export function SidebarProjectOption(): JSX.Element {
   const icon16px = '1.6rem';
   return (
     <ProjectsOptionContainer ref={projectOptionRef}>
-      <OptionItem onClick={() => setIsAllProjectsListOpen()}>
+      <OptionItem>
+        <OpenProjectsListLayer onClick={() => setIsAllProjectsListOpen()} />
+
         <OptionContentContainer>
           <RotateChevronIcon isAllProjectsListOpen={isAllProjectsListOpen} />
           Projects
