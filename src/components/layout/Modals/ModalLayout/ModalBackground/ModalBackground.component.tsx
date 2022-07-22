@@ -9,12 +9,15 @@ import './ModalBackground.css';
 
 export function ModalBackground(props: ModalBackgroundProps): JSX.Element {
   const dispatch = useDispatch();
+  const { modal, select } = useSelector((state: RootState) => state);
 
   const closeModal = () => {
-    dispatch(todosActions.showModal(false));
+    if (select) {
+      dispatch(todosActions.toggleSelect(false));
+    } else {
+      dispatch(todosActions.showModal(false));
+    }
   };
-
-  const { modal } = useSelector((state: RootState) => state);
 
   let isModalOpen = modal !== false;
 

@@ -1,3 +1,3 @@
-export interface AddProjectButtonModalProps {
-  onClick: (e: any) => any;
+export interface AddProjectButtonModalFormTextInputProps {
+  inputNameValue: string;
 }

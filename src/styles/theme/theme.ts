@@ -48,7 +48,7 @@ export const light: DefaultTheme = {
       one: '#3D5593',
     },
 
-    font: '#030303',
+    font: '#202020',
   },
 
   sizes: {

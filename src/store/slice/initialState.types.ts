@@ -8,7 +8,8 @@ export interface InitialState {
   user: IsUser | null;
   todos: IsTodo[];
   projects: IsProject[];
-  modal: string | null;
+  modal: string | false;
+  select: boolean;
 }
 
 export interface IsUser {

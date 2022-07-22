@@ -20,6 +20,8 @@ export const AllProjectsItemContainer = styled.div<AllProjectsItemProps>`
   width: 100%;
   transition: all 0.125s ease;
 
+  visibility: ${(props) => (props.isAllProjectsListOpen ? 'visible' : 'hidden')};
+
   &:hover {
     background-color: ${(props) => props.theme.colors.white.three};
   }

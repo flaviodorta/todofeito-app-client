@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useHover } from '../../../../../hooks/useHover';
 
 import { OptionContentContainer } from '../Option/SidebarOption.styled';
@@ -15,8 +15,9 @@ import { PlusSolidIcon as AddProjectIcon } from '../../../../shared/icons/PlusSo
 import { useToggle } from '../../../../../hooks/useToggle';
 import { AllProjectsItem } from './AllProjects/AllProjectItem/AllProjectItem.components';
 import { AllProjectsList } from './AllProjects/AllProjectList/AllProjectList.component';
-import { useDispatch } from 'react-redux';
-import { todosActions } from '../../../../../store/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, todosActions } from '../../../../../store/store';
+import { ADD_PROJECT_BUTTON_MODAL } from '../../../../../constants/constants';
 
 export function SidebarProjectOption(): JSX.Element {
   const [isAllProjectsListOpen, setIsAllProjectsListOpen] = useToggle(false);
@@ -31,8 +32,14 @@ export function SidebarProjectOption(): JSX.Element {
   const dispatch = useDispatch();
 
   const toggleAddProjectModal = () => {
-    dispatch(todosActions.showModal('add-project-modal'));
+    dispatch(todosActions.showModal(ADD_PROJECT_BUTTON_MODAL));
   };
+
+  const { modal } = useSelector((state: RootState) => state);
+
+  useEffect(() => {
+    console.log(modal);
+  }, [modal]);
 
   const icon16px = '1.6rem';
   return (
@@ -55,7 +62,7 @@ export function SidebarProjectOption(): JSX.Element {
         </AddProjectButton>
       </ProjectOptionItem>
 
-      <AllProjectsList isAllProjectsListOpen>
+      <AllProjectsList isAllProjectsListOpen={isAllProjectsListOpen}>
         <AllProjectsItem isAllProjectsListOpen={isAllProjectsListOpen}>
           Project 1
         </AllProjectsItem>

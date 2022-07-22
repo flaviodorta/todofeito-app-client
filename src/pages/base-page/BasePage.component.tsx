@@ -3,10 +3,11 @@ import { BasePageProps } from './BasePage.types';
 
 import { Navbar } from '../../components/layout/Navbar/Navbar.component';
 import { Sidebar } from '../../components/layout/Sidebar/Sidebar.component';
-import { Content, ModalBackground } from './BasePage.styled';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState, todosActions } from '../../store/store';
-import { AddProjectModal } from '../../components/layout/Modals/AddProjectModal/AddProjectModal.component';
+import { Content } from './BasePage.styled';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+import { AddProjectButtonModal } from '../../components/layout/Modals/AddProjectButtonModal/AddProjectButtonModal.component';
+import { ADD_PROJECT_BUTTON_MODAL } from '../../constants/constants';
 
 export function BasePage(props: BasePageProps): JSX.Element {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
@@ -14,16 +15,10 @@ export function BasePage(props: BasePageProps): JSX.Element {
   const toggleSidebar = () => setIsSidebarOpen((state) => !state);
 
   const { modal } = useSelector((state: RootState) => state);
-  const dispatch = useDispatch();
-
-  const toggleModal = () => dispatch(todosActions.showModal(null));
-
-  console.log(modal);
 
   return (
     <>
-      {modal && <ModalBackground onClick={toggleModal} />}
-      {modal === 'add-project-modal' && <AddProjectModal />}
+      {modal === ADD_PROJECT_BUTTON_MODAL && <AddProjectButtonModal />}
 
       <Navbar toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
       <Sidebar toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />

@@ -4,5 +4,6 @@ export const initialState: InitialState = {
   user: null,
   todos: [],
   projects: [],
-  modal: null,
+  modal: false,
+  select: false,
 };
