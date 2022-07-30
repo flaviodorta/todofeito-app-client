@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import { AllProjectsListContainerProps } from './AllProjectList.types';
+import { ContainerProps } from './AllProjectList.types';
 
-export const AllProjectsListContainer = styled.ul<AllProjectsListContainerProps>`
+export const Container = styled.ul<ContainerProps>`
   width: 100%;
   transition: height 0.3 ease;
 

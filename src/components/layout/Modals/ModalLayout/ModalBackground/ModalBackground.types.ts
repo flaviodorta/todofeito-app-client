@@ -1,3 +1,3 @@
 export interface ModalBackgroundProps {
-  onClick: (e: any) => any;
+  onClick?: (e: any) => any;
 }

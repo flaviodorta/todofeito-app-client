@@ -1,8 +1,12 @@
-export interface AllProjectsItemProps {
+export interface Props {
   children: React.ReactNode;
   isAllProjectsListOpen: boolean;
 }
 
-export interface AllProjectsItemContentContainerProps {
+export interface ContainerProps {
+  isAllProjectsListOpen: boolean;
+}
+
+export interface ContentProps {
   isAllProjectsListOpen: boolean;
 }

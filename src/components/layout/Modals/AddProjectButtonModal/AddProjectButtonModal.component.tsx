@@ -1,65 +1,71 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { SyntheticEvent, useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
-import { RootState } from '../../../../store/store';
+import { useEventListener } from '../../../../hooks/useEventListener';
+import { RootState, todosActions } from '../../../../redux/store';
 
 import { ModalBackground } from '../ModalLayout/ModalBackground/ModalBackground.component';
 import { ModalWrapper } from '../ModalLayout/ModalWrapper/ModalWrapper.component';
 import {
-  AddProjectButtonModalContainer,
-  AddProjectButtonModalContent,
-  AddProjectButtonModalFormGroup,
-  AddProjectButtonModalFormLabel,
-  AddProjectButtonModalFormTextInput,
-  AddProjectButtonModalTitle,
+  Container,
+  Content,
+  FormGroup,
+  FormLabel,
+  FormTextInput,
+  Title,
 } from './AddProjectButtonModal.styled';
-import { AddProjectButtonModalColorSelect } from './AddProjectButtonModalColorSelect/AddProjectButtonModalColorSelect.component';
+import { ColorSelect } from './ColorSelect/ColorSelect.component';
 
 import './ModalBackground.css';
 
-export function AddProjectButtonModal(): JSX.Element {
-  const { modal } = useSelector((state: RootState) => state);
-  const isModalOpen = modal !== null;
+export function AddProjectButtonModal<T>(): JSX.Element {
+  const { modal, isSelectOpen, isModalOpen } = useSelector(
+    (state: RootState) => state
+  );
+  const dispatch = useDispatch();
+  // const [selectRef, setSelectRef] = useState();
+  // const [containerRef, setContainerRef] = useState();
+  const containerRef = useRef(null);
+  const selectRef = useRef(null);
 
   const [inputNameValue, setInputNameValue] = useState('');
   const [selectColorValue, setSelectColorValue] = useState('');
 
+  // const closeSelect = () => dispatch(todosActions.toggleSelect(false));
+
+  const toggleSelect = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (isSelectOpen) {
+      dispatch(todosActions.toggleSelect(false));
+    } else {
+      dispatch(todosActions.toggleSelect(true));
+    }
+  };
+
+  // useEventListener('click', (e) => toggleSelect(e), containerRef);
+
   return (
     <ModalWrapper>
-      <ModalBackground onClick={(e) => e.stopPropagation()} />
-      <CSSTransition
-        in={isModalOpen}
-        timeout={125}
-        classNames='modal'
-        unmountOnExit
-        onEntered={() => console.log('cu')}
-      >
-        <AddProjectButtonModalContainer onClick={(e) => e.stopPropagation()}>
-          <AddProjectButtonModalTitle>Add title</AddProjectButtonModalTitle>
-          <AddProjectButtonModalContent>
-            <AddProjectButtonModalFormGroup>
-              <AddProjectButtonModalFormLabel htmlFor='project-name'>
-                Name
-              </AddProjectButtonModalFormLabel>
-              <AddProjectButtonModalFormTextInput
-                type='text'
-                id='project-name'
-                onChange={(e) => setInputNameValue(e.target.value)}
-                inputNameValue={inputNameValue}
-              />
-            </AddProjectButtonModalFormGroup>
+      <ModalBackground onClick={(e) => toggleSelect(e)} />
+      <Container ref={containerRef}>
+        <Title>New project</Title>
+        <Content>
+          <FormGroup>
+            <FormLabel htmlFor='project-name'>Name</FormLabel>
+            <FormTextInput
+              type='text'
+              id='project-name'
+              onChange={(e) => setInputNameValue(e.target.value)}
+              inputNameValue={inputNameValue}
+            />
+          </FormGroup>
 
-            <AddProjectButtonModalFormGroup>
-              <AddProjectButtonModalFormLabel htmlFor='project-color'>
-                Color
-              </AddProjectButtonModalFormLabel>
-              <AddProjectButtonModalColorSelect
-                setSelectColorValue={setSelectColorValue}
-              />
-            </AddProjectButtonModalFormGroup>
-          </AddProjectButtonModalContent>
-        </AddProjectButtonModalContainer>
-      </CSSTransition>
+          <FormGroup>
+            <FormLabel htmlFor='project-color'>Color</FormLabel>
+            <ColorSelect ref={selectRef} setSelectColorValue={setSelectColorValue} />
+          </FormGroup>
+        </Content>
+      </Container>
     </ModalWrapper>
   );
 }

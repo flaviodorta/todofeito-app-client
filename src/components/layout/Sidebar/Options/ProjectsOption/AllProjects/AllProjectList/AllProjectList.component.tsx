@@ -1,13 +1,11 @@
-import { AllProjectsListContainerProps } from './AllProjectList.types';
+import { Props } from './AllProjectList.types';
 
-import { AllProjectsListContainer } from './AllProjectList.styled';
+import { Container } from './AllProjectList.styled';
 
-export function AllProjectsList(props: AllProjectsListContainerProps): JSX.Element {
+export function AllProjectsList(props: Props): JSX.Element {
   const { isAllProjectsListOpen, children } = props;
 
   return (
-    <AllProjectsListContainer isAllProjectsListOpen={isAllProjectsListOpen}>
-      {children}
-    </AllProjectsListContainer>
+    <Container isAllProjectsListOpen={isAllProjectsListOpen}>{children}</Container>
   );
 }

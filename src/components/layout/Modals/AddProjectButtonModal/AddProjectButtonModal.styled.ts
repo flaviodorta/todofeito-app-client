@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
-import { AddProjectButtonModalFormTextInputProps } from './AddProjectButtonModal.types';
+import { FormTextInputProps } from './AddProjectButtonModal.types';
 
-export const AddProjectButtonModalContainer = styled.div`
+export const Container = styled.div`
   position: absolute;
   height: 500px;
   width: 400px;
@@ -14,7 +14,7 @@ export const AddProjectButtonModalContainer = styled.div`
   background-color: ${(props) => props.theme.colors.white.one};
 `;
 
-export const AddProjectButtonModalTitle = styled.div`
+export const Title = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,26 +28,27 @@ export const AddProjectButtonModalTitle = styled.div`
   border-bottom: 1px solid ${(props) => props.theme.colors.grey.two};
 `;
 
-export const AddProjectButtonModalContent = styled.div`
+export const Content = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
   padding: 2rem 3rem 0 3rem;
 `;
 
-export const AddProjectButtonModalFormGroup = styled.form`
+export const FormGroup = styled.form`
   display: flex;
   flex-direction: column;
   margin-bottom: 2.2rem;
   width: 100%;
 `;
 
-export const AddProjectButtonModalFormLabel = styled.label`
-  margin-bottom: 1.1rem;
+export const FormLabel = styled.label`
+  margin-bottom: 1rem;
   font-weight: 500;
+  font-size: 1.5rem;
 `;
 
-export const AddProjectButtonModalFormTextInput = styled.input<AddProjectButtonModalFormTextInputProps>`
+export const FormTextInput = styled.input<FormTextInputProps>`
   width: 100%;
   padding: 0.5rem 1rem;
   height: 2.7rem;
@@ -55,7 +56,7 @@ export const AddProjectButtonModalFormTextInput = styled.input<AddProjectButtonM
   border-radius: 5px;
   outline: none;
   background-color: transparent;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 
   border: 1px solid ${(props) => props.theme.colors.grey.two};
 

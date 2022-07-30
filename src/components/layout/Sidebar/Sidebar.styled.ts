@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { breakpoints } from '../../../styles/theme/theme';
-import { SidebarContainerProps } from './Sidebar.types';
+import { ContainerProps } from './Sidebar.types';
 
-export const SidebarContainer = styled.aside<SidebarContainerProps>`
+export const Container = styled.aside<ContainerProps>`
   position: fixed;
   min-height: 100%;
   padding: 2rem 0 7rem 5.5rem;
@@ -20,7 +20,7 @@ export const SidebarContainer = styled.aside<SidebarContainerProps>`
     props.isSidebarOpen ? '0' : `-${props.resizeabledWidth}`};
 `;
 
-export const SidebarOptionsList = styled.ul`
+export const OptionsList = styled.ul`
   li {
     &:not(:last-child) {
       margin-bottom: 0.5rem;
@@ -32,7 +32,7 @@ export const SidebarOptionsList = styled.ul`
   }
 `;
 
-export const SidebarResizer = styled.div`
+export const Resizer = styled.div`
   position: absolute;
   cursor: col-resize;
   height: 100%;

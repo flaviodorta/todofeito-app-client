@@ -1,9 +1,11 @@
-import { RefObject, useEffect, useLayoutEffect, useRef } from 'react';
+import React, { RefObject, useEffect, useLayoutEffect, useRef } from 'react';
 import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 
 export function useEventListener<K extends keyof WindowEventMap>(
   eventName: K,
-  handler: (event: WindowEventMap[K]) => void,
+  handler: (
+    event: WindowEventMap[K] | React.MouseEvent<Element, MouseEvent>
+  ) => void,
   element?: undefined,
   options?: boolean | AddEventListenerOptions
 ): void;
@@ -13,14 +15,18 @@ export function useEventListener<
   T extends HTMLElement = HTMLDivElement
 >(
   eventName: K,
-  handler: (event: HTMLElementEventMap[K]) => void,
+  handler: (
+    event: HTMLElementEventMap[K] | React.MouseEvent<Element, MouseEvent>
+  ) => void,
   element: RefObject<T>,
   options?: boolean | AddEventListenerOptions
 ): void;
 
 export function useEventListener<K extends keyof DocumentEventMap>(
   eventName: K,
-  handler: (event: DocumentEventMap[K]) => void,
+  handler: (
+    event: DocumentEventMap[K] | React.MouseEvent<Element, MouseEvent>
+  ) => void,
   element: RefObject<Document>,
   options?: boolean | AddEventListenerOptions
 ): void;
@@ -31,7 +37,13 @@ export function useEventListener<
   T extends HTMLElement | void = void
 >(
   eventName: KH | KW,
-  handler: (event: WindowEventMap[KW] | HTMLElementEventMap[KH] | Event) => void,
+  handler: (
+    event:
+      | WindowEventMap[KW]
+      | HTMLElementEventMap[KH]
+      | Event
+      | React.MouseEvent<Element, MouseEvent>
+  ) => void,
   element?: React.RefObject<T>,
   options?: boolean | AddEventListenerOptions
 ) {

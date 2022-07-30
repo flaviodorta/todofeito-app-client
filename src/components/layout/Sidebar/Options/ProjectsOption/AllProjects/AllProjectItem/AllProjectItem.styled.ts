@@ -1,11 +1,8 @@
 import styled from 'styled-components';
 
-import {
-  AllProjectsItemContentContainerProps,
-  AllProjectsItemProps,
-} from './AllProjectItem.types';
+import { ContainerProps, ContentProps } from './AllProjectItem.types';
 
-export const AllProjectsItemContainer = styled.div<AllProjectsItemProps>`
+export const Container = styled.div<ContainerProps>`
   display: flex;
   align-items: center;
   border-radius: 4px 0 0 4px;
@@ -32,7 +29,7 @@ export const AllProjectsItemContainer = styled.div<AllProjectsItemProps>`
   }
 `;
 
-export const AllProjectsItemContentContainer = styled.div<AllProjectsItemContentContainerProps>`
+export const Content = styled.div<ContentProps>`
   position: absolute;
   transition: all 0.125s ease;
   margin-left: 1.6rem;

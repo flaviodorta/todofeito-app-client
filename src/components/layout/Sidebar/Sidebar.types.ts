@@ -1,9 +1,9 @@
-export type SidebarProps = {
+export type Props = {
   toggleSidebar: () => void;
   isSidebarOpen: boolean;
 };
 
-export type SidebarContainerProps = {
+export type ContainerProps = {
   isSidebarOpen: boolean;
   initialWidth: string;
   resizeabledWidth: string;

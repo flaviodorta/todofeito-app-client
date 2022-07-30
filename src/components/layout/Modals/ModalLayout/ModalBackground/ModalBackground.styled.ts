@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-export const ModalBackgroundContainer = styled.div`
+export interface ModalBackgroundProps {
+  ref: React.ForwardedRef<unknown>;
+}
+
+export const ModalBackgroundContainer = styled.div<ModalBackgroundProps>`
   position: absolute;
   height: 100%;
   width: 100%;

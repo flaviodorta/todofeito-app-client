@@ -1,4 +1,4 @@
-import { SidebarProps } from './Sidebar.types';
+import { Props } from './Sidebar.types';
 import { baseTheme, breakpoints } from '../../../styles/theme/theme';
 import { useLayoutEffect, useRef } from 'react';
 import { usePersistedState } from '../../../hooks/usePersistedState';
@@ -6,20 +6,16 @@ import { useResize } from '../../../hooks/useResize';
 import { useWindowSize } from '../../../hooks/useWindowSize';
 import { useEventListener } from '../../../hooks/useEventListener';
 
-import {
-  SidebarContainer,
-  SidebarOptionsList,
-  SidebarResizer,
-} from './Sidebar.styled';
+import { Container, OptionsList, Resizer } from './Sidebar.styled';
 
 import { InboxSolidIcon as InboxIcon } from '../../shared/icons/InboxSolidIcon';
 import { CalendarDayIcon as TodayIcon } from '../../shared/icons/CalendarDayIcon';
 import { CalendarIcon as UpcomingIcon } from '../../shared/icons/CalendarIcon';
 import { LabelIcon as FiltersAndLabelsIcon } from '../../shared/icons/LabelIcon';
-import { SidebarProjectOption } from './Options/ProjectsOption/SidebarProjectOption.component';
-import { SidebarOption } from './Options/Option/SidebarOption.component';
+import { ProjectOption } from './Options/ProjectsOption/ProjectOption.component';
+import { Option } from './Options/Option/Option.component';
 
-export function Sidebar(props: SidebarProps): JSX.Element {
+export function Sidebar(props: Props): JSX.Element {
   const { isSidebarOpen, toggleSidebar } = props;
   const { colors } = baseTheme;
 
@@ -76,36 +72,36 @@ export function Sidebar(props: SidebarProps): JSX.Element {
   }, [resizeabledWidth, setPersistedWidth]);
 
   return (
-    <SidebarContainer
+    <Container
       ref={setRef.element}
       isSidebarOpen={isSidebarOpen}
       initialWidth={initialWidth}
       resizeabledWidth={persistedWidth}
     >
-      <SidebarResizer ref={setRef.right} />
-      <SidebarOptionsList>
-        <SidebarOption todoCount={23}>
+      <Resizer ref={setRef.right} />
+      <OptionsList>
+        <Option todoCount={23}>
           <InboxIcon fill={colors.blue} />
           Inbox
-        </SidebarOption>
+        </Option>
 
-        <SidebarOption todoCount={21}>
+        <Option todoCount={21}>
           <TodayIcon fill={colors.green} />
           Today
-        </SidebarOption>
+        </Option>
 
-        <SidebarOption todoCount={12}>
+        <Option todoCount={12}>
           <UpcomingIcon fill={colors.purple} />
           Upcoming
-        </SidebarOption>
+        </Option>
 
-        <SidebarOption todoCount={53}>
+        <Option todoCount={53}>
           <FiltersAndLabelsIcon fill={colors.orange} />
           Filters & Labels
-        </SidebarOption>
+        </Option>
 
-        <SidebarProjectOption />
-      </SidebarOptionsList>
-    </SidebarContainer>
+        <ProjectOption />
+      </OptionsList>
+    </Container>
   );
 }

@@ -1,3 +1,3 @@
-export interface AddProjectButtonModalFormTextInputProps {
+export interface FormTextInputProps {
   inputNameValue: string;
 }
