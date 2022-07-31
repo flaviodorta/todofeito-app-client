@@ -1,15 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { initialState } from './initialState';
 
-export const todosStateSlice = createSlice({
-  name: 'Todos',
+export const globalStateSlice = createSlice({
+  name: 'Global State',
   initialState: initialState,
   reducers: {
-    toggleModal: (state, action: PayloadAction<boolean>) => {
-      state.isModalOpen = action.payload;
-    },
     setModal: (state, action: PayloadAction<string>) => {
-      state.modal = action.payload;
+      state.modalOpenedIs = action.payload;
     },
     toggleSelect: (state, action: PayloadAction<boolean>) => {
       state.isSelectOpen = action.payload;

@@ -1,45 +1,56 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { Props } from './ColorSelect.types';
 
 import { Container } from './ColorSelect.styled';
 import { Dropdown } from './Dropdown/Dropdown.component';
 import { Option } from './Option/Option.component';
 
-import { CircleSolidIcon as CircleIcon } from '../../../../shared/icons/CircleSolid';
-import { useOnClickOutside } from '../../../../../hooks/useOnClickOutside';
+import { CircleSolidIcon as CircleIcon } from '../../../../../shared/icons/CircleSolid';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, todosActions } from '../../../../../redux/store';
+import { RootState, globalActions } from '../../../../../../redux/store';
+import { useOnClickOutside } from '../../../../../../hooks/useOnClickOutside';
 
-export function ColorSelect<T>(props: Props<T>): JSX.Element {
+export function ColorSelect(props: Props): JSX.Element {
   const { isSelectOpen } = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
 
   // const [colorSelected, setColorSelected] = useState('');
+  const selectRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const toggleSelect = () => {
-    if (isSelectOpen) {
-      dispatch(todosActions.toggleSelect(false));
-    } else {
-      dispatch(todosActions.toggleSelect(true));
+  useOnClickOutside(
+    selectRef,
+    () => {
+      if (isSelectOpen) {
+        dispatch(globalActions.toggleSelect(false));
+      }
+    },
+    'mousedown',
+    props.backgroundRef
+  );
+
+  const toggleSelect = (e: React.SyntheticEvent) => {
+    if (e.target === selectRef.current && isSelectOpen) {
+      dispatch(globalActions.toggleSelect(false));
+    }
+    if (e.target === selectRef.current && !isSelectOpen) {
+      dispatch(globalActions.toggleSelect(true));
+    }
+    if (e.target === dropdownRef.current) {
+      dispatch(globalActions.toggleSelect(false));
     }
   };
-
-  const selectRef = useRef(null);
-  const closeSelect = (e: React.MouseEvent<Element, MouseEvent>) => {
-    e.stopPropagation();
-    if (isSelectOpen) {
-      dispatch(todosActions.toggleSelect(false));
-    }
-  };
-
-  useOnClickOutside(selectRef, (e: React.MouseEvent) => closeSelect(e), 'mousedown');
 
   const redRef = useRef(null);
 
   return (
-    <Container ref={selectRef} onClick={toggleSelect} isFocus={isSelectOpen}>
+    <Container
+      ref={selectRef}
+      onClick={(e) => toggleSelect(e)}
+      isFocus={isSelectOpen}
+    >
       {isSelectOpen && (
-        <Dropdown>
+        <Dropdown ref={dropdownRef}>
           <Option ref={redRef} icon={<CircleIcon fill={'red'} />}>
             Red
           </Option>

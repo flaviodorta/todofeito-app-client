@@ -1,7 +1,9 @@
-export interface Props<T> {
+import React from 'react';
+
+export interface Props {
   setSelectColorValue: (e: any) => void;
-  ref: React.RefObject<T>;
   onClick?: (e: React.MouseEvent) => void;
+  backgroundRef: React.RefObject<HTMLDivElement>;
 }
 
 export interface ContainerProps {

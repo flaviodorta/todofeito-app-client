@@ -1,5 +1,5 @@
 import React from 'react';
 
-export interface ModalWrapperProps {
+export interface Props {
   children: React.ReactNode;
 }

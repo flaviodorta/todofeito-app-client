@@ -9,7 +9,7 @@ import { Container as OptionContainer } from '../Option/Option.styled';
 
 export const RotateChevronIcon = styled(ChevronDownIcon)<RotateChevronIconProps>`
   transform: ${(props) =>
-    props.isAllProjectsListOpen ? 'rotate(0deg)' : 'rotate(-90deg)'};
+    props.isallprojectslistopen ? 'rotate(0deg)' : 'rotate(-90deg)'};
   transition: all 0.125s ease;
 `;
 

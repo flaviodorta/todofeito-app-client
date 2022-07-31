@@ -6,7 +6,7 @@ import { Sidebar } from '../../components/layout/Sidebar/Sidebar.component';
 import { Content } from './BasePage.styled';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
-import { AddProjectButtonModal } from '../../components/layout/Modals/AddProjectButtonModal/AddProjectButtonModal.component';
+import { AddProjectButtonModal } from '../../components/layout/Modals/ModalsComponents/AddProjectButtonModal/AddProjectButtonModal.component';
 import { ADD_PROJECT_BUTTON_MODAL } from '../../constants/constants';
 
 export function BasePage(props: BasePageProps): JSX.Element {
@@ -14,11 +14,11 @@ export function BasePage(props: BasePageProps): JSX.Element {
 
   const toggleSidebar = () => setIsSidebarOpen((state) => !state);
 
-  const { modal } = useSelector((state: RootState) => state);
+  const { modalOpenedIs } = useSelector((state: RootState) => state);
 
   return (
     <>
-      {modal === ADD_PROJECT_BUTTON_MODAL && <AddProjectButtonModal />}
+      {modalOpenedIs === ADD_PROJECT_BUTTON_MODAL && <AddProjectButtonModal />}
 
       <Navbar toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
       <Sidebar toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />

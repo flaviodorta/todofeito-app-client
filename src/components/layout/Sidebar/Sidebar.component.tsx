@@ -20,7 +20,7 @@ export function Sidebar(props: Props): JSX.Element {
   const { colors } = baseTheme;
 
   const windowWidth = useWindowSize().width;
-  const oldWindowWidthRef = useRef<number | undefined>(undefined);
+  const oldWindowWidthRef = useRef<number>();
   const breakpointMd = parseInt(breakpoints.md, 10);
 
   useLayoutEffect(() => {
@@ -65,7 +65,7 @@ export function Sidebar(props: Props): JSX.Element {
     if (parseInt(persistedWidth) < minWidthRem) {
       setPersistedWidth(minWidthRem + 'rem');
     }
-  }, [persistedWidth]);
+  }, [persistedWidth, setPersistedWidth]);
 
   useLayoutEffect(() => {
     setPersistedWidth(resizeabledWidth);

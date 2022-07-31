@@ -8,8 +8,7 @@ export interface InitialState {
   user: IsUser | null;
   todos: IsTodo[];
   projects: IsProject[];
-  isModalOpen: boolean;
-  modal: string;
+  modalOpenedIs: string;
   isSelectOpen: boolean;
 }
 

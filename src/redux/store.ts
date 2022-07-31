@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { todosStateSlice } from './slice/slice';
+import { globalStateSlice } from './slice/slice';
 
 export const store = configureStore({
-  reducer: todosStateSlice.reducer,
+  reducer: globalStateSlice.reducer,
 });
 
 export type RootState = ReturnType<typeof store.getState>;
-export const todosActions = todosStateSlice.actions;
+export const globalActions = globalStateSlice.actions;
