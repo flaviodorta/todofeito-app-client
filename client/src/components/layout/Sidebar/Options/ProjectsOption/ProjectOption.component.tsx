@@ -15,12 +15,8 @@ import { PlusSolidIcon as AddProjectIcon } from '../../../../shared/icons/PlusSo
 import { useToggle } from '../../../../../hooks/useToggle';
 import { AllProjectsItem } from './AllProjects/AllProjectItem/AllProjectItem.components';
 import { AllProjectsList } from './AllProjects/AllProjectList/AllProjectList.component';
-import {
-  globalActions,
-  useAppDispatch,
-  useAppSelector,
-} from '../../../../../redux/store';
-import { ADD_PROJECT_BUTTON_MODAL } from '../../../../../constants/constants';
+import { globalActions, useAppDispatch } from '../../../../../redux/store';
+import { ADD_PROJECT_BUTTON_MODAL } from '../../../../../constants';
 
 export function ProjectOption(): JSX.Element {
   const [isAllProjectsListOpen, setIsAllProjectsListOpen] = useToggle(false);
@@ -33,11 +29,7 @@ export function ProjectOption(): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  const { modalOpenIs } = useAppSelector((state) => state);
-
   const toggleAddProjectModal = () => {
-    console.log(modalOpenIs);
-
     dispatch(globalActions.setModal(ADD_PROJECT_BUTTON_MODAL));
   };
 

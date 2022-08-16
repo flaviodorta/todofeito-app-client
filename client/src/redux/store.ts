@@ -1,8 +1,4 @@
-import {
-  combineReducers,
-  configureStore,
-  getDefaultMiddleware,
-} from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { globalStateSlice } from './slice/slice';
 import storage from 'redux-persist/lib/storage';
 import {
@@ -23,11 +19,11 @@ const persistConfig = {
   storage,
 };
 
-const reducers = combineReducers({
-  global: globalStateSlice.reducer,
-});
+// const reducers = combineReducers({
+//   global: globalStateSlice.reducer,
+// });
 
-const persistedReducer = persistReducer(persistConfig, reducers);
+const persistedReducer = persistReducer(persistConfig, globalStateSlice.reducer);
 
 export const store = configureStore({
   reducer: persistedReducer,

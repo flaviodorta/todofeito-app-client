@@ -20,6 +20,7 @@ export interface InputProps {
 export type HoveredButtonProps = {
   width?: string;
   height?: string;
+  onClick?: () => void;
 };
 
 // NavbarData component types
