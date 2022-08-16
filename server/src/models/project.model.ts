@@ -1,7 +1,7 @@
 import { prop, getModelForClass } from '@typegoose/typegoose';
 
-import { todoId } from '../types/todo.types';
-import { userId } from '../types/user.types';
+import { todoId } from '../types';
+import { userId } from '../types';
 import { ActivityModel } from './activity.model';
 import { CommentModel } from './comment.model';
 

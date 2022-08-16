@@ -1,7 +1,7 @@
 import { prop, getModelForClass } from '@typegoose/typegoose';
 
-import { projectId } from '../types/project.types';
-import { userId } from '../types/user.types';
+import { projectId } from '../types';
+import { userId } from '../types';
 import { CommentModel } from './comment.model';
 
 export class TodoModel {

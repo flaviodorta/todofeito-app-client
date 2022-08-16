@@ -8,7 +8,7 @@ export interface InitialState {
   user: IsUser | null;
   todos: IsTodo[];
   projects: IsProject[];
-  modalOpenedIs: string;
+  modalOpenIs: string;
   isSelectOpen: boolean;
 }
 
@@ -19,14 +19,15 @@ export interface IsUser {
   name?: string;
   lastName?: string;
   photo?: string;
+  todos: IsTodo[];
 }
 
 export interface IsTodo {
   todoId: string;
   createdBy: userId;
-  name: string;
+  createAt: Date;
+  title: string;
   content: string;
-  date: Date;
   isCompleted: boolean;
   comments?: IsComment[];
   priority?: 1 | 2 | 3 | 4;
@@ -38,6 +39,7 @@ export interface IsTodo {
 
 export interface IsProject {
   projectId: string;
+  name: string;
   createdBy: userId;
   todos?: todoId[];
   sharingUsers?: userId[];

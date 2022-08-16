@@ -4,15 +4,6 @@ import { Request, Response } from 'express';
 import { userModel } from '../models/user.model';
 
 class UserController {
-  private static instance: UserController | null;
-
-  public static getInstance(): UserController {
-    if (!UserController.instance) {
-      UserController.instance = new UserController();
-    }
-    return UserController.instance;
-  }
-
   async getUser(req: Request, res: Response) {
     const { userId } = req.body;
 
@@ -65,4 +56,4 @@ class UserController {
   }
 }
 
-export const userController = UserController.getInstance();
+export const userController = new UserController();

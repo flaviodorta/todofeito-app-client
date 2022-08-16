@@ -1,7 +1,7 @@
 import { Props } from './Background.types';
 import React, { forwardRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState, globalActions } from '../../../../../redux/store';
+import { useDispatch } from 'react-redux';
+import { globalActions, useAppSelector } from '../../../../../redux/store';
 
 import { Container } from './Background.styled';
 
@@ -9,7 +9,7 @@ import './Background.css';
 
 export const Background = forwardRef<HTMLDivElement, Props>(
   (props, ref): JSX.Element => {
-    const { isSelectOpen } = useSelector((state: RootState) => state);
+    const { isSelectOpen } = useAppSelector((state) => state);
     const dispatch = useDispatch();
 
     const closeModal = (e: React.SyntheticEvent) => {

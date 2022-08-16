@@ -1,1 +1,0 @@
-export type todoId = string;

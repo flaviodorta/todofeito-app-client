@@ -6,8 +6,9 @@ export const globalStateSlice = createSlice({
   initialState: initialState,
   reducers: {
     setModal: (state, action: PayloadAction<string>) => {
-      state.modalOpenedIs = action.payload;
+      state.modalOpenIs = action.payload;
     },
+
     toggleSelect: (state, action: PayloadAction<boolean>) => {
       state.isSelectOpen = action.payload;
     },

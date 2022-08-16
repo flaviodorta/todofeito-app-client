@@ -1,6 +1,6 @@
 import { prop, getModelForClass } from '@typegoose/typegoose';
 
-import { userId } from '../types/user.types';
+import { userId } from '../types';
 
 export class CommentModel {
   @prop({ required: true })
