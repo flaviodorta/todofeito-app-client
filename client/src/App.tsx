@@ -5,7 +5,7 @@ import { persistor, store } from './redux/store';
 import { AppThemeProvider } from './context-api/theme-api/ThemeAppContext';
 import { PersistGate } from 'redux-persist/integration/react';
 
-import { Inbox } from './pages/Inbox';
+import { Inbox } from './pages/Inbox/Inbox';
 
 export default function App() {
   return (
