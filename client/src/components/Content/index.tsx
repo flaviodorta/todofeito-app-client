@@ -46,12 +46,13 @@ export const Option = styled.div`
   justify-content: space-between;
   align-items: center;
   font-size: 1.2rem;
-  color: grey;
+  color: ${(props) => props.theme.colors.grey.three};
   gap: 6px;
   border-radius: 3.5px;
+  cursor: pointer;
 
   svg {
-    fill: grey;
+    fill: ${(props) => props.theme.colors.grey.three};
   }
 
   &:hover {

@@ -5,9 +5,16 @@ import { Container as OptionContainer } from '../Option/styled';
 export const IconContainer = styled.div<{
   isAllProjectsListOpen: boolean;
 }>`
+  width: 20px;
+  height: 20px;
   transform: ${(props) =>
     props.isAllProjectsListOpen ? 'rotate(0deg)' : 'rotate(-90deg)'};
   transition: all 0.125s ease;
+  margin-right: 1rem;
+
+  svg {
+    stroke: ${(props) => props.theme.colors.grey.three};
+  }
 `;
 
 export const Container = styled.div`
