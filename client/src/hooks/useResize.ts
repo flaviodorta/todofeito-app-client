@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useEffect, useRef, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 
 type Side = {
   direction: 'top' | 'right' | 'bottom' | 'left';

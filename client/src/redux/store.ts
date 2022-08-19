@@ -1,5 +1,4 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { globalStateSlice } from './slice/slice';
 import storage from 'redux-persist/lib/storage';
 import {
   persistReducer,
@@ -12,14 +11,28 @@ import {
   REGISTER,
 } from 'redux-persist';
 import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
-import { InitialState } from './slice/initialState.types';
+
+import { userSlice } from './slice/user/user.slice';
+import { uiSlice } from './slice/UI/ui.slice';
+
+import { RootState } from './slice/types';
 
 const persistConfig = {
   key: 'root',
   storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, globalStateSlice.reducer);
+const reducers = combineReducers({
+  user: userSlice.reducer,
+  ui: uiSlice.reducer,
+});
+
+// const reducers = combineReducers<RootState>({
+//   user: persistReducer(persistConfig, userSlice.reducer),
+//   ui: persistReducer(persistConfig, uiSlice.reducer),
+// });
+
+const persistedReducer = persistReducer(persistConfig, reducers);
 
 export const store = configureStore({
   reducer: persistedReducer,
@@ -34,7 +47,7 @@ export const store = configureStore({
 
 export const persistor = persistStore(store);
 
-export type RootState = InitialState;
+// export type RootState = RootState;
 // export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 export type ThunkDispatch = typeof store.dispatch;
@@ -43,4 +56,5 @@ export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useThunkDispatch = () => useDispatch<ThunkDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-export const globalActions = globalStateSlice.actions;
+export const userActions = userSlice.actions;
+export const uiActions = uiSlice.actions;

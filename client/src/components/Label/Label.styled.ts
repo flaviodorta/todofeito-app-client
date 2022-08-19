@@ -1,7 +1,10 @@
 import styled from 'styled-components';
-import { DivProps } from './Label.types';
 
-export const Div = styled.div<DivProps>`
+export const Container = styled.div<{
+  isVisible?: boolean;
+  parentWidth?: number;
+  elementWidth?: number;
+}>`
   background-color: ${(props) => props.theme.colors.grey.three};
   border: none;
   border-radius: 4px;
