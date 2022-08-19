@@ -15,9 +15,12 @@ import { LabelIcon as FiltersAndLabelsIcon } from '../Icons/LabelIcon';
 import { ProjectOption } from './Options/ProjectsOption/ProjectOption.component';
 import { Option } from './Options/Option/Option.component';
 import { useNavigate } from 'react-router-dom';
+import { globalActions, useAppDispatch, useAppSelector } from '../../redux/store';
 
 export function Sidebar(props: Props): JSX.Element {
-  const { isSidebarOpen, toggleSidebar } = props;
+  // const { isSidebarOpen, toggleSidebar } = props;
+  const dispatch = useAppDispatch();
+  const { isSidebarOpen } = useAppSelector((state) => state);
   const { colors } = baseTheme;
 
   const windowWidth = useWindowSize().width;
@@ -38,7 +41,8 @@ export function Sidebar(props: Props): JSX.Element {
         windowWidth < breakpointMd &&
         oldWindowWidthRef.current > breakpointMd
       ) {
-        setTimeout(toggleSidebar, 100);
+        console.log('cu');
+        setTimeout(() => dispatch(globalActions.toggleSidebar()), 100);
       }
     }
   });

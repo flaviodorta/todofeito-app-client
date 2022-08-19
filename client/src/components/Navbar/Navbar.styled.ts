@@ -27,6 +27,7 @@ export const Nav = styled.nav`
   justify-content: space-between;
   align-items: center;
   z-index: 300;
+  position: absolute;
 
   color: ${(props) => props.theme.colors.white.one};
   background-color: ${(props) => props.theme.colors.primary.one};

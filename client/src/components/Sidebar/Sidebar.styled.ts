@@ -3,8 +3,9 @@ import { breakpoints } from '../../styles/theme/theme';
 import { ContainerProps } from './Sidebar.types';
 
 export const Container = styled.aside<ContainerProps>`
-  position: fixed;
-  min-height: 100%;
+  position: absolute;
+  left: 0;
+  min-height: 100vh;
   padding: 8rem 0 7rem 5.5rem;
   z-index: 200;
   user-select: none;

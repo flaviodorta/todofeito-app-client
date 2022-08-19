@@ -10,13 +10,11 @@ export const Div = styled.div`
 export const Content = styled.div<ContentProps>`
   width: 100%;
   min-height: 100vh;
-  margin-left: ${(props) => (props.isSidebarOpen ? '30rem' : '20rem')};
-
   z-index: 100;
   display: flex;
   justify-content: center;
   padding-top: 4rem;
-  padding-left: 33rem;
+  /* padding-left: 33rem; */
 
   transition: margin-left 0.125s ease;
 

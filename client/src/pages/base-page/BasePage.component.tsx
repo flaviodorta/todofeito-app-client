@@ -1,5 +1,3 @@
-import { BasePageProps } from './BasePage.types';
-
 import { useAppSelector } from '../../redux/store';
 import { useState } from 'react';
 
@@ -12,23 +10,31 @@ import { AddTodoModal } from '../../components/Todo/AddTodoModal/AddTodoModal.co
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background-color: red;
   z-index: 120;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   display: flex;
-  justify-content: center;
+  overflow: auto;
 `;
 
-const Layout = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+// const Layout = styled.div`
+//   /* display: flex; */
+//   /* flex-direction: column; */
+//   width: 100%;
+// `;
 
 interface Props {
   activePage: string;
   children: React.ReactNode;
 }
+
+const Layout = styled.div`
+  width: 100vw;
+  height: 100vw;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+`;
 
 export function BasePage(props: Props): JSX.Element {
   const { children, activePage } = props;
@@ -46,6 +52,7 @@ export function BasePage(props: Props): JSX.Element {
 
       <Navbar toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
       <Sidebar toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
+
       <Content isSidebarOpen={isSidebarOpen}>{children}</Content>
     </Layout>
   );

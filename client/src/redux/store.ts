@@ -19,10 +19,6 @@ const persistConfig = {
   storage,
 };
 
-// const reducers = combineReducers({
-//   global: globalStateSlice.reducer,
-// });
-
 const persistedReducer = persistReducer(persistConfig, globalStateSlice.reducer);
 
 export const store = configureStore({

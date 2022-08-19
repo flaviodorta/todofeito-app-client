@@ -10,6 +10,7 @@ export interface InitialState {
   projects: IsProject[];
   modalOpenIs: string;
   isSelectOpen: boolean;
+  isSidebarOpen: boolean;
 }
 
 export interface IsUser {

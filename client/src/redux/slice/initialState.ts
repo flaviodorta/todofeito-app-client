@@ -6,4 +6,5 @@ export const initialState: InitialState = {
   projects: [],
   modalOpenIs: '',
   isSelectOpen: false,
+  isSidebarOpen: true,
 };

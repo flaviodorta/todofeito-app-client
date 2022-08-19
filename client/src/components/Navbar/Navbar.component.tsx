@@ -24,13 +24,17 @@ import { BarsSolidIcon as SidebarIcon } from '../Icons/BarsSolidIcon';
 import { MaginifyingGlassSolidIcon as SearchIcon } from '../Icons/MagnifyingGlassSolidIcon';
 import { BellRegularIcon as NotificationsIcon } from '../Icons/BellRegularIcon';
 import { CircleUserSolidIcon as UserIcon } from '../Icons/CircleUserSolidIcon';
-import { globalActions, useAppDispatch } from '../../redux/store';
+import { globalActions, useAppDispatch, useAppSelector } from '../../redux/store';
 import { ADD_TODO_MODAL } from '../../constants';
 
 export function Navbar(props: NavbarProps) {
-  const { toggleSidebar, isSidebarOpen } = props;
+  // const { toggleSidebar, isSidebarOpen } = props;
   const { white } = baseTheme.colors;
   const { iconsData, setIconName } = Data();
+
+  const dispatch = useAppDispatch();
+
+  const { isSidebarOpen } = useAppSelector((state) => state);
 
   const { sidebar, home, addTodo, completedTodos, notifications, user } = iconsData;
   const setIconNameTo = (iconName: string) => setIconName(iconName);
@@ -44,8 +48,6 @@ export function Navbar(props: NavbarProps) {
     content: string | [string, string],
     parentWidth: number
   ) => <Label isVisible={isVisible} content={content} parentWidth={parentWidth} />;
-
-  const dispatch = useAppDispatch();
 
   const handleAddTodo = () => {
     dispatch(globalActions.setModal(ADD_TODO_MODAL));
@@ -62,7 +64,10 @@ export function Navbar(props: NavbarProps) {
           onMouseEnter={() => setIconNameTo('sidebar')}
           onMouseLeave={() => setIconNameTo('none')}
         >
-          <HoveredButton onClick={toggleSidebar} height={hoveredButtonHeight}>
+          <HoveredButton
+            onClick={() => dispatch(globalActions.toggleSidebar())}
+            height={hoveredButtonHeight}
+          >
             <SidebarIcon fill={white.one} />
           </HoveredButton>
 

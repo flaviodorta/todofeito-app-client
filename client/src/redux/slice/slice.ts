@@ -12,5 +12,9 @@ export const globalStateSlice = createSlice({
     toggleSelect: (state, action: PayloadAction<boolean>) => {
       state.isSelectOpen = action.payload;
     },
+
+    toggleSidebar: (state) => {
+      state.isSidebarOpen = !state.isSidebarOpen;
+    },
   },
 });
