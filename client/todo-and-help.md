@@ -11,6 +11,11 @@
 
 # To do
 
-- add keybind no F12 pra F2
-- mudar botes do mouse pra mudar de workspace
-- mudar useFocus para useToggle
+- add useOnKeyPress
+- ajeitar o expanding textarea
+  - pra retornar o tamanho usar o text height
+- fazer a lista de todos item
+- terminar os contents das paginas
+- terminar o data picker
+- fazer o dropdown do search e das opçoes
+- fazer a tela de login

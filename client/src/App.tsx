@@ -2,7 +2,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { GlobalStyle } from './styles';
 import { persistor, store } from './redux/store';
-import { AppThemeProvider } from './context-api/theme-api/ThemeAppContext';
+import { AppThemeProvider } from './context/theme/ThemeAppContext';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import { Page } from './page';

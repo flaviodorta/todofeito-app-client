@@ -1,28 +1,29 @@
 import styled from 'styled-components';
-
 import Textarea from 'react-expanding-textarea';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  position: fixed;
-  left: 50%;
-  top: 35%;
-  transform: translate(-50%, -50%);
-  padding: 30px;
   background-color: ${(props) => props.theme.colors.white.one};
   border-radius: 4px;
-  width: 50rem;
+  width: 100%;
   min-height: 20rem;
   max-height: 30rem;
-  z-index: 100;
+  font-size: 1.4rem;
+`;
+
+export const Border = styled.div`
+  border: 1px solid ${(props) => props.theme.colors.grey.one};
+  border-radius: 4px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
 `;
 
 export const Title = styled.input`
   border: none;
   outline: none;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 
   &::placeholder {
     color: #777;
@@ -35,14 +36,13 @@ export const Description = styled(Textarea)`
   outline: none;
   width: 100%;
   height: 59px;
-  margin-bottom: 5rem;
+  margin-bottom: 2.5rem;
 
   &::placeholder {
     color: #999;
   }
 
   &::-webkit-scrollbar {
-    width: 0px;
   }
 `;
 
@@ -50,7 +50,7 @@ export const Options = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
 `;
 
 export const OptionsLeft = styled.div`

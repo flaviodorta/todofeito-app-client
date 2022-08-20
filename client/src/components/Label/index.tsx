@@ -1,6 +1,6 @@
 import { useElementSize } from '../../hooks/useElementSize';
 
-import { Container } from './Label.styled';
+import { Container } from './styled';
 
 interface Props {
   isVisible?: boolean;

@@ -6,7 +6,7 @@ export const Container = styled.div`
   width: 400px;
   border-radius: 5px;
   left: 50%;
-  top: 50%;
+  top: 25%;
   transform: translate(-50%, -70%);
   z-index: 100;
   overflow: hidden;

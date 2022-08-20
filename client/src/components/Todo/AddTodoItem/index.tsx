@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { uiActions, useAppDispatch } from '../../../redux/store';
 
 import {
   Container,
+  Border,
   Title,
   Description,
   Options,
@@ -13,7 +14,6 @@ import {
   Buttons,
   Button,
 } from './styled';
-import { Modal } from '../../Modals/ModalLayout';
 
 import {
   CalendarIcon,
@@ -21,56 +21,42 @@ import {
   FlagIcon,
   LabelIcon,
 } from '../../Icons';
-import { useEventListener } from '../../../hooks/useEventListener';
-import { useOnKeyPress } from '../../../hooks/useOnKeyPress';
+
+import { expandTextarea } from '../../../utils/helpers';
 
 interface Props {}
 
-export const AddTodoModal = (props: Props): JSX.Element => {
-  const dispatch = useAppDispatch();
-
+export const AddTodoItem = (props: Props): JSX.Element => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   // const [date, setDate] = useState<Date | null>(null);
   // const [project, setProject] = useState<projectId | null>(null);
   // const [label, setLabel] = useState('');
+
   const [datePickerIsOpen, setDatePickerIsOpen] = useState(false);
 
   const addTodoButtonDisbled = !(title && description);
 
-  const backgroundRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
+
+  const dispatch = useAppDispatch();
 
   const handleCloseModal = () => dispatch(uiActions.setModal(''));
 
-  const handleAddTodo = () => {
-    if (title) {
-      alert('todo added');
-      handleCloseModal();
-    }
-  };
-
-  useOnKeyPress('Enter', handleAddTodo, titleRef);
-
-  useEffect(() => {
-    titleRef?.current?.focus();
-  }, []);
-
   return (
-    <Modal ref={backgroundRef}>
-      <Container>
+    <Container>
+      <Border>
         <Title
-          ref={titleRef}
           placeholder='Todo name'
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
         <Description
-          ref={descriptionRef}
           placeholder='Description'
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={(e) => {
+            setDescription(e.target.value);
+          }}
         />
         <Options>
           <OptionsLeft>
@@ -101,29 +87,28 @@ export const AddTodoModal = (props: Props): JSX.Element => {
             </OptionIconed>
           </OptionsRight>
         </Options>
+      </Border>
 
-        <Buttons>
-          <Button
-            color={'#777'}
-            bg={'transparent'}
-            bgHover={'#E5E5E5'}
-            bgActive={'#CFCFCF'}
-            onClick={handleCloseModal}
-          >
-            Cancel
-          </Button>
-          <Button
-            disabled={addTodoButtonDisbled}
-            color={'white'}
-            bg={'#246FE0'}
-            bgHover={'#1d63cd'}
-            bgActive={'#174ea1'}
-            onClick={handleAddTodo}
-          >
-            Add todo
-          </Button>
-        </Buttons>
-      </Container>
-    </Modal>
+      <Buttons>
+        <Button
+          color={'#777'}
+          bg={'transparent'}
+          bgHover={'#E5E5E5'}
+          bgActive={'#CFCFCF'}
+          onClick={handleCloseModal}
+        >
+          Cancel
+        </Button>
+        <Button
+          disabled={addTodoButtonDisbled}
+          color={'white'}
+          bg={'#246FE0'}
+          bgHover={'#1d63cd'}
+          bgActive={'#174ea1'}
+        >
+          Add todo
+        </Button>
+      </Buttons>
+    </Container>
   );
 };

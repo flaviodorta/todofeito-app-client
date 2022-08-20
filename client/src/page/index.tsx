@@ -5,7 +5,7 @@ import { Navbar } from '../components/Navbar';
 import { Sidebar } from '../components/Sidebar';
 import { Content } from '../components/Content';
 import { AddProjectButtonModal } from '../components/Modals/ModalsComponents/AddProjectButtonModal';
-import { ADD_PROJECT_BUTTON_MODAL, ADD_TODO_MODAL } from '../constants';
+import { ADD_PROJECT_BUTTON_MODAL, ADD_TODO_MODAL } from '../utils/constants';
 import { AddTodoModal } from '../components/Todo/AddTodoModal';
 
 import { ActivePage } from '../redux/slice/types';

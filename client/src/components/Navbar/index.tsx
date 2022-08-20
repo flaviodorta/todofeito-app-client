@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { useHover } from '../../hooks/useHover';
 import { useToggle } from '../../hooks/useToggle';
 import { uiActions, useAppDispatch, useAppSelector } from '../../redux/store';
-import { ADD_TODO_MODAL } from '../../constants';
+import { ADD_TODO_MODAL } from '../../utils/constants';
 import { baseTheme } from '../../styles/theme/theme';
 import { NavbarData as Data } from './data';
 
@@ -15,7 +15,7 @@ import {
   HoveredDiv,
   ShortcutInputButton,
 } from './styled';
-import { Label } from '../Label/Label.component';
+import { Label } from '../Label';
 import { NavLink } from '../NavLink/NavLink.styled';
 
 import {

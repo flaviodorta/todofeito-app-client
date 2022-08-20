@@ -1,4 +1,8 @@
+import { useHover } from '../../hooks/useHover';
+import { useRef } from 'react';
 import { useAppSelector } from '../../redux/store';
+
+import { AddTodoItem } from '../Todo/AddTodoItem';
 
 import {
   EllipsisSolidIcon as EllipsisIcon,
@@ -10,8 +14,6 @@ import {
 import { ActivePage } from '../../redux/slice/types';
 
 import styled from 'styled-components';
-import { useHover } from '../../hooks/useHover';
-import { useRef } from 'react';
 
 export const Container = styled.div`
   z-index: 120;
@@ -203,6 +205,7 @@ export function Content(props: Props): JSX.Element {
             <p>Add section</p>
             <span></span>
           </AddSection>
+          <AddTodoItem />
         </Flex>
       )}
     </Container>

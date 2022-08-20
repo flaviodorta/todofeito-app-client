@@ -1,4 +1,4 @@
-import { ADD_PROJECT_BUTTON_MODAL } from '../../../../constants';
+import { ADD_PROJECT_BUTTON_MODAL } from '../../../../utils/constants';
 
 import { useRef } from 'react';
 import { useHover } from '../../../../hooks/useHover';
