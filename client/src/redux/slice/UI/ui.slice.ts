@@ -1,32 +1,37 @@
-import { ActivePage, UIState } from '../types';
+import { ActivePage, ModalShow, UIState } from '../types';
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const uiState: UIState = {
-  modalOpenIs: '',
-  isSelectOpen: false,
-  isSidebarOpen: true,
-  activePage: 'inbox',
+  activePageIs: 'inbox',
+  modalShowIs: 'none',
+  shouldShowSelectColor: false,
+  shouldShowSidebar: true,
+  shouldShowAddTodoItem: false,
 };
 
 export const uiSlice = createSlice({
   name: 'ui slice',
   initialState: uiState,
   reducers: {
-    setModal: (state, action: PayloadAction<string>) => {
-      state.modalOpenIs = action.payload;
+    setActivePageIs: (state, action: PayloadAction<ActivePage>) => {
+      state.activePageIs = action.payload;
     },
 
-    toggleSelect: (state, action: PayloadAction<boolean>) => {
-      state.isSelectOpen = action.payload;
+    setModalShowIs: (state, action: PayloadAction<ModalShow>) => {
+      state.modalShowIs = action.payload;
     },
 
-    toggleSidebar: (state) => {
-      state.isSidebarOpen = !state.isSidebarOpen;
+    setShouldShowSelectColor: (state) => {
+      state.shouldShowSelectColor = !state.shouldShowSelectColor;
     },
 
-    setActivePage: (state, action: PayloadAction<ActivePage>) => {
-      state.activePage = action.payload;
+    setShouldShowSidebar: (state) => {
+      state.shouldShowSidebar = !state.shouldShowSidebar;
+    },
+
+    setShouldShowAddTodoItem: (state) => {
+      state.shouldShowAddTodoItem = !state.shouldShowAddTodoItem;
     },
   },
 });

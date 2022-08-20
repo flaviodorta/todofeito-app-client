@@ -20,8 +20,8 @@ import {
 
 export function Sidebar(): JSX.Element {
   const dispatch = useAppDispatch();
-  const { isSidebarOpen } = useAppSelector((state) => state.ui);
-  const toggleSidebar = () => dispatch(uiActions.toggleSidebar());
+  const { shouldShowSidebar } = useAppSelector((state) => state.ui);
+  const toggleSidebar = () => dispatch(uiActions.setShouldShowSidebar());
   const { colors } = baseTheme;
 
   const windowWidth = useWindowSize().width;
@@ -38,7 +38,7 @@ export function Sidebar(): JSX.Element {
   useEventListener('resize', () => {
     if (windowWidth && oldWindowWidthRef.current) {
       if (
-        isSidebarOpen &&
+        shouldShowSidebar &&
         windowWidth < breakpointMd &&
         oldWindowWidthRef.current > breakpointMd
       ) {
@@ -82,7 +82,7 @@ export function Sidebar(): JSX.Element {
   return (
     <Container
       ref={setRef.element}
-      isSidebarOpen={isSidebarOpen}
+      shouldShowSidebar={shouldShowSidebar}
       initialWidth={initialWidth}
       resizeabledWidth={persistedWidth}
     >

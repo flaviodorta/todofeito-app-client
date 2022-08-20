@@ -16,7 +16,7 @@ interface Props {
 }
 
 export function ColorSelect(props: Props): JSX.Element {
-  const { isSelectOpen } = useAppSelector((state) => state.ui);
+  const { shouldShowSelectColor } = useAppSelector((state) => state.ui);
   const dispatch = useDispatch();
 
   // const [colorSelected, setColorSelected] = useState('');
@@ -26,8 +26,8 @@ export function ColorSelect(props: Props): JSX.Element {
   useOnClickOutside(
     selectRef,
     () => {
-      if (isSelectOpen) {
-        dispatch(uiActions.toggleSelect(false));
+      if (shouldShowSelectColor) {
+        dispatch(uiActions.setShouldShowSelectColor());
       }
     },
     'mousedown',
@@ -35,14 +35,14 @@ export function ColorSelect(props: Props): JSX.Element {
   );
 
   const toggleSelect = (e: React.SyntheticEvent) => {
-    if (e.target === selectRef.current && isSelectOpen) {
-      dispatch(uiActions.toggleSelect(false));
+    if (e.target === selectRef.current && shouldShowSelectColor) {
+      dispatch(uiActions.setShouldShowSelectColor());
     }
-    if (e.target === selectRef.current && !isSelectOpen) {
-      dispatch(uiActions.toggleSelect(true));
+    if (e.target === selectRef.current && !shouldShowSelectColor) {
+      dispatch(uiActions.setShouldShowSelectColor());
     }
     if (e.target === dropdownRef.current) {
-      dispatch(uiActions.toggleSelect(false));
+      dispatch(uiActions.setShouldShowSelectColor());
     }
   };
 
@@ -52,9 +52,9 @@ export function ColorSelect(props: Props): JSX.Element {
     <Container
       ref={selectRef}
       onClick={(e) => toggleSelect(e)}
-      isFocus={isSelectOpen}
+      isFocus={shouldShowSelectColor}
     >
-      {isSelectOpen && (
+      {shouldShowSelectColor && (
         <Dropdown ref={dropdownRef}>
           <Option ref={redRef} icon={<CircleIcon fill={'red'} />}>
             Red

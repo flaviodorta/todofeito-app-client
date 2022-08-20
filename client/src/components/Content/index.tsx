@@ -1,6 +1,6 @@
 import { useHover } from '../../hooks/useHover';
 import { useRef } from 'react';
-import { useAppSelector } from '../../redux/store';
+import { uiActions, useAppDispatch, useAppSelector } from '../../redux/store';
 
 import { AddTodoItem } from '../Todo/AddTodoItem';
 
@@ -14,6 +14,7 @@ import {
 import { ActivePage } from '../../redux/slice/types';
 
 import styled from 'styled-components';
+import { useToggle } from '../../hooks/useToggle';
 
 export const Container = styled.div`
   z-index: 120;
@@ -72,15 +73,15 @@ export const Todos = styled.div`
   margin-bottom: 2rem;
 `;
 
-export const Flex = styled.div<{ isSidebarOpen: boolean }>`
+export const Flex = styled.div<{ shouldShowSidebar: boolean }>`
   display: flex;
   flex-direction: column;
   margin-top: 4.5rem;
-  margin-left: ${(props) => (props.isSidebarOpen ? '10rem' : '0rem')};
+  margin-left: ${(props) => (props.shouldShowSidebar ? '10rem' : '0rem')};
   transition: margin-left 0.145s ease;
 `;
 
-export const AddTask = styled.div`
+export const AddTodo = styled.div`
   width: 100%;
   height: 3rem;
   display: flex;
@@ -124,14 +125,14 @@ export const AddTask = styled.div`
   }
 `;
 
-export const AddSection = styled.div<{ isHover: boolean }>`
+export const AddSection = styled.div<{ isAddSectionHover: boolean }>`
   position: relative;
   padding: 2rem 0;
   transition: all 0.175s ease;
   cursor: pointer;
   font-size: 1.4rem;
 
-  opacity: ${(props) => (props.isHover ? 1 : 0)};
+  opacity: ${(props) => (props.isAddSectionHover ? 1 : 0)};
 
   p {
     position: absolute;
@@ -168,16 +169,22 @@ interface Props {
 
 export function Content(props: Props): JSX.Element {
   const { activePage } = props;
-  const { isSidebarOpen } = useAppSelector((state) => state.ui);
-  const addSection = useRef<HTMLDivElement>(null);
-  const isHover = useHover(addSection);
+  const { shouldShowSidebar } = useAppSelector((state) => state.ui);
 
-  console.log(isHover);
+  // const [shouldShowAddTodo, setShouldShowAddTodo] = useToggle(false);
+
+  const addSection = useRef<HTMLDivElement>(null);
+  const isAddSectionHover = useHover(addSection);
+
+  const { shouldShowAddTodoItem } = useAppSelector((state) => state.ui);
+  const dispatch = useAppDispatch();
+
+  const handleOpenAddTodoItem = () => dispatch(uiActions.setShouldShowAddTodoItem());
 
   return (
     <Container>
       {activePage === 'inbox' && (
-        <Flex isSidebarOpen={isSidebarOpen}>
+        <Flex shouldShowSidebar={shouldShowSidebar}>
           <Heading>
             <Title>Inbox</Title>
             <Options>
@@ -195,17 +202,21 @@ export function Content(props: Props): JSX.Element {
             </Options>
           </Heading>
           <Todos>todos</Todos>
-          <AddTask>
-            <div className='icon-bg'>
-              <PlusIcon />
-            </div>
-            Add task
-          </AddTask>
-          <AddSection ref={addSection} isHover={isHover}>
+          {shouldShowAddTodoItem ? (
+            <AddTodoItem />
+          ) : (
+            <AddTodo onClick={handleOpenAddTodoItem}>
+              <div className='icon-bg'>
+                <PlusIcon />
+              </div>
+              Add todo
+            </AddTodo>
+          )}
+
+          <AddSection ref={addSection} isAddSectionHover={isAddSectionHover}>
             <p>Add section</p>
             <span></span>
           </AddSection>
-          <AddTodoItem />
         </Flex>
       )}
     </Container>

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { breakpoints } from '../../styles/theme/theme';
 
 export const Container = styled.aside<{
-  isSidebarOpen: boolean;
+  shouldShowSidebar: boolean;
   initialWidth: string;
   resizeabledWidth: string;
 }>`
@@ -21,7 +21,7 @@ export const Container = styled.aside<{
   width: ${(props) =>
     props.resizeabledWidth ? props.resizeabledWidth : props.initialWidth};
   margin-left: ${(props) =>
-    props.isSidebarOpen ? '0' : `-${props.resizeabledWidth}`};
+    props.shouldShowSidebar ? '0' : `-${props.resizeabledWidth}`};
 `;
 
 export const OptionsList = styled.ul`

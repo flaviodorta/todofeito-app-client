@@ -10,15 +10,15 @@ interface Props {
 
 export const Background = forwardRef<HTMLDivElement, Props>(
   (props, ref): JSX.Element => {
-    const { isSelectOpen } = useAppSelector((state) => state.ui);
+    const { shouldShowSelectColor } = useAppSelector((state) => state.ui);
     const dispatch = useDispatch();
 
     const closeModal = (e: React.SyntheticEvent) => {
-      if (!isSelectOpen) {
-        dispatch(uiActions.setModal(''));
+      if (!shouldShowSelectColor) {
+        dispatch(uiActions.setModalShowIs('none'));
       }
-      if (isSelectOpen) {
-        dispatch(uiActions.toggleSelect(false));
+      if (shouldShowSelectColor) {
+        dispatch(uiActions.setShouldShowSelectColor());
       }
     };
 

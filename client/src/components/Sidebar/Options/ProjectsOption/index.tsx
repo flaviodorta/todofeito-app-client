@@ -33,7 +33,7 @@ export function ProjectOption(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const toggleAddProjectModal = () => {
-    dispatch(uiActions.setModal(ADD_PROJECT_BUTTON_MODAL));
+    dispatch(uiActions.setModalShowIs(ADD_PROJECT_BUTTON_MODAL));
   };
 
   const icon16px = '1.6rem';

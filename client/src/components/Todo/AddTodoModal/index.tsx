@@ -21,7 +21,6 @@ import {
   FlagIcon,
   LabelIcon,
 } from '../../Icons';
-import { useEventListener } from '../../../hooks/useEventListener';
 import { useOnKeyPress } from '../../../hooks/useOnKeyPress';
 
 interface Props {}
@@ -42,7 +41,7 @@ export const AddTodoModal = (props: Props): JSX.Element => {
   const titleRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
 
-  const handleCloseModal = () => dispatch(uiActions.setModal(''));
+  const handleCloseModal = () => dispatch(uiActions.setModalShowIs('none'));
 
   const handleAddTodo = () => {
     if (title) {

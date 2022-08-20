@@ -22,8 +22,6 @@ import {
   LabelIcon,
 } from '../../Icons';
 
-import { expandTextarea } from '../../../utils/helpers';
-
 interface Props {}
 
 export const AddTodoItem = (props: Props): JSX.Element => {
@@ -41,7 +39,8 @@ export const AddTodoItem = (props: Props): JSX.Element => {
 
   const dispatch = useAppDispatch();
 
-  const handleCloseModal = () => dispatch(uiActions.setModal(''));
+  const handleCloseAddTodoItem = () =>
+    dispatch(uiActions.setShouldShowAddTodoItem());
 
   return (
     <Container>
@@ -52,6 +51,7 @@ export const AddTodoItem = (props: Props): JSX.Element => {
           onChange={(e) => setTitle(e.target.value)}
         />
         <Description
+          maxLength={100}
           placeholder='Description'
           value={description}
           onChange={(e) => {
@@ -95,7 +95,7 @@ export const AddTodoItem = (props: Props): JSX.Element => {
           bg={'transparent'}
           bgHover={'#E5E5E5'}
           bgActive={'#CFCFCF'}
-          onClick={handleCloseModal}
+          onClick={handleCloseAddTodoItem}
         >
           Cancel
         </Button>

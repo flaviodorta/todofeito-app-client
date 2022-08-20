@@ -31,7 +31,7 @@ import {
 export function Navbar() {
   const { white } = baseTheme.colors;
   const { iconsData, setIconName } = Data();
-  const { isSidebarOpen } = useAppSelector((state) => state.ui);
+  const { shouldShowSidebar } = useAppSelector((state) => state.ui);
 
   const dispatch = useAppDispatch();
 
@@ -48,9 +48,9 @@ export function Navbar() {
     parentWidth: number
   ) => <Label isVisible={isVisible} content={content} parentWidth={parentWidth} />;
 
-  const handleAddTodo = () => dispatch(uiActions.setModal(ADD_TODO_MODAL));
+  const handleAddTodo = () => dispatch(uiActions.setModalShowIs(ADD_TODO_MODAL));
 
-  const toggleSiderbar = () => dispatch(uiActions.toggleSidebar());
+  const toggleSiderbar = () => dispatch(uiActions.setShouldShowSidebar());
 
   const icon24px = '2.4rem';
   const hoveredButtonHeight = '4.8rem';
@@ -69,7 +69,7 @@ export function Navbar() {
 
           {LabelComponent(
             sidebar.isLabelVisible,
-            isSidebarOpen ? sidebar.labelContent[0] : sidebar.labelContent[1],
+            shouldShowSidebar ? sidebar.labelContent[0] : sidebar.labelContent[1],
             sidebar.width
           )}
         </Li>

@@ -15,7 +15,6 @@ export const Container = styled.div`
   border-radius: 4px;
   width: 50rem;
   min-height: 20rem;
-  max-height: 30rem;
   z-index: 100;
 `;
 
@@ -39,10 +38,6 @@ export const Description = styled(Textarea)`
 
   &::placeholder {
     color: #999;
-  }
-
-  &::-webkit-scrollbar {
-    width: 0px;
   }
 `;
 

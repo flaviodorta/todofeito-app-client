@@ -8,6 +8,8 @@ export type activityId = string;
 
 export type ActivePage = 'inbox' | 'today' | 'upcoming';
 
+export type ModalShow = 'none' | 'add-project-button-modal' | 'add-todo-modal';
+
 // export interface RootState {
 //   user: UserState & PersistPartial;
 //   ui: UIState & PersistPartial;
@@ -26,10 +28,11 @@ export interface UserState {
 }
 
 export interface UIState {
-  modalOpenIs: string;
-  isSelectOpen: boolean;
-  isSidebarOpen: boolean;
-  activePage: ActivePage;
+  activePageIs: ActivePage;
+  modalShowIs: ModalShow;
+  shouldShowSelectColor: boolean;
+  shouldShowSidebar: boolean;
+  shouldShowAddTodoItem: boolean;
 }
 
 export interface Label {
