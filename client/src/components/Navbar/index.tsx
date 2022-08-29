@@ -2,7 +2,6 @@ import { useRef } from 'react';
 import { useHover } from '../../hooks/useHover';
 import { useToggle } from '../../hooks/useToggle';
 import { uiActions, useAppDispatch, useAppSelector } from '../../redux/store';
-import { ADD_TODO_MODAL } from '../../utils/constants';
 import { baseTheme } from '../../styles/theme/theme';
 import { NavbarData as Data } from './data';
 
@@ -28,7 +27,12 @@ import {
   CircleUserSolidIcon as UserIcon,
 } from '../Icons';
 
-export function Navbar() {
+interface Props {
+  setShouldShowModal: () => void;
+}
+
+export function Navbar(props: Props) {
+  const { setShouldShowModal } = props;
   const { white } = baseTheme.colors;
   const { iconsData, setIconName } = Data();
   const { shouldShowSidebar } = useAppSelector((state) => state.ui);
@@ -47,8 +51,6 @@ export function Navbar() {
     content: string | [string, string],
     parentWidth: number
   ) => <Label isVisible={isVisible} content={content} parentWidth={parentWidth} />;
-
-  const handleAddTodo = () => dispatch(uiActions.setModalShowIs(ADD_TODO_MODAL));
 
   const toggleSiderbar = () => dispatch(uiActions.setShouldShowSidebar());
 
@@ -115,7 +117,7 @@ export function Navbar() {
           onMouseEnter={() => setIconNameTo('add-todo')}
           onMouseLeave={() => setIconNameTo('none')}
         >
-          <HoveredButton onClick={handleAddTodo} height={hoveredButtonHeight}>
+          <HoveredButton onClick={setShouldShowModal} height={hoveredButtonHeight}>
             <AddTodoIcon fill={white.one} />
           </HoveredButton>
 

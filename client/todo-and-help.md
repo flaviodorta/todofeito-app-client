@@ -9,13 +9,21 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 
-# To do
+# did
 
 - add useOnKeyPress
 - ajeitar o expanding textarea
-  - pra retornar o tamanho usar o text height
+  - retornar o tamanho usar o text height
+  - limitar a expansão (nao consegui)
+
+# To do
+
 - fazer a lista de todos item
+  - criar custom checkbox
 - terminar os contents das paginas
 - terminar o data picker
+- terminar add project modal
+- add archievied projects
 - fazer o dropdown do search e das opçoes
 - fazer a tela de login
+- ajeitar detalhes de UX/UI

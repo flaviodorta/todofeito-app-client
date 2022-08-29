@@ -18,7 +18,12 @@ import {
   LabelIcon as FiltersAndLabelsIcon,
 } from '../Icons';
 
-export function Sidebar(): JSX.Element {
+interface Props {
+  setShouldShowModal: () => void;
+}
+
+export function Sidebar(props: Props): JSX.Element {
+  const { setShouldShowModal } = props;
   const dispatch = useAppDispatch();
   const { shouldShowSidebar } = useAppSelector((state) => state.ui);
   const toggleSidebar = () => dispatch(uiActions.setShouldShowSidebar());
@@ -108,7 +113,7 @@ export function Sidebar(): JSX.Element {
           Filters & Labels
         </Option>
 
-        <ProjectOption />
+        <ProjectOption setShouldShowModal={setShouldShowModal} />
       </OptionsList>
     </Container>
   );

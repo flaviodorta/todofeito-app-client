@@ -6,22 +6,50 @@ import { Container } from './styled';
 
 interface Props {
   onClick?: (e: any) => any;
+  hasBackground?: boolean;
+  setShouldShowModal: () => void;
 }
+
+const variants = {
+  hidden: {
+    opacity: 0,
+    transition: {
+      duration: 0.125,
+    },
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.125,
+    },
+  },
+};
 
 export const Background = forwardRef<HTMLDivElement, Props>(
   (props, ref): JSX.Element => {
-    const { shouldShowSelectColor } = useAppSelector((state) => state.ui);
+    const { setShouldShowModal } = props;
     const dispatch = useDispatch();
+    const { shouldShowSelectColor } = useAppSelector((state) => state.ui);
 
-    const closeModal = (e: React.SyntheticEvent) => {
+    const closeModal = () => {
       if (!shouldShowSelectColor) {
-        dispatch(uiActions.setModalShowIs('none'));
+        setShouldShowModal();
       }
       if (shouldShowSelectColor) {
         dispatch(uiActions.setShouldShowSelectColor());
       }
     };
 
-    return <Container ref={ref} onClick={(e) => closeModal(e)} />;
+    return (
+      <Container
+        ref={ref}
+        onClick={() => closeModal()}
+        hasBackground={props.hasBackground}
+        variants={variants}
+        initial='hidden'
+        animate='visible'
+        exit='hidden'
+      />
+    );
   }
 );

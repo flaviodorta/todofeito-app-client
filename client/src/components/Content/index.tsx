@@ -14,7 +14,7 @@ import {
 import { ActivePage } from '../../redux/slice/types';
 
 import styled from 'styled-components';
-import { useToggle } from '../../hooks/useToggle';
+import { TodoItem } from '../Todo/TodoItem';
 
 export const Container = styled.div`
   z-index: 120;
@@ -169,15 +169,13 @@ interface Props {
 
 export function Content(props: Props): JSX.Element {
   const { activePage } = props;
-  const { shouldShowSidebar } = useAppSelector((state) => state.ui);
-
-  // const [shouldShowAddTodo, setShouldShowAddTodo] = useToggle(false);
+  const { shouldShowAddTodoItem, shouldShowSidebar } = useAppSelector(
+    (state) => state.ui
+  );
+  const dispatch = useAppDispatch();
 
   const addSection = useRef<HTMLDivElement>(null);
   const isAddSectionHover = useHover(addSection);
-
-  const { shouldShowAddTodoItem } = useAppSelector((state) => state.ui);
-  const dispatch = useAppDispatch();
 
   const handleOpenAddTodoItem = () => dispatch(uiActions.setShouldShowAddTodoItem());
 
@@ -217,6 +215,7 @@ export function Content(props: Props): JSX.Element {
             <p>Add section</p>
             <span></span>
           </AddSection>
+          <TodoItem title={'porra'} content={'caralho'} date={new Date()} />
         </Flex>
       )}
     </Container>

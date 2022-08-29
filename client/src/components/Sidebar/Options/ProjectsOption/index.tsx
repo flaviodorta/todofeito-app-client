@@ -1,5 +1,3 @@
-import { ADD_PROJECT_BUTTON_MODAL } from '../../../../utils/constants';
-
 import { useRef } from 'react';
 import { useHover } from '../../../../hooks/useHover';
 import { useToggle } from '../../../../hooks/useToggle';
@@ -21,7 +19,12 @@ import {
   ChevronDownIcon as ChevronIcon,
 } from '../../../Icons';
 
-export function ProjectOption(): JSX.Element {
+interface Props {
+  setShouldShowModal: () => void;
+}
+
+export function ProjectOption(props: Props): JSX.Element {
+  const { setShouldShowModal } = props;
   const [isAllProjectsListOpen, setIsAllProjectsListOpen] = useToggle(false);
 
   const projectOptionRef = useRef<HTMLDivElement | null>(null);
@@ -32,11 +35,8 @@ export function ProjectOption(): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  const toggleAddProjectModal = () => {
-    dispatch(uiActions.setModalShowIs(ADD_PROJECT_BUTTON_MODAL));
-  };
-
   const icon16px = '1.6rem';
+
   return (
     <Container ref={projectOptionRef}>
       <OptionContent>
@@ -53,7 +53,7 @@ export function ProjectOption(): JSX.Element {
           ref={AddProjectButtonRef}
           isProjectHover={isProjectOptionHover}
           isProjectButtonHover={isProjectOptionButtonHover}
-          onClick={toggleAddProjectModal}
+          onClick={setShouldShowModal}
         >
           <AddProjectIcon width={icon16px} height={icon16px} />
         </AddProjectButton>

@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { useToggle } from '../../../hooks/useToggle';
+import { Checkbox } from './Checkbox';
 
 interface Props {
   title: string;
@@ -6,7 +8,7 @@ interface Props {
   date: Date;
 }
 
-export const Container = styled.div`
+export const Container = styled.label`
   display: flex;
   justify-content: flex-start;
 `;
@@ -17,23 +19,36 @@ export const TitleAndContentContainer = styled.div`
 `;
 
 export const Title = styled.h6`
-  font-size: 1.2rem;
+  font-size: 1.6rem;
 `;
 
 export const Content = styled.p`
-  font-size: 1rem;
+  font-size: 1.2rem;
+`;
+
+export const Box = styled.div<{
+  padding?: string;
+  flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse';
+}>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-direction: ${(props) => props.flexDirection ?? 'row'};
+  padding: ${(props) => props.padding ?? 0};
 `;
 
 export const TodoItem = (props: Props): JSX.Element => {
   const { title, content, date } = props;
 
+  const [checked, setChecked] = useToggle(false);
   return (
     <Container>
-      <input type='radio' />
-      <TitleAndContentContainer>
+      <Checkbox checked={checked} onChange={setChecked} />
+      <Box padding={'1rem'} flexDirection={'column'}>
         <Title>{title}</Title>
         <Content>{content}</Content>
-      </TitleAndContentContainer>
+      </Box>
     </Container>
   );
 };

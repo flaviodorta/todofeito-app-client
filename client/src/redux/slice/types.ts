@@ -29,7 +29,6 @@ export interface UserState {
 
 export interface UIState {
   activePageIs: ActivePage;
-  modalShowIs: ModalShow;
   shouldShowSelectColor: boolean;
   shouldShowSidebar: boolean;
   shouldShowAddTodoItem: boolean;

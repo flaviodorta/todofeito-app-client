@@ -1,13 +1,12 @@
-import { useAppSelector } from '../redux/store';
-
 import { Layout } from './styled';
 import { Navbar } from '../components/Navbar';
 import { Sidebar } from '../components/Sidebar';
 import { Content } from '../components/Content';
 import { AddProjectButtonModal } from '../components/Modals/ModalsComponents/AddProjectButtonModal';
-import { AddTodoModal } from '../components/Todo/AddTodoModal';
+import { AddTodoModal } from '../components/Modals/ModalsComponents/AddTodoModal';
 
 import { ActivePage } from '../redux/slice/types';
+import { useToggle } from '../hooks/useToggle';
 
 interface Props {
   activePage: ActivePage;
@@ -15,15 +14,23 @@ interface Props {
 
 export function Page(props: Props): JSX.Element {
   const { activePage } = props;
-  const { modalShowIs } = useAppSelector((state) => state.ui);
+  const [shouldShowAddTodoModal, setShouldShowAddTodoModal] = useToggle(false);
+  const [shouldShowAddProjectModal, setShouldShowAddProjectModal] = useToggle(false);
 
   return (
     <Layout>
-      {modalShowIs === 'add-project-button-modal' && <AddProjectButtonModal />}
-      {modalShowIs === 'add-todo-modal' && <AddTodoModal />}
+      <AddProjectButtonModal
+        shouldShowModal={shouldShowAddProjectModal}
+        setShouldShowModal={setShouldShowAddProjectModal}
+      />
 
-      <Navbar />
-      <Sidebar />
+      <AddTodoModal
+        shouldShowModal={shouldShowAddTodoModal}
+        setShouldShowModal={setShouldShowAddTodoModal}
+      />
+
+      <Navbar setShouldShowModal={setShouldShowAddTodoModal} />
+      <Sidebar setShouldShowModal={setShouldShowAddProjectModal} />
 
       <Content activePage={activePage} />
     </Layout>
