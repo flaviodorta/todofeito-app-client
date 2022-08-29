@@ -9,6 +9,8 @@ interface Props {
 }
 
 export const Container = styled.label`
+  width: 100%;
+  max-width: 90rem;
   display: flex;
   justify-content: flex-start;
 `;
@@ -16,23 +18,29 @@ export const Container = styled.label`
 export const TitleAndContentContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 export const Title = styled.h6`
   font-size: 1.6rem;
+  width: 100%;
 `;
 
 export const Content = styled.p`
   font-size: 1.2rem;
+  width: 100%;
 `;
 
-export const Box = styled.div<{
+interface BoxProps {
   padding?: string;
   flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse';
-}>`
+}
+
+export const Box = styled.div<BoxProps>`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 
   flex-direction: ${(props) => props.flexDirection ?? 'row'};
   padding: ${(props) => props.padding ?? 0};

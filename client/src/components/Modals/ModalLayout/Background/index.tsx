@@ -7,7 +7,6 @@ import { Container } from './styled';
 interface Props {
   onClick?: (e: any) => any;
   hasBackground?: boolean;
-  setShouldShowModal: () => void;
 }
 
 const variants = {
@@ -27,13 +26,21 @@ const variants = {
 
 export const Background = forwardRef<HTMLDivElement, Props>(
   (props, ref): JSX.Element => {
-    const { setShouldShowModal } = props;
     const dispatch = useDispatch();
-    const { shouldShowSelectColor } = useAppSelector((state) => state.ui);
+    const {
+      shouldShowSelectColor,
+      shouldShowAddProjectModal,
+      shouldShowAddTodoItemModal,
+    } = useAppSelector((state) => state.ui);
 
     const closeModal = () => {
       if (!shouldShowSelectColor) {
-        setShouldShowModal();
+        if (shouldShowAddProjectModal) {
+          dispatch(uiActions.setShouldShowAddProjectModal());
+        }
+        if (shouldShowAddTodoItemModal) {
+          dispatch(uiActions.setShouldShowAddTodoItemModal());
+        }
       }
       if (shouldShowSelectColor) {
         dispatch(uiActions.setShouldShowSelectColor());

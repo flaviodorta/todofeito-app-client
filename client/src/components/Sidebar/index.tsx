@@ -18,20 +18,17 @@ import {
   LabelIcon as FiltersAndLabelsIcon,
 } from '../Icons';
 
-interface Props {
-  setShouldShowModal: () => void;
-}
-
-export function Sidebar(props: Props): JSX.Element {
-  const { setShouldShowModal } = props;
+export function Sidebar(): JSX.Element {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { shouldShowSidebar } = useAppSelector((state) => state.ui);
-  const toggleSidebar = () => dispatch(uiActions.setShouldShowSidebar());
   const { colors } = baseTheme;
+  const { shouldShowSidebar } = useAppSelector((state) => state.ui);
 
   const windowWidth = useWindowSize().width;
   const oldWindowWidthRef = useRef<number>();
   const breakpointMd = parseInt(breakpoints.md, 10);
+
+  const toggleSidebar = () => dispatch(uiActions.setShouldShowSidebar());
 
   useLayoutEffect(() => {
     return () => {
@@ -82,7 +79,24 @@ export function Sidebar(props: Props): JSX.Element {
     setPersistedWidth(resizeabledWidth);
   }, [resizeabledWidth, setPersistedWidth]);
 
-  const navigate = useNavigate();
+  const variants = {
+    visible: {
+      x: 0,
+      transition: {
+        type: 'tween',
+        duration: 0.2,
+        ease: 'easeOut',
+      },
+    },
+    hidden: {
+      x: `-${resizeabledWidth}`,
+    },
+    transition: {
+      type: 'tween',
+      duration: 2,
+      ease: 'easeOut',
+    },
+  };
 
   return (
     <Container
@@ -90,10 +104,12 @@ export function Sidebar(props: Props): JSX.Element {
       shouldShowSidebar={shouldShowSidebar}
       initialWidth={initialWidth}
       resizeabledWidth={persistedWidth}
+      variants={variants}
+      animate={shouldShowSidebar ? 'visible' : 'hidden'}
     >
       <Resizer ref={setRef.right} />
       <OptionsList>
-        <Option todoCount={23} onClick={() => console.log('/inbox')}>
+        <Option todoCount={23} onClick={() => navigate('/inbox')}>
           <InboxIcon fill={colors.blue} />
           Inbox
         </Option>
@@ -113,7 +129,7 @@ export function Sidebar(props: Props): JSX.Element {
           Filters & Labels
         </Option>
 
-        <ProjectOption setShouldShowModal={setShouldShowModal} />
+        <ProjectOption />
       </OptionsList>
     </Container>
   );

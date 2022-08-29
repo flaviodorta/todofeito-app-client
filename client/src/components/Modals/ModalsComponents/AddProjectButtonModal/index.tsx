@@ -11,6 +11,7 @@ import {
 } from './styled';
 import { ColorSelect } from './ColorSelect';
 import { AnimatePresence } from 'framer-motion';
+import { useAppSelector } from '../../../../redux/store';
 
 const variants = {
   hidden: {
@@ -27,28 +28,21 @@ const variants = {
   },
 };
 
-interface Props {
-  hasBackground?: boolean;
-  shouldShowModal: boolean;
-  setShouldShowModal: () => void;
-}
-
-export function AddProjectButtonModal(props: Props): JSX.Element {
-  const { shouldShowModal, setShouldShowModal } = props;
+export function AddProjectButtonModal(): JSX.Element {
+  // const dispatch = useAppDispatch();
+  const { shouldShowAddProjectModal } = useAppSelector((state) => state.ui);
   const [inputNameValue, setInputNameValue] = useState('');
   const [selectColorValue, setSelectColorValue] = useState('');
 
   const titleRef = useRef<HTMLDivElement>(null);
   const backgroundRef = useRef<HTMLDivElement>(null);
 
+  // const handleCloseModal = () => dispatch(uiActions.setShouldShowAddProjectModal);
+
   return (
     <AnimatePresence>
-      {shouldShowModal && (
-        <Modal
-          ref={backgroundRef}
-          hasBackground={true}
-          setShouldShowModal={setShouldShowModal}
-        >
+      {shouldShowAddProjectModal && (
+        <Modal ref={backgroundRef} hasBackground={true}>
           <Container
             variants={variants}
             initial='hidden'

@@ -1,18 +1,20 @@
 import styled from 'styled-components';
 import { breakpoints } from '../../styles/theme/theme';
+import { motion } from 'framer-motion';
 
-export const Container = styled.aside<{
+interface ContainerProps {
   shouldShowSidebar: boolean;
   initialWidth: string;
   resizeabledWidth: string;
-}>`
-  position: absolute;
+}
+
+export const Container = styled(motion.aside)<ContainerProps>`
+  position: fixed;
   left: 0;
   min-height: 100vh;
   padding: 8rem 0 7rem 5.5rem;
   z-index: 200;
   user-select: none;
-  transition: margin-left 0.125s ease;
 
   @media screen and (max-width: ${breakpoints.md}) {
   }
@@ -20,8 +22,6 @@ export const Container = styled.aside<{
   background-color: ${(props) => props.theme.colors.white.two};
   width: ${(props) =>
     props.resizeabledWidth ? props.resizeabledWidth : props.initialWidth};
-  margin-left: ${(props) =>
-    props.shouldShowSidebar ? '0' : `-${props.resizeabledWidth}`};
 `;
 
 export const OptionsList = styled.ul`

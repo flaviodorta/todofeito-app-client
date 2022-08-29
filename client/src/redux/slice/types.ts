@@ -32,6 +32,8 @@ export interface UIState {
   shouldShowSelectColor: boolean;
   shouldShowSidebar: boolean;
   shouldShowAddTodoItem: boolean;
+  shouldShowAddTodoItemModal: boolean;
+  shouldShowAddProjectModal: boolean;
 }
 
 export interface Label {

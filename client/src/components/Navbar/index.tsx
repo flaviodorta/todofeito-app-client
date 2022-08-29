@@ -27,17 +27,11 @@ import {
   CircleUserSolidIcon as UserIcon,
 } from '../Icons';
 
-interface Props {
-  setShouldShowModal: () => void;
-}
-
-export function Navbar(props: Props) {
-  const { setShouldShowModal } = props;
+export function Navbar() {
+  const dispatch = useAppDispatch();
   const { white } = baseTheme.colors;
   const { iconsData, setIconName } = Data();
   const { shouldShowSidebar } = useAppSelector((state) => state.ui);
-
-  const dispatch = useAppDispatch();
 
   const { sidebar, home, addTodo, completedTodos, notifications, user } = iconsData;
   const setIconNameTo = (iconName: string) => setIconName(iconName);
@@ -52,7 +46,10 @@ export function Navbar(props: Props) {
     parentWidth: number
   ) => <Label isVisible={isVisible} content={content} parentWidth={parentWidth} />;
 
-  const toggleSiderbar = () => dispatch(uiActions.setShouldShowSidebar());
+  const toggleSidebar = () => dispatch(uiActions.setShouldShowSidebar());
+
+  const toggleAddTodoItemModal = () =>
+    dispatch(uiActions.setShouldShowAddTodoItemModal());
 
   const icon24px = '2.4rem';
   const hoveredButtonHeight = '4.8rem';
@@ -65,7 +62,7 @@ export function Navbar(props: Props) {
           onMouseEnter={() => setIconNameTo('sidebar')}
           onMouseLeave={() => setIconNameTo('none')}
         >
-          <HoveredButton onClick={toggleSiderbar} height={hoveredButtonHeight}>
+          <HoveredButton onClick={toggleSidebar} height={hoveredButtonHeight}>
             <SidebarIcon fill={white.one} />
           </HoveredButton>
 
@@ -117,7 +114,10 @@ export function Navbar(props: Props) {
           onMouseEnter={() => setIconNameTo('add-todo')}
           onMouseLeave={() => setIconNameTo('none')}
         >
-          <HoveredButton onClick={setShouldShowModal} height={hoveredButtonHeight}>
+          <HoveredButton
+            onClick={toggleAddTodoItemModal}
+            height={hoveredButtonHeight}
+          >
             <AddTodoIcon fill={white.one} />
           </HoveredButton>
 

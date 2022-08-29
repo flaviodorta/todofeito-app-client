@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-import { useAppDispatch } from '../../../../redux/store';
+import { uiActions, useAppDispatch, useAppSelector } from '../../../../redux/store';
+import { useOnKeyPress } from '../../../../hooks/useOnKeyPress';
 
+import { AnimatePresence } from 'framer-motion';
 import {
   Container,
   Title,
@@ -14,15 +16,12 @@ import {
   Button,
 } from './styled';
 import { Modal } from '../../ModalLayout';
-
 import {
   CalendarIcon,
   InboxSolidIcon as InboxIcon,
   FlagIcon,
   LabelIcon,
 } from '../../../Icons';
-import { useOnKeyPress } from '../../../../hooks/useOnKeyPress';
-import { AnimatePresence } from 'framer-motion';
 
 const variants = {
   hidden: {
@@ -32,7 +31,7 @@ const variants = {
     y: 0,
     transition: {
       type: 'tween',
-      duration: 0.1,
+      duration: 0.125,
     },
   },
   visible: {
@@ -42,19 +41,14 @@ const variants = {
     y: '-50%',
     transition: {
       type: 'tween',
-      duration: 0.1,
+      duration: 0.125,
     },
   },
 };
 
-interface Props {
-  shouldShowModal: boolean;
-  setShouldShowModal: () => void;
-}
-
-export const AddTodoModal = (props: Props): JSX.Element => {
-  const { setShouldShowModal, shouldShowModal } = props;
+export const AddTodoModal = (): JSX.Element => {
   const dispatch = useAppDispatch();
+  const { shouldShowAddTodoItemModal } = useAppSelector((state) => state.ui);
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -63,34 +57,32 @@ export const AddTodoModal = (props: Props): JSX.Element => {
   // const [label, setLabel] = useState('');
   const [datePickerIsOpen, setDatePickerIsOpen] = useState(false);
 
-  const addTodoButtonDisbled = !(title && description);
+  const addTodoButtonDisabled = !title;
 
   const backgroundRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
 
-  const handleAddTodo = () => {
+  const toggleAddTodoItemModal = () =>
+    dispatch(uiActions.setShouldShowAddTodoItemModal());
+
+  const handlePostAddTodo = () => {
     if (title) {
       alert('todo added');
-      setShouldShowModal();
+      toggleAddTodoItemModal();
     }
   };
 
-  useOnKeyPress('Enter', handleAddTodo, titleRef);
+  useOnKeyPress('Enter', handlePostAddTodo, titleRef);
 
   useEffect(() => {
     titleRef?.current?.focus();
   }, []);
 
-  const style = {
-    width: 'fit-content',
-    height: 'fit-content',
-  };
-
   return (
     <AnimatePresence>
-      {shouldShowModal && (
-        <Modal ref={backgroundRef} setShouldShowModal={setShouldShowModal}>
+      {shouldShowAddTodoItemModal && (
+        <Modal ref={backgroundRef}>
           <Container
             variants={variants}
             initial='hidden'
@@ -145,17 +137,17 @@ export const AddTodoModal = (props: Props): JSX.Element => {
                 bg={'transparent'}
                 bgHover={'#E5E5E5'}
                 bgActive={'#CFCFCF'}
-                onClick={setShouldShowModal}
+                onClick={toggleAddTodoItemModal}
               >
                 Cancel
               </Button>
               <Button
-                disabled={addTodoButtonDisbled}
+                disabled={addTodoButtonDisabled}
                 color={'white'}
                 bg={'#246FE0'}
                 bgHover={'#1d63cd'}
                 bgActive={'#174ea1'}
-                onClick={handleAddTodo}
+                onClick={handlePostAddTodo}
               >
                 Add todo
               </Button>
