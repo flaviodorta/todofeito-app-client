@@ -28,6 +28,8 @@ const variants = {
   hidden: {
     scale: 0.6,
     opacity: 0,
+    x: '-50%',
+    y: 0,
     transition: {
       type: 'tween',
       duration: 0.1,
@@ -36,6 +38,8 @@ const variants = {
   visible: {
     scale: 1,
     opacity: 1,
+    x: '-50%',
+    y: '-50%',
     transition: {
       type: 'tween',
       duration: 0.1,
@@ -77,6 +81,11 @@ export const AddTodoModal = (props: Props): JSX.Element => {
   useEffect(() => {
     titleRef?.current?.focus();
   }, []);
+
+  const style = {
+    width: 'fit-content',
+    height: 'fit-content',
+  };
 
   return (
     <AnimatePresence>
