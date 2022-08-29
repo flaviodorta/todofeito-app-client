@@ -105,6 +105,7 @@ export function Sidebar(): JSX.Element {
       initialWidth={initialWidth}
       resizeabledWidth={persistedWidth}
       variants={variants}
+      initial={shouldShowSidebar ? 'visible' : 'hidden'}
       animate={shouldShowSidebar ? 'visible' : 'hidden'}
     >
       <Resizer ref={setRef.right} />

@@ -60,10 +60,11 @@ export function Content(props: Props): JSX.Element {
   const isAddSectionHover = useHover(addSection);
 
   const handleOpenAddTodoItem = () => dispatch(uiActions.setShouldShowAddTodoItem());
-
+  console.log(shouldShowSidebar);
   return (
     <Container
       variants={variants}
+      initial={shouldShowSidebar ? 'visible' : 'hidden'}
       animate={shouldShowSidebar ? 'visible' : 'hidden'}
     >
       {activePage === 'inbox' && (
@@ -84,7 +85,15 @@ export function Content(props: Props): JSX.Element {
               </Option>
             </Options>
           </Heading>
-          <Todos>todos</Todos>
+          <Todos>
+            <TodoItem
+              title={'jacqueline filha da puta'}
+              description={'vagabunda do caralho piranha filha da puta'}
+              date={new Date()}
+            />
+            <TodoItem title={'porra'} description={'caralho'} date={new Date()} />
+            <TodoItem title={'porra'} description={'caralho'} date={new Date()} />
+          </Todos>
           {shouldShowAddTodoItem ? (
             <AddTodoItem />
           ) : (
@@ -100,7 +109,6 @@ export function Content(props: Props): JSX.Element {
             <p>Add section</p>
             <span></span>
           </AddSection>
-          <TodoItem title={'porra'} content={'caralho'} date={new Date()} />
         </Flex>
       )}
     </Container>
