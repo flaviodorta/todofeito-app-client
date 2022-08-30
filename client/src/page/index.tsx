@@ -17,12 +17,10 @@ export function Page(props: Props): JSX.Element {
   return (
     <Layout>
       <AddProjectButtonModal />
-
       <AddTodoModal />
 
       <Navbar />
       <Sidebar />
-
       <Content activePage={activePage} />
     </Layout>
   );

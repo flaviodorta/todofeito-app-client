@@ -11,6 +11,7 @@ export const Container = styled.div`
   min-height: 20rem;
   max-height: 30rem;
   font-size: 1.4rem;
+  padding: 0 30px;
 `;
 
 export const Border = styled.div`
@@ -102,6 +103,12 @@ export const OptionIconed = styled.button`
   border: none;
   outline: none;
   background: none;
+
+  svg {
+    width: 16px;
+    height: 16px;
+    fill: #777;
+  }
 
   &:hover {
     background-color: #ddd;

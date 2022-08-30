@@ -1,62 +1,81 @@
-import styled from 'styled-components';
 import { useToggle } from '../../../hooks/useToggle';
 import { Checkbox } from './Checkbox';
+import {
+  Container,
+  GripIcon,
+  Date,
+  Description,
+  Flex,
+  FlexRow,
+  Options,
+  Project,
+  Title,
+  Wrapper,
+  IconContainer,
+  OptionIconed,
+} from './styled';
+
+import {
+  PenSolidIcon as PenIcon,
+  CalendarIcon,
+  MessageRegularIcon as MessageIcon,
+  MoreThreeDotsIcon as ThreeDotsIcon,
+} from '../../Icons';
 
 interface Props {
   title: string;
-  content: string;
+  description: string;
   date: Date;
+  project: string;
 }
-
-export const Container = styled.label`
-  width: 100%;
-  max-width: 90rem;
-  display: flex;
-  justify-content: flex-start;
-`;
-
-export const TitleAndContentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
-
-export const Title = styled.h6`
-  font-size: 1.6rem;
-  width: 100%;
-`;
-
-export const Content = styled.p`
-  font-size: 1.2rem;
-  width: 100%;
-`;
-
-interface BoxProps {
-  padding?: string;
-  flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse';
-}
-
-export const Box = styled.div<BoxProps>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-
-  flex-direction: ${(props) => props.flexDirection ?? 'row'};
-  padding: ${(props) => props.padding ?? 0};
-`;
-
 export const TodoItem = (props: Props): JSX.Element => {
-  const { title, content, date } = props;
+  const { title, description, date, project } = props;
+  const [shouldShowDragIcon, setShouldShowDragIcon] = useToggle(false);
+  const [shouldShowOptions, setShouldShowOptions] = useToggle(false);
+  const [isChecked, setIsChecked] = useToggle(false);
 
-  const [checked, setChecked] = useToggle(false);
+  const toggleHiddenElements = () => {
+    setShouldShowDragIcon();
+    setShouldShowOptions();
+  };
+
   return (
-    <Container>
-      <Checkbox checked={checked} onChange={setChecked} />
-      <Box padding={'1rem'} flexDirection={'column'}>
-        <Title>{title}</Title>
-        <Content>{content}</Content>
-      </Box>
-    </Container>
+    <Wrapper onMouseEnter={toggleHiddenElements} onMouseLeave={toggleHiddenElements}>
+      <Container>
+        {shouldShowDragIcon && (
+          <IconContainer>
+            <GripIcon />
+          </IconContainer>
+        )}
+        <Checkbox isChecked={setIsChecked} />
+        <Flex>
+          <Title>{title}</Title>
+          <Description>
+            {description.substring(0, 30)}
+            {description.length > 30 ? '...' : ''}
+          </Description>
+          <FlexRow>
+            <Date>12 aug</Date>
+            <Project>{project}</Project>
+          </FlexRow>
+        </Flex>
+        {shouldShowOptions && (
+          <Options>
+            <OptionIconed>
+              <PenIcon />
+            </OptionIconed>
+            <OptionIconed>
+              <CalendarIcon />
+            </OptionIconed>
+            <OptionIconed>
+              <MessageIcon />
+            </OptionIconed>
+            <OptionIconed>
+              <ThreeDotsIcon />
+            </OptionIconed>
+          </Options>
+        )}
+      </Container>
+    </Wrapper>
   );
 };

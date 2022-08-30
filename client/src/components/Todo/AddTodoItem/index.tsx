@@ -35,7 +35,7 @@ export const AddTodoItem = (props: Props): JSX.Element => {
 
   const addTodoButtonDisbled = !(title && description);
 
-  const descriptionRef = useRef<HTMLTextAreaElement>(null);
+  // const descriptionRef = useRef<HTMLTextAreaElement>(null);
 
   const dispatch = useAppDispatch();
 
@@ -73,17 +73,12 @@ export const AddTodoItem = (props: Props): JSX.Element => {
           <OptionsRight>
             {/* Label */}
             <OptionIconed>
-              <LabelIcon
-                height={'16px'}
-                width={'16px'}
-                fill={'#777'}
-                onClick={() => setDatePickerIsOpen((s) => !s)}
-              />
+              <LabelIcon onClick={() => setDatePickerIsOpen((s) => !s)} />
             </OptionIconed>
 
             {/* Priority */}
             <OptionIconed>
-              <FlagIcon height={'16px'} width={'16px'} fill={'#777'} />
+              <FlagIcon />
             </OptionIconed>
           </OptionsRight>
         </Options>

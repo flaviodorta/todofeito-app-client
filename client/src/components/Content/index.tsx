@@ -24,7 +24,6 @@ import {
   MessageRegularIcon as MessageIcon,
   PlusSolidIcon as PlusIcon,
 } from '../../components/Icons';
-import styled from 'styled-components';
 
 interface Props {
   activePage: ActivePage;
@@ -63,9 +62,9 @@ export function Content(props: Props): JSX.Element {
   console.log(shouldShowSidebar);
   return (
     <Container
-      variants={variants}
-      initial={shouldShowSidebar ? 'visible' : 'hidden'}
-      animate={shouldShowSidebar ? 'visible' : 'hidden'}
+    // variants={variants}
+    // initial={shouldShowSidebar ? 'visible' : 'hidden'}
+    // animate={shouldShowSidebar ? 'visible' : 'hidden'}
     >
       {activePage === 'inbox' && (
         <Flex>
@@ -87,12 +86,23 @@ export function Content(props: Props): JSX.Element {
           </Heading>
           <Todos>
             <TodoItem
-              title={'jacqueline filha da puta'}
-              description={'vagabunda do caralho piranha filha da puta'}
+              title={'lavar a louça'}
+              description={'tem muita louça pra lavar'}
               date={new Date()}
+              project={'rotina'}
             />
-            <TodoItem title={'porra'} description={'caralho'} date={new Date()} />
-            <TodoItem title={'porra'} description={'caralho'} date={new Date()} />
+            <TodoItem
+              title={'programar sem parar'}
+              description={'no pain no gain'}
+              date={new Date()}
+              project={'trabalho'}
+            />
+            <TodoItem
+              title={'almoçar'}
+              description={'comer uma comida diliciosa'}
+              date={new Date()}
+              project={'rotina'}
+            />
           </Todos>
           {shouldShowAddTodoItem ? (
             <AddTodoItem />
