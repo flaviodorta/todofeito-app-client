@@ -53,17 +53,18 @@ export interface User {
 
 export interface Todo {
   todoId: string;
-  createdBy: userId;
-  createAt: Date;
+  createdBy?: userId;
+  createAt?: Date;
   title: string;
-  content: string;
-  isCompleted: boolean;
+  description: string;
+  isCompleted?: boolean;
+  toBeCompletedAt?: Date;
   comments?: Comment[];
   priority?: 1 | 2 | 3 | 4;
   sharingUsers?: userId[];
   labels?: string[];
   reminder?: Date;
-  project?: projectId;
+  projectName?: string;
 }
 
 export interface Project {

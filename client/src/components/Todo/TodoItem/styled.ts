@@ -14,7 +14,10 @@ export const Container = styled.div`
   padding: 20px 20px 0 0;
   margin: 0 auto;
   position: relative;
+  background: ${(props) => props.theme.colors.white.one};
   border-bottom: solid 1px ${(props) => props.theme.colors.grey.one};
+  user-select: none;
+  cursor: pointer;
 `;
 
 export const IconContainer = styled.div`

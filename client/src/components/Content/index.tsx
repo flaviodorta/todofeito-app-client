@@ -1,7 +1,7 @@
-import { ActivePage } from '../../redux/slice/types';
+import { ActivePage, Todo } from '../../redux/slice/types';
 
 import { useHover } from '../../hooks/useHover';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { uiActions, useAppDispatch, useAppSelector } from '../../redux/store';
 
 import {
@@ -24,6 +24,9 @@ import {
   MessageRegularIcon as MessageIcon,
   PlusSolidIcon as PlusIcon,
 } from '../../components/Icons';
+
+import { Reorder } from 'framer-motion';
+import { isTemplateSpan } from 'typescript';
 
 interface Props {
   activePage: ActivePage;
@@ -59,12 +62,52 @@ export function Content(props: Props): JSX.Element {
   const isAddSectionHover = useHover(addSection);
 
   const handleOpenAddTodoItem = () => dispatch(uiActions.setShouldShowAddTodoItem());
-  console.log(shouldShowSidebar);
+
+  const [todos, setTodos] = useState<Todo[]>([
+    {
+      todoId: '12312',
+      title: 'lavar louça',
+      description: 'muita coisa pra lavar',
+      toBeCompletedAt: new Date(),
+      projectName: 'rotina',
+    },
+    {
+      todoId: '12311',
+      title: 'lavar louça',
+      description: 'muita coisa pra lavar',
+      toBeCompletedAt: new Date(),
+      projectName: 'rotina',
+    },
+    {
+      todoId: '1231',
+      title: 'lavar louça',
+      description: 'muita coisa pra lavar',
+      toBeCompletedAt: new Date(),
+      projectName: 'rotina',
+    },
+  ]);
+
+  const todosList = (
+    <Reorder.Group axis='y' values={todos} onReorder={setTodos}>
+      {todos.map((todo) => (
+        <TodoItem
+          key={todo.todoId}
+          todo={todo}
+          todoId={todo.todoId}
+          title={todo.title}
+          description={todo.description}
+          toBeCompletedAt={todo.toBeCompletedAt}
+          projectName={todo.projectName}
+        />
+      ))}
+    </Reorder.Group>
+  );
+
   return (
     <Container
-    // variants={variants}
-    // initial={shouldShowSidebar ? 'visible' : 'hidden'}
-    // animate={shouldShowSidebar ? 'visible' : 'hidden'}
+      variants={variants}
+      initial={shouldShowSidebar ? 'visible' : 'hidden'}
+      animate={shouldShowSidebar ? 'visible' : 'hidden'}
     >
       {activePage === 'inbox' && (
         <Flex>
@@ -84,26 +127,7 @@ export function Content(props: Props): JSX.Element {
               </Option>
             </Options>
           </Heading>
-          <Todos>
-            <TodoItem
-              title={'lavar a louça'}
-              description={'tem muita louça pra lavar'}
-              date={new Date()}
-              project={'rotina'}
-            />
-            <TodoItem
-              title={'programar sem parar'}
-              description={'no pain no gain'}
-              date={new Date()}
-              project={'trabalho'}
-            />
-            <TodoItem
-              title={'almoçar'}
-              description={'comer uma comida diliciosa'}
-              date={new Date()}
-              project={'rotina'}
-            />
-          </Todos>
+          <Todos>{todosList}</Todos>
           {shouldShowAddTodoItem ? (
             <AddTodoItem />
           ) : (

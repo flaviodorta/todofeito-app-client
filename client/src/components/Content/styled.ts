@@ -9,7 +9,7 @@ interface AddSectionProps {
   isAddSectionHover: boolean;
 }
 
-export const Container = styled.div`
+export const Container = styled(motion.div)`
   z-index: 120;
   width: 100%;
   max-width: 80rem;
