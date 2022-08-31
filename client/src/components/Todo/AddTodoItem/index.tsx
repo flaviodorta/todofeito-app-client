@@ -1,5 +1,6 @@
-import React, { useRef, useState } from 'react';
-import { uiActions, useAppDispatch } from '../../../redux/store';
+import { useState } from 'react';
+import { projectId } from '../../../redux/slice/types';
+import { nanoid } from '@reduxjs/toolkit';
 
 import {
   Container,
@@ -21,26 +22,33 @@ import {
   FlagIcon,
   LabelIcon,
 } from '../../Icons';
+import { useAppDispatch, userActions } from '../../../redux/store';
 
-interface Props {}
+interface Props {
+  toggle: () => void;
+}
 
 export const AddTodoItem = (props: Props): JSX.Element => {
+  const dispatch = useAppDispatch();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  // const [date, setDate] = useState<Date | null>(null);
-  // const [project, setProject] = useState<projectId | null>(null);
+  const [date, setDate] = useState<Date>(new Date());
+  const [project, setProject] = useState<projectId>('');
   // const [label, setLabel] = useState('');
-
   const [datePickerIsOpen, setDatePickerIsOpen] = useState(false);
 
-  const addTodoButtonDisbled = !(title && description);
+  const addTodoButtonDisbled = !title;
 
-  // const descriptionRef = useRef<HTMLTextAreaElement>(null);
-
-  const dispatch = useAppDispatch();
-
-  const handleCloseAddTodoItem = () =>
-    dispatch(uiActions.setShouldShowAddTodoItem());
+  const handleAddTodo = () =>
+    dispatch(
+      userActions.addTodo({
+        todoId: nanoid(),
+        createdBy: nanoid(),
+        createAt: date,
+        title,
+        description,
+      })
+    );
 
   return (
     <Container>
@@ -90,16 +98,18 @@ export const AddTodoItem = (props: Props): JSX.Element => {
           bg={'transparent'}
           bgHover={'#E5E5E5'}
           bgActive={'#CFCFCF'}
-          onClick={handleCloseAddTodoItem}
+          onClick={props.toggle}
         >
           Cancel
         </Button>
+
         <Button
           disabled={addTodoButtonDisbled}
           color={'white'}
           bg={'#246FE0'}
           bgHover={'#1d63cd'}
           bgActive={'#174ea1'}
+          onClick={handleAddTodo}
         >
           Add todo
         </Button>

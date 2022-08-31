@@ -17,7 +17,7 @@ export const Container = styled.div`
 export const Border = styled.div`
   border: 1px solid ${(props) => props.theme.colors.grey.one};
   border-radius: 4px;
-  padding: 1.5rem;
+  /* padding: 1.5rem; */
   margin-bottom: 1rem;
 `;
 
@@ -25,6 +25,7 @@ export const Title = styled.input`
   border: none;
   outline: none;
   margin-bottom: 1rem;
+  padding: 1.5rem 1.5rem 0.5rem 1.5rem;
 
   &::placeholder {
     color: #777;
@@ -38,6 +39,7 @@ export const Description = styled(Textarea)`
   width: 100%;
   height: 59px;
   margin-bottom: 2.5rem;
+  padding: 0 1.5rem 1.5rem 1.5rem;
 
   &::placeholder {
     color: #999;
@@ -52,6 +54,7 @@ export const Options = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.5rem;
+  padding: 0 1.5rem 1.5rem 1.5rem;
 `;
 
 export const OptionsLeft = styled.div`
@@ -122,12 +125,14 @@ export const Buttons = styled.div`
   justify-content: flex-end;
 `;
 
-export const Button = styled.button<{
+interface ButtonProps {
   bg: string;
   bgHover: string;
   color: string;
   bgActive: string;
-}>`
+}
+
+export const Button = styled.button<ButtonProps>`
   font-weight: bold;
   border-radius: 4px;
   padding: 1rem 1rem;
@@ -154,5 +159,49 @@ export const Button = styled.button<{
   &:disabled {
     background-color: #aac7f3;
     cursor: not-allowed;
+  }
+`;
+
+export const AddTodo = styled.div`
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-weight: 200;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  cursor: pointer;
+
+  color: ${(props) => props.theme.colors.grey.three};
+
+  svg {
+    width: 1.2rem;
+    height: 1.2rem;
+    fill: ${(props) => props.theme.colors.blue};
+  }
+
+  .icon-bg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    margin-bottom: 0.2rem;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+    color: ${(props) => props.theme.colors.white.one};
+  }
+
+  &:hover {
+    color: ${(props) => props.theme.colors.blue};
+
+    .icon-bg {
+      background-color: ${(props) => props.theme.colors.blue};
+    }
+
+    svg {
+      fill: white;
+    }
   }
 `;
