@@ -5,10 +5,10 @@ import { useEffect } from 'react';
 
 const checkboxVariants: Variants = {
   clicked: {
-    scale: [1, 1.1, 1.2, 1.3, 1.4, 1.3, 1.2, 1.1, 1, 0.9, 0.85, 0.8],
+    scale: [1, 1.05, 1.1, 1.15, 1.2, 1.15, 1.1, 1.05, 1, 0.9, 0.85, 0.8],
     opacity: [1, 1, 1, 1, 1, 1, 1, 1, 1, 0.6, 0.4, 0],
     transition: {
-      duration: 0.4,
+      duration: 0.45,
       type: 'spring',
       stiffness: 350,
     },

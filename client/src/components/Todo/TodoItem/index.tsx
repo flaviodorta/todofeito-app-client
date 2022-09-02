@@ -73,7 +73,7 @@ export const TodoItem = (props: Props): JSX.Element => {
     console.log(todoId);
     console.log(todos);
     if (isChecked) {
-      setTimeout(() => dispatch(userActions.deleteTodo(todoId)), 400);
+      setTimeout(() => dispatch(userActions.deleteTodo(todoId)), 500);
     }
   }, [isChecked, dispatch, todoId]);
 
