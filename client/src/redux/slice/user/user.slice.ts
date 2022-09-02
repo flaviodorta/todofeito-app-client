@@ -1,6 +1,6 @@
-import { UserState } from '../types';
+import { Todo, UserState } from '../types';
 
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export const userState: UserState = {
   userId: '',
@@ -12,5 +12,13 @@ export const userState: UserState = {
 export const userSlice = createSlice({
   name: 'user slice',
   initialState: userState,
-  reducers: {},
+  reducers: {
+    addTodo: (state, action: PayloadAction<Todo>) => {
+      state.todos.push(action.payload);
+    },
+
+    deleteTodo: (state, action: PayloadAction<string>) => {
+      state.todos = state.todos.filter((todo) => todo.todoId !== action.payload);
+    },
+  },
 });

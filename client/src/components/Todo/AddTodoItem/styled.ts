@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import Textarea from 'react-expanding-textarea';
+import { motion } from 'framer-motion';
 
-export const Container = styled.div`
+export const Container = styled(motion.div)`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -26,6 +27,7 @@ export const Title = styled.input`
   outline: none;
   margin-bottom: 1rem;
   padding: 1.5rem 1.5rem 0.5rem 1.5rem;
+  font-weight: 500;
 
   &::placeholder {
     color: #777;

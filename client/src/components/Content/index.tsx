@@ -1,8 +1,14 @@
 import { ActivePage, Todo } from '../../redux/slice/types';
 
+import { AnimatePresence, Reorder } from 'framer-motion';
 import { useHover } from '../../hooks/useHover';
 import { useRef, useState } from 'react';
-import { uiActions, useAppDispatch, useAppSelector } from '../../redux/store';
+import {
+  uiActions,
+  useAppDispatch,
+  useAppSelector,
+  userActions,
+} from '../../redux/store';
 
 import {
   Container,
@@ -24,9 +30,7 @@ import {
   MessageRegularIcon as MessageIcon,
   PlusSolidIcon as PlusIcon,
 } from '../../components/Icons';
-
-import { Reorder } from 'framer-motion';
-import { isTemplateSpan } from 'typescript';
+import { useEffect } from 'react';
 
 interface Props {
   activePage: ActivePage;
@@ -53,60 +57,44 @@ const variants = {
 
 export function Content(props: Props): JSX.Element {
   const { activePage } = props;
-  const { shouldShowAddTodoItem, shouldShowSidebar } = useAppSelector(
+  const dispatch = useAppDispatch();
+
+  const { shouldShowSidebar, shouldShowAddTodoItem } = useAppSelector(
     (state) => state.ui
   );
-  const dispatch = useAppDispatch();
+  const { todos } = useAppSelector((state) => state.user);
+  const [renderedTodos, setRenderedTodos] = useState(todos);
+  useEffect(() => {
+    console.log(todos);
+  });
 
   const addSection = useRef<HTMLDivElement>(null);
   const isAddSectionHover = useHover(addSection);
 
-  const handleOpenAddTodoItem = () => dispatch(uiActions.setShouldShowAddTodoItem());
-
-  const [todos, setTodos] = useState<Todo[]>([
-    {
-      todoId: '12312',
-      title: 'lavar louça',
-      description: 'muita coisa pra lavar',
-      toBeCompletedAt: new Date(),
-      projectName: 'rotina',
-    },
-    {
-      todoId: '12311',
-      title: 'lavar louça',
-      description: 'muita coisa pra lavar',
-      toBeCompletedAt: new Date(),
-      projectName: 'rotina',
-    },
-    {
-      todoId: '1231',
-      title: 'lavar louça',
-      description: 'muita coisa pra lavar',
-      toBeCompletedAt: new Date(),
-      projectName: 'rotina',
-    },
-  ]);
+  const toggleAddTodoItem = () => dispatch(uiActions.setShouldShowAddTodoItem());
 
   const todosList = (
-    <Reorder.Group axis='y' values={todos} onReorder={setTodos}>
-      {todos.map((todo) => (
-        <TodoItem
-          key={todo.todoId}
-          todo={todo}
-          todoId={todo.todoId}
-          title={todo.title}
-          description={todo.description}
-          toBeCompletedAt={todo.toBeCompletedAt}
-          projectName={todo.projectName}
-        />
-      ))}
-    </Reorder.Group>
+    <AnimatePresence>
+      <Reorder.Group axis='y' values={renderedTodos} onReorder={setRenderedTodos}>
+        {todos.map((todo) => (
+          <TodoItem
+            key={todo.todoId}
+            todo={todo}
+            todoId={todo.todoId}
+            title={todo.title}
+            description={todo.description}
+            toBeCompletedAt={todo.toBeCompletedAt}
+            projectName={todo.projectName}
+          />
+        ))}
+      </Reorder.Group>
+    </AnimatePresence>
   );
 
   return (
     <Container
       variants={variants}
-      initial={shouldShowSidebar ? 'visible' : 'hidden'}
+      initial={false}
       animate={shouldShowSidebar ? 'visible' : 'hidden'}
     >
       {activePage === 'inbox' && (
@@ -129,9 +117,9 @@ export function Content(props: Props): JSX.Element {
           </Heading>
           <Todos>{todosList}</Todos>
           {shouldShowAddTodoItem ? (
-            <AddTodoItem />
+            <AddTodoItem toggle={toggleAddTodoItem} />
           ) : (
-            <AddTodo onClick={handleOpenAddTodoItem}>
+            <AddTodo onClick={toggleAddTodoItem}>
               <div className='icon-bg'>
                 <PlusIcon />
               </div>

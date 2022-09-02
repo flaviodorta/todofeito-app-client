@@ -9,6 +9,7 @@ const uiState: UIState = {
   shouldShowAddTodoItem: false,
   shouldShowAddTodoItemModal: false,
   shouldShowAddProjectModal: false,
+  shouldShowEditTodoItem: false,
 };
 
 export const uiSlice = createSlice({
@@ -37,6 +38,10 @@ export const uiSlice = createSlice({
 
     setShouldShowAddProjectModal: (state) => {
       state.shouldShowAddProjectModal = !state.shouldShowAddProjectModal;
+    },
+
+    setShouldShowEditTodoItem: (state) => {
+      state.shouldShowEditTodoItem = !state.shouldShowEditTodoItem;
     },
   },
 });

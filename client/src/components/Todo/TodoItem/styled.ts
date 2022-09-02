@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import { GripVerticalSolidIcon } from '../../Icons';
+import { motion } from 'framer-motion';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled(motion.div)`
   padding: 0 30px;
+  background: transparent;
 `;
 
 export const Container = styled.div`
@@ -20,7 +22,7 @@ export const Container = styled.div`
   cursor: pointer;
 `;
 
-export const IconContainer = styled.div`
+export const IconContainer = styled(motion.div)`
   display: flex;
   width: 25px;
   height: 30px;
@@ -58,6 +60,7 @@ export const FlexRow = styled.div`
 
 export const Title = styled.div`
   font-size: 16px;
+  font-weight: 500;
 `;
 
 export const Description = styled.div`

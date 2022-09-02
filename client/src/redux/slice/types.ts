@@ -34,6 +34,7 @@ export interface UIState {
   shouldShowAddTodoItem: boolean;
   shouldShowAddTodoItemModal: boolean;
   shouldShowAddProjectModal: boolean;
+  shouldShowEditTodoItem: boolean;
 }
 
 export interface Label {
@@ -56,7 +57,7 @@ export interface Todo {
   createdBy?: userId;
   createAt?: Date;
   title: string;
-  description: string;
+  description?: string;
   isCompleted?: boolean;
   toBeCompletedAt?: Date;
   comments?: Comment[];

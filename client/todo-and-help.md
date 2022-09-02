@@ -15,14 +15,15 @@
 - ajeitar o expanding textarea
   - retornar o tamanho usar o text height
   - limitar a expansão (nao consegui)
+- fazer a lista de todos item
+  - criar custom checkbox
+- terminar add project modal
 
 # To do
 
-- fazer a lista de todos item
-  - criar custom checkbox
+- fazer a lista dragglabe (usar react-beautiful-dnd)
 - terminar os contents das paginas
 - terminar o data picker
-- terminar add project modal
 - add archievied projects
 - fazer o dropdown do search e das opçoes
 - fazer a tela de login

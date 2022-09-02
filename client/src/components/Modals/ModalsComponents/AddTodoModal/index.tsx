@@ -1,5 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import { uiActions, useAppDispatch, useAppSelector } from '../../../../redux/store';
+import {
+  uiActions,
+  useAppDispatch,
+  useAppSelector,
+  userActions,
+} from '../../../../redux/store';
 import { useOnKeyPress } from '../../../../hooks/useOnKeyPress';
 
 import { AnimatePresence } from 'framer-motion';
@@ -22,6 +27,7 @@ import {
   FlagIcon,
   LabelIcon,
 } from '../../../Icons';
+import { nanoid } from '@reduxjs/toolkit';
 
 const variants = {
   hidden: {
@@ -66,9 +72,20 @@ export const AddTodoModal = (): JSX.Element => {
   const toggleAddTodoItemModal = () =>
     dispatch(uiActions.setShouldShowAddTodoItemModal());
 
+  const handleAddTodo = () =>
+    dispatch(
+      userActions.addTodo({
+        todoId: nanoid(),
+        createdBy: nanoid(),
+        createAt: new Date(),
+        title,
+        description,
+      })
+    );
+
   const handlePostAddTodo = () => {
     if (title) {
-      alert('todo added');
+      handleAddTodo();
       toggleAddTodoItemModal();
     }
   };
